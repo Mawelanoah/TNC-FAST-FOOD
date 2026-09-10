@@ -3,431 +3,669 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <meta name="theme-color" content="#0f0f0f">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#111111">
   <title>TNC Fast Food | Kotas, Chicken, Chips & More</title>
-  <meta name="description" content="TNC Fast Food serves tasty and affordable Kotas, chicken, chips, wings, snacks and drinks. Order for collection. Fresh. Tasty. Affordable.">
-  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="TNC Fast Food – Fresh, tasty and affordable Kotas, chicken, chips, wings and drinks. Order for collection.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #111;
+      --card: #1c1c1c;
+      --red: #e6392e;
+      --green: #25d366;
+      --text: #fff;
+      --muted: #999;
+      --radius: 14px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+      font-size: 15px;
+      padding-bottom: 100px;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    .container { max-width: 480px; margin: 0 auto; padding: 0 14px; }
+
+    /* HEADER */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(17,17,17,0.96); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      height: 54px; display: flex; align-items: center;
+    }
+    .header-inner {
+      width: 100%; max-width: 480px; margin: 0 auto; padding: 0 14px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { font-weight: 800; font-size: 1.15rem; }
+    .logo span { color: var(--red); }
+    .status {
+      font-size: 0.72rem; font-weight: 600; padding: 4px 10px;
+      border-radius: 20px; display: flex; align-items: center; gap: 5px;
+    }
+    .status.open { background: rgba(37,211,102,0.15); color: var(--green); }
+    .status.closed { background: rgba(230,57,46,0.15); color: var(--red); }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+
+    /* HERO */
+    .hero { padding: 68px 0 28px; }
+    .hero-img {
+      width: 100%; height: 180px; border-radius: var(--radius);
+      background: #2a2a2a center/cover no-repeat;
+      margin-bottom: 16px; position: relative; overflow: hidden;
+    }
+    .hero-img::after {
+      content: '📷 Add kota photo → assets/hero-kota.jpg';
+      position: absolute; inset: 0; display: flex; align-items: center;
+      justify-content: center; background: rgba(0,0,0,0.55);
+      color: #aaa; font-size: 0.85rem; text-align: center; padding: 12px;
+    }
+    .hero h1 { font-size: 1.7rem; font-weight: 800; line-height: 1.2; margin-bottom: 6px; }
+    .hero p { color: var(--muted); font-size: 0.9rem; margin-bottom: 14px; }
+    .hero-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .pill {
+      background: var(--card); padding: 6px 12px; border-radius: 20px;
+      font-size: 0.78rem; color: var(--muted);
+    }
+    .pill strong { color: #fff; }
+    .btn {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      height: 46px; border-radius: 50px; font-weight: 600; font-size: 0.9rem;
+      border: none; cursor: pointer; width: 100%;
+    }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-green { background: var(--green); color: #fff; }
+    .btn-sm {
+      height: 36px; font-size: 0.8rem; padding: 0 12px; width: auto;
+      border-radius: 20px; background: var(--green); color: #fff; border: none; cursor: pointer;
+    }
+
+    /* SECTIONS */
+    section { padding: 24px 0; }
+
+    /* PRODUCT CARD */
+    .product {
+      background: var(--card); border-radius: var(--radius);
+      margin-bottom: 10px; overflow: hidden;
+      display: flex; gap: 12px; padding: 12px;
+      align-items: center;
+    }
+    .product-img {
+      width: 72px; height: 72px; border-radius: 10px; flex-shrink: 0;
+      background: #2a2a2a center/cover no-repeat; position: relative;
+    }
+    .product-img::after {
+      content: '📷';
+      position: absolute; inset: 0; display: flex; align-items: center;
+      justify-content: center; font-size: 1.2rem; background: rgba(0,0,0,0.35);
+      border-radius: 10px;
+    }
+    .product-info { flex: 1; min-width: 0; }
+    .product-info h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; }
+    .product-info .desc { font-size: 0.75rem; color: var(--muted); margin-bottom: 6px; line-height: 1.3; }
+    .product-bottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .price { color: var(--red); font-weight: 700; font-size: 1rem; }
+    .badge {
+      display: inline-block; font-size: 0.65rem; font-weight: 700;
+      padding: 2px 8px; border-radius: 10px; margin-left: 6px;
+    }
+    .badge.popular { background: var(--red); color: #fff; }
+    .badge.best { background: #ff6b00; color: #fff; }
+
+    /* CATEGORY */
+    .cat-title {
+      font-size: 1rem; font-weight: 700; color: var(--red);
+      margin: 22px 0 10px; display: flex; align-items: center; gap: 6px;
+    }
+
+    /* CART BAR */
+    .cart-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+      background: #1a1a1a; border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 10px 14px; display: none;
+    }
+    .cart-bar.show { display: block; }
+    .cart-inner {
+      max-width: 480px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .cart-info { font-size: 0.85rem; }
+    .cart-info strong { color: var(--green); font-size: 1.05rem; }
+    .cart-btn {
+      background: var(--green); color: #fff; border: none;
+      height: 42px; padding: 0 18px; border-radius: 50px;
+      font-weight: 700; font-size: 0.85rem; cursor: pointer;
+      white-space: nowrap;
+    }
+
+    /* CART MODAL */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+      z-index: 200; display: none; align-items: flex-end; justify-content: center;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal {
+      background: #1c1c1c; width: 100%; max-width: 480px;
+      border-radius: 20px 20px 0 0; padding: 20px 16px 30px;
+      max-height: 80vh; overflow-y: auto;
+    }
+    .modal h3 { font-size: 1.15rem; margin-bottom: 14px; text-align: center; }
+    .cart-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.9rem;
+    }
+    .cart-item .remove {
+      background: none; border: none; color: var(--red);
+      font-size: 0.8rem; cursor: pointer; margin-left: 8px;
+    }
+    .cart-total {
+      display: flex; justify-content: space-between;
+      font-size: 1.1rem; font-weight: 700; margin: 16px 0;
+    }
+    .cart-total span:last-child { color: var(--green); }
+    .modal-actions { display: flex; flex-direction: column; gap: 10px; }
+    .close-modal {
+      background: transparent; border: 1.5px solid rgba(255,255,255,0.2);
+      color: #fff; height: 44px; border-radius: 50px; font-weight: 600;
+      cursor: pointer; width: 100%;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 28px 14px; text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    footer .brand { font-weight: 800; color: var(--red); margin-bottom: 4px; }
+    footer p { color: var(--muted); font-size: 0.85rem; }
+    footer .copy { margin-top: 12px; font-size: 0.75rem; color: #555; }
+
+    /* CONTACT */
+    .contact-card {
+      background: var(--card); border-radius: var(--radius); padding: 18px;
+    }
+    .contact-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.9rem;
+    }
+    .contact-row:last-child { border-bottom: none; }
+
+    @media (min-width: 500px) {
+      .container, .header-inner, .cart-inner, .modal { max-width: 520px; }
+      .hero-img { height: 220px; }
+    }
+  </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="header">
-    <div class="container header-inner">
-      <a href="#home" class="logo">
-        <span class="logo-text">TNC</span>
-        <span class="logo-sub">FAST FOOD</span>
-      </a>
-      <nav class="nav" id="nav">
-        <a href="#home" class="nav-link">Home</a>
-        <a href="#menu" class="nav-link">Menu</a>
-        <a href="#weekend" class="nav-link">Weekend Specials</a>
-        <a href="#about" class="nav-link">About</a>
-        <a href="#contact" class="nav-link">Contact</a>
-      </nav>
-      <a href="https://wa.me/27840171408?text=Hi%20TNC%20Fast%20Food%20%F0%9F%91%8B%20I'd%20like%20to%20place%20an%20order%20for%20collection." class="btn btn-whatsapp header-cta" target="_blank" rel="noopener">
-        💬 Order Now
-      </a>
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo">TNC <span>FAST FOOD</span></div>
+    <div class="status" id="statusBadge">
+      <span class="status-dot"></span>
+      <span id="statusText">Checking...</span>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- Hero -->
-  <section id="home" class="hero">
-    <div class="hero-overlay"></div>
-    <div class="container hero-content">
-      <h1 class="hero-title">Fresh. Tasty. Affordable.</h1>
-      <p class="hero-desc">Your favourite Kotas, chicken, chips, snacks and more — all in one place!</p>
-      <div class="hero-buttons">
-        <a href="https://wa.me/27840171408?text=Hi%20TNC%20Fast%20Food%20%F0%9F%91%8B%20I'd%20like%20to%20place%20an%20order%20for%20collection." class="btn btn-primary" target="_blank" rel="noopener">ORDER FOR COLLECTION</a>
-        <a href="#menu" class="btn btn-outline">VIEW MENU</a>
-      </div>
-      <div class="hero-info">
-        <div class="info-item">
-          <span class="info-icon">🕐</span>
-          <div>
-            <strong>Opening Hours</strong>
-            <p>07:30 – 18:00</p>
-          </div>
-        </div>
-        <div class="info-item">
-          <span class="info-icon">🛍️</span>
-          <div>
-            <strong>Collection Only</strong>
-            <p>No delivery available</p>
-          </div>
-        </div>
-        <div class="info-item">
-          <span class="info-icon">📞</span>
-          <div>
-            <strong>Contact</strong>
-            <p>084 017 1408</p>
-          </div>
-        </div>
-      </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-img" id="heroImg"></div>
+    <h1>Fresh. Tasty. Affordable.</h1>
+    <p>Loaded Kotas, crispy chips, chicken & more — ready for collection.</p>
+    <div class="hero-meta">
+      <div class="pill">🕐 <strong>07:30 – 18:00</strong></div>
+      <div class="pill">📍 <strong>Collection</strong></div>
+      <div class="pill"><strong id="openText">...</strong></div>
     </div>
-  </section>
+    <a href="#menu" class="btn btn-red">View Full Menu</a>
+  </div>
+</section>
 
-  <!-- Featured Menu -->
-  <section class="featured section">
-    <div class="container">
-      <h2 class="section-title">What We Serve</h2>
-      <div class="featured-grid">
-        <div class="featured-card">
-          <div class="featured-icon">🍔</div>
-          <h3>Kotas</h3>
-          <p>Loaded, filling and packed with flavour.</p>
-          <span class="from-price">From R20</span>
-          <a href="#kotas" class="btn btn-sm">VIEW KOTA MENU</a>
-        </div>
-        <div class="featured-card">
-          <div class="featured-icon">🍟</div>
-          <h3>Chips</h3>
-          <p>Crispy, hot and made to order.</p>
-          <span class="from-price">From R20</span>
-          <a href="#chips" class="btn btn-sm">VIEW CHIPS</a>
-        </div>
-        <div class="featured-card">
-          <div class="featured-icon">🍗</div>
-          <h3>Chicken & Wings</h3>
-          <p>Perfect for weekend cravings.</p>
-          <span class="from-price">From R40</span>
-          <a href="#weekend" class="btn btn-sm">VIEW WEEKEND MENU</a>
-        </div>
-        <div class="featured-card">
-          <div class="featured-icon">🥤</div>
-          <h3>Drinks & Snacks</h3>
-          <p>Something refreshing or something sweet.</p>
-          <span class="from-price">From R1</span>
-          <a href="#drinks" class="btn btn-sm">VIEW MENU</a>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- MENU -->
+<section id="menu">
+  <div class="container">
 
-  <!-- Full Menu -->
-  <section id="menu" class="menu-section section">
-    <div class="container">
-      <h2 class="section-title">Our Menu</h2>
-
-      <!-- Magwinya -->
-      <div class="menu-category">
-        <h3 class="category-title">🥟 Magwinya</h3>
-        <div class="menu-item">
-          <div class="item-info">
-            <h4>Magwinya</h4>
-            <p>Freshly fried dough balls – classic township favourite</p>
-          </div>
+    <!-- MAGWINYA -->
+    <div class="cat-title">🥟 Magwinya</div>
+    <div class="product" data-name="Magwinya" data-price="25">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>Magwinya</h4>
+        <div class="desc">Freshly fried dough balls</div>
+        <div class="product-bottom">
           <span class="price">R25</span>
-        </div>
-      </div>
-
-      <!-- Kotas -->
-      <div id="kotas" class="menu-category">
-        <h3 class="category-title">🍔 TNC Kota Menu</h3>
-        <p class="category-intro">Choose your ride. Every Kota is loaded with flavour.</p>
-        
-        <div class="kota-grid">
-          <div class="kota-card">
-            <div class="kota-header">
-              <h4>KWID</h4>
-              <span class="price">R20</span>
-            </div>
-            <ul class="ingredients">
-              <li>Atchaar</li>
-              <li>Chips</li>
-              <li>Polony</li>
-            </ul>
-          </div>
-
-          <div class="kota-card">
-            <div class="kota-header">
-              <h4>VW</h4>
-              <span class="price">R25</span>
-            </div>
-            <ul class="ingredients">
-              <li>Atchaar</li>
-              <li>Chips</li>
-              <li>Polony</li>
-              <li>Vienna</li>
-            </ul>
-          </div>
-
-          <div class="kota-card">
-            <div class="kota-header">
-              <h4>AUDI</h4>
-              <span class="price">R30</span>
-            </div>
-            <ul class="ingredients">
-              <li>Atchaar</li>
-              <li>Chips</li>
-              <li>Polony</li>
-              <li>Egg</li>
-              <li>Russian</li>
-            </ul>
-          </div>
-
-          <div class="kota-card">
-            <div class="kota-header">
-              <h4>BMW</h4>
-              <span class="price">R33</span>
-            </div>
-            <ul class="ingredients">
-              <li>Atchaar</li>
-              <li>Chips</li>
-              <li>Polony</li>
-              <li>Cheese</li>
-              <li>Egg</li>
-              <li>Russian</li>
-            </ul>
-          </div>
-
-          <div class="kota-card popular">
-            <span class="badge">POPULAR</span>
-            <div class="kota-header">
-              <h4>MERCEDES BENZ</h4>
-              <span class="price">R40</span>
-            </div>
-            <ul class="ingredients">
-              <li>Atchaar</li>
-              <li>Chips</li>
-              <li>Polony</li>
-              <li>Cheese</li>
-              <li>Egg</li>
-              <li>Vienna</li>
-              <li>Russian</li>
-            </ul>
-          </div>
-
-          <div class="kota-card fullhouse">
-            <span class="badge hot">FULL HOUSE 🔥</span>
-            <div class="kota-header">
-              <h4>McLAREN</h4>
-              <span class="price">R50</span>
-            </div>
-            <ul class="ingredients">
-              <li>Atchaar</li>
-              <li>Chips</li>
-              <li>Polony</li>
-              <li>Cheese</li>
-              <li>Egg</li>
-              <li>Vienna</li>
-              <li>Russian</li>
-              <li>Beef Patty</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Chips -->
-      <div id="chips" class="menu-category">
-        <h3 class="category-title">🍟 Chips</h3>
-        <p class="category-intro">Crispy, golden and served fresh.</p>
-        <div class="chips-grid">
-          <div class="menu-item simple">
-            <h4>Small Chips</h4>
-            <span class="price">R20</span>
-          </div>
-          <div class="menu-item simple">
-            <h4>Medium Chips</h4>
-            <span class="price">R30</span>
-          </div>
-          <div class="menu-item simple">
-            <h4>Large Chips</h4>
-            <span class="price">R40</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Top Ups -->
-      <div class="menu-category">
-        <h3 class="category-title">➕ Make It Extra</h3>
-        <div class="topups-grid">
-          <div class="topup-item"><span>Egg</span><span class="price">R6</span></div>
-          <div class="topup-item"><span>Cheese</span><span class="price">R3</span></div>
-          <div class="topup-item"><span>Vienna</span><span class="price">R7</span></div>
-          <div class="topup-item"><span>Garlic</span><span class="price">R2</span></div>
-          <div class="topup-item"><span>Polony</span><span class="price">R2</span></div>
-          <div class="topup-item"><span>Russian</span><span class="price">R12</span></div>
-          <div class="topup-item"><span>Beef Patty</span><span class="price">R10</span></div>
-        </div>
-      </div>
-
-      <!-- Weekend Food -->
-      <div id="weekend" class="menu-category weekend">
-        <h3 class="category-title">🍗 Weekend Food Menu</h3>
-        <p class="category-intro">Also available with pap and salad.</p>
-        <div class="weekend-grid">
-          <div class="menu-item">
-            <div class="item-info">
-              <h4>Quarter Chicken & Chips</h4>
-            </div>
-            <span class="price">R40</span>
-          </div>
-          <div class="menu-item">
-            <div class="item-info">
-              <h4>Half Chicken & Chips</h4>
-            </div>
-            <span class="price">R80</span>
-          </div>
-          <div class="menu-item">
-            <div class="item-info">
-              <h4>Full Chicken & Chips</h4>
-            </div>
-            <span class="price">R120</span>
-          </div>
-          <div class="menu-item">
-            <div class="item-info">
-              <h4>3 Wings & Chips</h4>
-            </div>
-            <span class="price">R40</span>
-          </div>
-          <div class="menu-item">
-            <div class="item-info">
-              <h4>5 Wings & Chips</h4>
-            </div>
-            <span class="price">R60</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Drinks & Snacks -->
-      <div id="drinks" class="menu-category">
-        <h3 class="category-title">🥤 Drinks & Snacks</h3>
-        <div class="drinks-grid">
-          <div class="menu-item simple">
-            <h4>Popcorn</h4>
-            <span class="price">R5</span>
-          </div>
-          <div class="menu-item simple">
-            <h4>Ice Cream</h4>
-            <span class="price">R5</span>
-          </div>
-          <div class="menu-item simple">
-            <h4>Ice</h4>
-            <span class="price">R1</span>
-          </div>
-          <div class="menu-item simple">
-            <h4>Mocktail</h4>
-            <span class="price">R10</span>
-          </div>
-          <div class="menu-item simple">
-            <h4>Milkshake</h4>
-            <span class="price">R10</span>
-          </div>
-          <div class="menu-item simple">
-            <h4>Soft Drink</h4>
-            <span class="price">R18</span>
-          </div>
-          <div class="menu-item simple">
-            <h4>Energy Drink</h4>
-            <span class="price">R12</span>
-          </div>
+          <button class="btn-sm add-btn">Add</button>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Weekend Specials Banner -->
-  <section class="specials-banner">
-    <div class="container">
-      <h2>Weekend Cravings? We've Got You Covered.</h2>
-      <p>Enjoy crispy chicken, wings and chips — with pap and salad also available.</p>
-      <div class="specials-prices">
-        <span>Quarter Chicken & Chips — R40</span>
-        <span>Half — R80</span>
-        <span>Full — R120</span>
-        <span>3 Wings — R40</span>
-        <span>5 Wings — R60</span>
-      </div>
-      <a href="https://wa.me/27840171408?text=Hi%20TNC%20Fast%20Food%20%F0%9F%91%8B%20I'd%20like%20to%20place%20an%20order%20for%20collection." class="btn btn-primary" target="_blank" rel="noopener">ORDER FOR COLLECTION</a>
-    </div>
-  </section>
+    <!-- KOTAS -->
+    <div class="cat-title">🍔 Kota Menu</div>
 
-  <!-- About -->
-  <section id="about" class="about section">
-    <div class="container">
-      <h2 class="section-title">About TNC Fast Food</h2>
-      <div class="about-content">
-        <p>At TNC Fast Food, we serve fresh, tasty and affordable food made for every craving.</p>
-        <p>From loaded Kotas and crispy chips to chicken, wings, snacks and refreshing drinks, there's something for everyone.</p>
-        <p>Whether you're grabbing a quick meal or feeding the family, TNC Fast Food is ready to serve you.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Order Section -->
-  <section class="order-section section">
-    <div class="container">
-      <h2 class="section-title">📲 Ready to Order?</h2>
-      <p class="order-text">Choose your favourite meal, send us your order and collect it from TNC Fast Food.</p>
-      <a href="https://wa.me/27840171408?text=Hi%20TNC%20Fast%20Food%20%F0%9F%91%8B%20I'd%20like%20to%20place%20an%20order%20for%20collection." class="btn btn-whatsapp btn-large" target="_blank" rel="noopener">
-        💬 ORDER ON WHATSAPP
-      </a>
-      <p class="phone-display">Or call: <a href="tel:0840171408">084 017 1408</a></p>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="contact section">
-    <div class="container">
-      <h2 class="section-title">Come Grab a Bite</h2>
-      <div class="contact-grid">
-        <div class="contact-card">
-          <h3>TNC Fast Food</h3>
-          <ul class="contact-list">
-            <li><span>📞</span> <a href="tel:0840171408">084 017 1408</a></li>
-            <li><span>💬</span> WhatsApp Available</li>
-            <li><span>🕐</span> 07:30 – 18:00</li>
-            <li><span>🛍️</span> Collection Only</li>
-            <li><span>📍</span> Address coming soon</li>
-          </ul>
+    <div class="product" data-name="KWID Kota" data-price="20">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>KWID</h4>
+        <div class="desc">Atchaar, Chips, Polony</div>
+        <div class="product-bottom">
+          <span class="price">R20</span>
+          <button class="btn-sm add-btn">Add</button>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <h3>TNC FAST FOOD</h3>
-          <p>Fresh. Tasty. Affordable.</p>
+    <div class="product" data-name="VW Kota" data-price="25">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>VW</h4>
+        <div class="desc">Atchaar, Chips, Polony, Vienna</div>
+        <div class="product-bottom">
+          <span class="price">R25</span>
+          <button class="btn-sm add-btn">Add</button>
         </div>
-        <div class="footer-links">
-          <h4>Quick Links</h4>
-          <a href="#home">Home</a>
-          <a href="#menu">Menu</a>
-          <a href="#weekend">Weekend Specials</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
-        </div>
-        <div class="footer-contact">
-          <h4>Contact</h4>
-          <p>084 017 1408</p>
-          <p>Hours: 07:30 – 18:00</p>
-          <p>Collection only</p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© 2026 TNC Fast Food. All rights reserved.</p>
       </div>
     </div>
-  </footer>
 
-  <!-- Sticky Mobile Order Button -->
-  <a href="https://wa.me/27840171408?text=Hi%20TNC%20Fast%20Food%20%F0%9F%91%8B%20I'd%20like%20to%20place%20an%20order%20for%20collection." class="sticky-order" target="_blank" rel="noopener">
-    💬 ORDER FOR COLLECTION
-  </a>
+    <div class="product" data-name="AUDI Kota" data-price="30">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>AUDI</h4>
+        <div class="desc">Atchaar, Chips, Polony, Egg, Russian</div>
+        <div class="product-bottom">
+          <span class="price">R30</span>
+          <button class="btn-sm add-btn">Add</button>
+        </div>
+      </div>
+    </div>
 
-  <script src="script.js"></script>
+    <div class="product" data-name="BMW Kota" data-price="33">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>BMW</h4>
+        <div class="desc">Atchaar, Chips, Polony, Cheese, Egg, Russian</div>
+        <div class="product-bottom">
+          <span class="price">R33</span>
+          <button class="btn-sm add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product" data-name="Mercedes Benz Kota" data-price="40">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>MERCEDES BENZ <span class="badge popular">POPULAR</span></h4>
+        <div class="desc">Atchaar, Chips, Polony, Cheese, Egg, Vienna, Russian</div>
+        <div class="product-bottom">
+          <span class="price">R40</span>
+          <button class="btn-sm add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product" data-name="McLaren Kota" data-price="50">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>McLAREN <span class="badge best">FULL HOUSE</span></h4>
+        <div class="desc">Atchaar, Chips, Polony, Cheese, Egg, Vienna, Russian, Beef Patty</div>
+        <div class="product-bottom">
+          <span class="price">R50</span>
+          <button class="btn-sm add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHIPS -->
+    <div class="cat-title">🍟 Chips</div>
+    <div class="product" data-name="Small Chips" data-price="20">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>Small Chips</h4>
+        <div class="product-bottom">
+          <span class="price">R20</span>
+          <button class="btn-sm add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+    <div class="product" data-name="Medium Chips" data-price="30">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>Medium Chips</h4>
+        <div class="product-bottom">
+          <span class="price">R30</span>
+          <button class="btn-sm add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+    <div class="product" data-name="Large Chips" data-price="40">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>Large Chips</h4>
+        <div class="product-bottom">
+          <span class="price">R40</span>
+          <button class="btn-sm add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOP UPS -->
+    <div class="cat-title">➕ Make It Extra</div>
+    <div class="product" data-name="Extra Egg" data-price="6">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>Egg</h4>
+        <div class="product-bottom"><span class="price">R6</span><button class="btn-sm add-btn">Add</button></div>
+      </div>
+    </div>
+    <div class="product" data-name="Extra Cheese" data-price="3">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>Cheese</h4>
+        <div class="product-bottom"><span class="price">R3</span><button class="btn-sm add-btn">Add</button></div>
+      </div>
+    </div>
+    <div class="product" data-name="Extra Vienna" data-price="7">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>Vienna</h4>
+        <div class="product-bottom"><span class="price">R7</span><button class="btn-sm add-btn">Add</button></div>
+      </div>
+    </div>
+    <div class="product" data-name="Extra Garlic" data-price="2">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>Garlic</h4>
+        <div class="product-bottom"><span class="price">R2</span><button class="btn-sm add-btn">Add</button></div>
+      </div>
+    </div>
+    <div class="product" data-name="Extra Polony" data-price="2">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>Polony</h4>
+        <div class="product-bottom"><span class="price">R2</span><button class="btn-sm add-btn">Add</button></div>
+      </div>
+    </div>
+    <div class="product" data-name="Extra Russian" data-price="12">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>Russian</h4>
+        <div class="product-bottom"><span class="price">R12</span><button class="btn-sm add-btn">Add</button></div>
+      </div>
+    </div>
+    <div class="product" data-name="Extra Beef Patty" data-price="10">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>Beef Patty</h4>
+        <div class="product-bottom"><span class="price">R10</span><button class="btn-sm add-btn">Add</button></div>
+      </div>
+    </div>
+
+    <!-- WEEKEND -->
+    <div class="cat-title">🍗 Weekend Food</div>
+    <p style="color:var(--muted);font-size:0.8rem;margin-bottom:10px;">Also available with pap & salad</p>
+    <div class="product" data-name="Quarter Chicken & Chips" data-price="40">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>Quarter Chicken & Chips</h4>
+        <div class="product-bottom"><span class="price">R40</span><button class="btn-sm add-btn">Add</button></div>
+      </div>
+    </div>
+    <div class="product" data-name="Half Chicken & Chips" data-price="80">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>Half Chicken & Chips</h4>
+        <div class="product-bottom"><span class="price">R80</span><button class="btn-sm add-btn">Add</button></div>
+      </div>
+    </div>
+    <div class="product" data-name="Full Chicken & Chips" data-price="120">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>Full Chicken & Chips</h4>
+        <div class="product-bottom"><span class="price">R120</span><button class="btn-sm add-btn">Add</button></div>
+      </div>
+    </div>
+    <div class="product" data-name="3 Wings & Chips" data-price="40">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>3 Wings & Chips</h4>
+        <div class="product-bottom"><span class="price">R40</span><button class="btn-sm add-btn">Add</button></div>
+      </div>
+    </div>
+    <div class="product" data-name="5 Wings & Chips" data-price="60">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>5 Wings & Chips</h4>
+        <div class="product-bottom"><span class="price">R60</span><button class="btn-sm add-btn">Add</button></div>
+      </div>
+    </div>
+
+    <!-- DRINKS -->
+    <div class="cat-title">🥤 Drinks & Snacks</div>
+    <div class="product" data-name="Popcorn" data-price="5">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>Popcorn</h4>
+        <div class="product-bottom"><span class="price">R5</span><button class="btn-sm add-btn">Add</button></div>
+      </div>
+    </div>
+    <div class="product" data-name="Ice Cream" data-price="5">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>Ice Cream</h4>
+        <div class="product-bottom"><span class="price">R5</span><button class="btn-sm add-btn">Add</button></div>
+      </div>
+    </div>
+    <div class="product" data-name="Ice" data-price="1">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>Ice</h4>
+        <div class="product-bottom"><span class="price">R1</span><button class="btn-sm add-btn">Add</button></div>
+      </div>
+    </div>
+    <div class="product" data-name="Mocktail" data-price="10">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>Mocktail</h4>
+        <div class="product-bottom"><span class="price">R10</span><button class="btn-sm add-btn">Add</button></div>
+      </div>
+    </div>
+    <div class="product" data-name="Milkshake" data-price="10">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>Milkshake</h4>
+        <div class="product-bottom"><span class="price">R10</span><button class="btn-sm add-btn">Add</button></div>
+      </div>
+    </div>
+    <div class="product" data-name="Soft Drink" data-price="18">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>Soft Drink</h4>
+        <div class="product-bottom"><span class="price">R18</span><button class="btn-sm add-btn">Add</button></div>
+      </div>
+    </div>
+    <div class="product" data-name="Energy Drink" data-price="12">
+      <div class="product-img"></div>
+      <div class="product-info">
+        <h4>Energy Drink</h4>
+        <div class="product-bottom"><span class="price">R12</span><button class="btn-sm add-btn">Add</button></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section>
+  <div class="container">
+    <div class="contact-card">
+      <div class="contact-row">📞 <a href="tel:0840171408">084 017 1408</a></div>
+      <div class="contact-row">💬 WhatsApp available</div>
+      <div class="contact-row">🕐 07:30 – 18:00</div>
+      <div class="contact-row">📍 Address coming soon</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="brand">TNC FAST FOOD</div>
+  <p>Fresh. Tasty. Affordable.</p>
+  <div class="copy">© 2026 TNC Fast Food</div>
+</footer>
+
+<!-- CART BAR -->
+<div class="cart-bar" id="cartBar">
+  <div class="cart-inner">
+    <div class="cart-info">
+      <div id="cartCount">0 items</div>
+      <strong id="cartTotal">R0</strong>
+    </div>
+    <button class="cart-btn" id="viewCartBtn">View Order</button>
+  </div>
+</div>
+
+<!-- CART MODAL -->
+<div class="modal-overlay" id="cartModal">
+  <div class="modal">
+    <h3>Your Order</h3>
+    <div id="cartItems"></div>
+    <div class="cart-total">
+      <span>Total</span>
+      <span id="modalTotal">R0</span>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-green" id="whatsappOrderBtn" style="width:100%;height:48px;border-radius:50px;font-weight:700;border:none;cursor:pointer;">💬 Order on WhatsApp</button>
+      <button class="close-modal" id="closeModal">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ===== OPEN / CLOSED STATUS (SAST) =====
+  function updateStatus() {
+    const now = new Date();
+    const sastOffset = 2 * 60;
+    const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+    const sast = new Date(utc + (sastOffset * 60000));
+    const hours = sast.getHours();
+    const mins = sast.getMinutes();
+    const time = hours * 60 + mins;
+    const openTime = 7 * 60 + 30;
+    const closeTime = 18 * 60;
+    const isOpen = time >= openTime && time < closeTime;
+
+    const badge = document.getElementById('statusBadge');
+    const text = document.getElementById('statusText');
+    const openText = document.getElementById('openText');
+
+    if (isOpen) {
+      badge.className = 'status open';
+      text.textContent = 'Open now';
+      openText.textContent = 'Open now';
+    } else {
+      badge.className = 'status closed';
+      text.textContent = 'Closed';
+      openText.textContent = 'Closed';
+    }
+  }
+  updateStatus();
+  setInterval(updateStatus, 60000);
+
+  // ===== CART =====
+  let cart = [];
+
+  function addToCart(name, price) {
+    const existing = cart.find(i => i.name === name);
+    if (existing) {
+      existing.qty += 1;
+    } else {
+      cart.push({ name, price, qty: 1 });
+    }
+    renderCart();
+  }
+
+  function removeFromCart(name) {
+    cart = cart.filter(i => i.name !== name);
+    renderCart();
+  }
+
+  function getTotal() {
+    return cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+  }
+
+  function getCount() {
+    return cart.reduce((sum, i) => sum + i.qty, 0);
+  }
+
+  function renderCart() {
+    const bar = document.getElementById('cartBar');
+    const countEl = document.getElementById('cartCount');
+    const totalEl = document.getElementById('cartTotal');
+    const itemsEl = document.getElementById('cartItems');
+    const modalTotal = document.getElementById('modalTotal');
+
+    const count = getCount();
+    const total = getTotal();
+
+    if (count > 0) {
+      bar.classList.add('show');
+      countEl.textContent = count + (count === 1 ? ' item' : ' items');
+      totalEl.textContent = 'R' + total;
+    } else {
+      bar.classList.remove('show');
+    }
+
+    itemsEl.innerHTML = cart.map(i => `
+      <div class="cart-item">
+        <span>${i.qty}× ${i.name}</span>
+        <span>R${i.price * i.qty} <button class="remove" onclick="removeFromCart('${i.name}')">✕</button></span>
+      </div>
+    `).join('');
+    modalTotal.textContent = 'R' + total;
+  }
+
+  document.querySelectorAll('.add-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const product = this.closest('.product');
+      const name = product.dataset.name;
+      const price = parseInt(product.dataset.price);
+      addToCart(name, price);
+      this.textContent = 'Added ✓';
+      setTimeout(() => { this.textContent = 'Add'; }, 800);
+    });
+  });
+
+  document.getElementById('viewCartBtn').addEventListener('click', () => {
+    document.getElementById('cartModal').classList.add('show');
+  });
+  document.getElementById('closeModal').addEventListener('click', () => {
+    document.getElementById('cartModal').classList.remove('show');
+  });
+  document.getElementById('cartModal').addEventListener('click', (e) => {
+    if (e.target.id === 'cartModal') {
+      document.getElementById('cartModal').classList.remove('show');
+    }
+  });
+
+  document.getElementById('whatsappOrderBtn').addEventListener('click', () => {
+    if (cart.length === 0) return;
+    let message = 'Hi TNC Fast Food 👋\\nI would like to order for collection:\\n\\n';
+    cart.forEach(i => {
+      message += '• ' + i.qty + '× ' + i.name + ' – R' + (i.price * i.qty) + '\\n';
+    });
+    message += '\\nTotal: R' + getTotal() + '\\n\\nThank you!';
+    const url = 'https://wa.me/27840171408?text=' + encodeURIComponent(message);
+    window.open(url, '_blank');
+  });
+</script>
 </body>
 </html>
