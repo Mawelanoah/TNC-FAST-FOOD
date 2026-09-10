@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <meta name="theme-color" content="#111111">
+  <meta name="theme-color" content="#0d0d0d">
   <title>TNC Fast Food | Kotas, Chicken, Chips & More</title>
   <meta name="description" content="TNC Fast Food – Fresh, tasty and affordable Kotas, chicken, chips, wings and drinks. Order for collection.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,163 +11,272 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #111;
-      --card: #1c1c1c;
+      --bg: #0d0d0d;
+      --card: #1a1a1a;
       --red: #e6392e;
+      --red-dark: #c62d24;
       --green: #25d366;
       --text: #fff;
-      --muted: #999;
-      --radius: 14px;
+      --muted: #a0a0a0;
+      --radius: 16px;
     }
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.45;
+      line-height: 1.5;
       font-size: 15px;
-      padding-bottom: 100px;
+      padding-bottom: 90px;
     }
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
-    .container { max-width: 480px; margin: 0 auto; padding: 0 14px; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
 
-    /* HEADER */
+    /* ===== HEADER ===== */
     header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(17,17,17,0.96); backdrop-filter: blur(12px);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(13,13,13,0.97);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(255,255,255,0.06);
-      height: 54px; display: flex; align-items: center;
     }
     .header-inner {
-      width: 100%; max-width: 480px; margin: 0 auto; padding: 0 14px;
       display: flex; align-items: center; justify-content: space-between;
+      height: 60px; max-width: 1100px; margin: 0 auto; padding: 0 16px;
     }
-    .logo { font-weight: 800; font-size: 1.15rem; }
-    .logo span { color: var(--red); }
+    .logo-img {
+      height: 42px; width: auto;
+      background: linear-gradient(135deg, #e6392e, #ff6b00);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      padding: 0 12px; font-weight: 800; font-size: 0.95rem; letter-spacing: -0.5px;
+    }
+    .logo-img span { color: #fff; }
+    .nav { display: none; gap: 24px; }
+    .nav a { font-weight: 500; font-size: 0.9rem; opacity: 0.85; transition: 0.2s; }
+    .nav a:hover, .nav a.active { opacity: 1; color: var(--red); }
+    .header-right { display: flex; align-items: center; gap: 12px; }
+    .wa-header {
+      background: var(--green); color: #fff; font-weight: 600; font-size: 0.85rem;
+      padding: 8px 16px; border-radius: 50px; display: flex; align-items: center; gap: 6px;
+    }
     .status {
-      font-size: 0.72rem; font-weight: 600; padding: 4px 10px;
-      border-radius: 20px; display: flex; align-items: center; gap: 5px;
+      font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 20px;
+      display: flex; align-items: center; gap: 5px;
     }
     .status.open { background: rgba(37,211,102,0.15); color: var(--green); }
-    .status.closed { background: rgba(230,57,46,0.15); color: var(--red); }
+    .status.closed { background: rgba(230,57,46,0.18); color: #ff6b6b; }
     .status-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+    .hamburger {
+      display: flex; flex-direction: column; gap: 5px; background: none; border: none;
+      cursor: pointer; padding: 6px;
+    }
+    .hamburger span { width: 22px; height: 2.5px; background: #fff; border-radius: 2px; }
 
-    /* HERO */
-    .hero { padding: 68px 0 28px; }
-    .hero-img {
-      width: 100%; height: 180px; border-radius: var(--radius);
-      background: #2a2a2a center/cover no-repeat;
-      margin-bottom: 16px; position: relative; overflow: hidden;
+    /* Mobile nav */
+    .mobile-nav {
+      display: none; position: fixed; top: 60px; left: 0; right: 0;
+      background: #111; padding: 12px 16px 20px; z-index: 999;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
-    .hero-img::after {
-      content: '📷 Add kota photo → assets/hero-kota.jpg';
-      position: absolute; inset: 0; display: flex; align-items: center;
-      justify-content: center; background: rgba(0,0,0,0.55);
-      color: #aaa; font-size: 0.85rem; text-align: center; padding: 12px;
+    .mobile-nav.show { display: flex; flex-direction: column; gap: 4px; }
+    .mobile-nav a {
+      padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-weight: 500;
     }
-    .hero h1 { font-size: 1.7rem; font-weight: 800; line-height: 1.2; margin-bottom: 6px; }
-    .hero p { color: var(--muted); font-size: 0.9rem; margin-bottom: 14px; }
-    .hero-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
-    .pill {
-      background: var(--card); padding: 6px 12px; border-radius: 20px;
-      font-size: 0.78rem; color: var(--muted);
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 80px 0 40px;
+      background: linear-gradient(135deg, #1a0a0a 0%, #0d0d0d 50%, #1a1208 100%);
+      position: relative; overflow: hidden;
     }
-    .pill strong { color: #fff; }
+    .hero-grid {
+      display: grid; gap: 28px; align-items: center;
+    }
+    .hero-text h1 {
+      font-size: 2.4rem; font-weight: 800; line-height: 1.15;
+      margin-bottom: 12px; letter-spacing: -0.5px;
+    }
+    .hero-text h1 .red { color: var(--red); }
+    .hero-text p {
+      color: var(--muted); font-size: 1rem; margin-bottom: 22px; max-width: 380px;
+    }
+    .hero-btns { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
     .btn {
-      display: flex; align-items: center; justify-content: center; gap: 6px;
-      height: 46px; border-radius: 50px; font-weight: 600; font-size: 0.9rem;
-      border: none; cursor: pointer; width: 100%;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      height: 48px; border-radius: 50px; font-weight: 600; font-size: 0.95rem;
+      border: none; cursor: pointer; transition: 0.2s;
+    }
+    .btn-green { background: var(--green); color: #fff; }
+    .btn-outline {
+      background: transparent; border: 1.5px solid rgba(255,255,255,0.3); color: #fff;
     }
     .btn-red { background: var(--red); color: #fff; }
-    .btn-green { background: var(--green); color: #fff; }
-    .btn-sm {
-      height: 36px; font-size: 0.8rem; padding: 0 12px; width: auto;
-      border-radius: 20px; background: var(--green); color: #fff; border: none; cursor: pointer;
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 16px; font-size: 0.8rem; color: var(--muted);
+    }
+    .hero-meta strong { color: #fff; display: block; font-size: 0.9rem; }
+    .hero-img-wrap {
+      border-radius: 20px; overflow: hidden; position: relative;
+      background: #1a1a1a; aspect-ratio: 4/3;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+    .hero-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .hero-img-placeholder {
+      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(145deg, #2a1a1a, #1a1a1a);
+      color: #666; font-size: 0.9rem; text-align: center; padding: 20px;
     }
 
-    /* SECTIONS */
-    section { padding: 24px 0; }
+    /* ===== FEATURED ===== */
+    .featured { padding: 40px 0; background: #111; }
+    .section-title {
+      font-size: 1.5rem; font-weight: 800; text-align: center; margin-bottom: 8px;
+    }
+    .section-title span { color: var(--red); }
+    .section-sub {
+      text-align: center; color: var(--muted); margin-bottom: 28px; font-size: 0.95rem;
+    }
+    .feat-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    .feat-card {
+      background: var(--card); border-radius: var(--radius); overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .feat-img {
+      height: 110px; background: #222 center/cover no-repeat; position: relative;
+    }
+    .feat-img::after {
+      content: '📷';
+      position: absolute; inset: 0; display: flex; align-items: center;
+      justify-content: center; background: rgba(0,0,0,0.35); font-size: 1.4rem;
+    }
+    .feat-body { padding: 14px 12px 16px; text-align: center; }
+    .feat-body .icon {
+      width: 36px; height: 36px; border-radius: 50%; background: var(--red);
+      display: flex; align-items: center; justify-content: center;
+      margin: -28px auto 8px; font-size: 1rem; position: relative; z-index: 1;
+    }
+    .feat-body h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+    .feat-body p { font-size: 0.75rem; color: var(--muted); margin-bottom: 8px; }
+    .feat-price {
+      display: inline-block; background: var(--red); color: #fff;
+      font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    .feat-btn {
+      display: block; width: 100%; height: 36px; border-radius: 20px;
+      border: 1.5px solid rgba(255,255,255,0.2); background: transparent;
+      color: #fff; font-size: 0.8rem; font-weight: 600; cursor: pointer;
+    }
 
-    /* PRODUCT CARD */
+    /* ===== MENU ===== */
+    .menu-section { padding: 36px 0; }
+    .cat-title {
+      font-size: 1.1rem; font-weight: 700; color: var(--red);
+      margin: 28px 0 12px; display: flex; align-items: center; gap: 8px;
+    }
     .product {
-      background: var(--card); border-radius: var(--radius);
-      margin-bottom: 10px; overflow: hidden;
-      display: flex; gap: 12px; padding: 12px;
-      align-items: center;
+      background: var(--card); border-radius: 14px; margin-bottom: 10px;
+      display: flex; gap: 12px; padding: 12px; align-items: center;
+      border: 1px solid rgba(255,255,255,0.04);
     }
     .product-img {
-      width: 72px; height: 72px; border-radius: 10px; flex-shrink: 0;
+      width: 70px; height: 70px; border-radius: 12px; flex-shrink: 0;
       background: #2a2a2a center/cover no-repeat; position: relative;
     }
     .product-img::after {
       content: '📷';
       position: absolute; inset: 0; display: flex; align-items: center;
-      justify-content: center; font-size: 1.2rem; background: rgba(0,0,0,0.35);
-      border-radius: 10px;
+      justify-content: center; font-size: 1.1rem; background: rgba(0,0,0,0.3);
+      border-radius: 12px;
     }
     .product-info { flex: 1; min-width: 0; }
     .product-info h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; }
-    .product-info .desc { font-size: 0.75rem; color: var(--muted); margin-bottom: 6px; line-height: 1.3; }
+    .product-info .desc { font-size: 0.75rem; color: var(--muted); margin-bottom: 6px; }
     .product-bottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-    .price { color: var(--red); font-weight: 700; font-size: 1rem; }
+    .price { color: var(--red); font-weight: 700; font-size: 1.05rem; }
     .badge {
       display: inline-block; font-size: 0.65rem; font-weight: 700;
-      padding: 2px 8px; border-radius: 10px; margin-left: 6px;
+      padding: 2px 8px; border-radius: 8px; margin-left: 6px;
     }
     .badge.popular { background: var(--red); color: #fff; }
     .badge.best { background: #ff6b00; color: #fff; }
-
-    /* CATEGORY */
-    .cat-title {
-      font-size: 1rem; font-weight: 700; color: var(--red);
-      margin: 22px 0 10px; display: flex; align-items: center; gap: 6px;
+    .add-btn {
+      height: 34px; padding: 0 14px; border-radius: 20px;
+      background: var(--green); color: #fff; border: none;
+      font-weight: 600; font-size: 0.8rem; cursor: pointer;
     }
 
-    /* CART BAR */
+    /* ===== CONTACT ===== */
+    .contact-section { padding: 30px 0; }
+    .contact-card {
+      background: var(--card); border-radius: var(--radius); padding: 20px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .contact-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.95rem;
+    }
+    .contact-row:last-child { border-bottom: none; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 32px 16px; text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      background: #0a0a0a;
+    }
+    footer .brand { font-weight: 800; color: var(--red); font-size: 1.1rem; margin-bottom: 4px; }
+    footer p { color: var(--muted); font-size: 0.85rem; }
+    footer .copy { margin-top: 14px; font-size: 0.75rem; color: #555; }
+
+    /* ===== CART BAR ===== */
     .cart-bar {
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
-      background: #1a1a1a; border-top: 1px solid rgba(255,255,255,0.08);
-      padding: 10px 14px; display: none;
+      background: #161616; border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 10px 16px; display: none;
     }
     .cart-bar.show { display: block; }
     .cart-inner {
-      max-width: 480px; margin: 0 auto;
+      max-width: 1100px; margin: 0 auto;
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
     }
     .cart-info { font-size: 0.85rem; }
-    .cart-info strong { color: var(--green); font-size: 1.05rem; }
+    .cart-info strong { color: var(--green); font-size: 1.1rem; }
     .cart-btn {
       background: var(--green); color: #fff; border: none;
-      height: 42px; padding: 0 18px; border-radius: 50px;
+      height: 42px; padding: 0 20px; border-radius: 50px;
       font-weight: 700; font-size: 0.85rem; cursor: pointer;
-      white-space: nowrap;
     }
 
-    /* CART MODAL */
+    /* ===== CART MODAL ===== */
     .modal-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+      position: fixed; inset: 0; background: rgba(0,0,0,0.75);
       z-index: 200; display: none; align-items: flex-end; justify-content: center;
     }
     .modal-overlay.show { display: flex; }
     .modal {
-      background: #1c1c1c; width: 100%; max-width: 480px;
-      border-radius: 20px 20px 0 0; padding: 20px 16px 30px;
+      background: #1a1a1a; width: 100%; max-width: 480px;
+      border-radius: 20px 20px 0 0; padding: 22px 16px 32px;
       max-height: 80vh; overflow-y: auto;
     }
-    .modal h3 { font-size: 1.15rem; margin-bottom: 14px; text-align: center; }
+    .modal h3 { font-size: 1.2rem; margin-bottom: 14px; text-align: center; }
     .cart-item {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
       font-size: 0.9rem;
     }
     .cart-item .remove {
       background: none; border: none; color: var(--red);
-      font-size: 0.8rem; cursor: pointer; margin-left: 8px;
+      font-size: 0.85rem; cursor: pointer; margin-left: 8px;
     }
     .cart-total {
       display: flex; justify-content: space-between;
-      font-size: 1.1rem; font-weight: 700; margin: 16px 0;
+      font-size: 1.15rem; font-weight: 700; margin: 16px 0;
     }
     .cart-total span:last-child { color: var(--green); }
     .modal-actions { display: flex; flex-direction: column; gap: 10px; }
@@ -177,29 +286,29 @@
       cursor: pointer; width: 100%;
     }
 
-    /* FOOTER */
-    footer {
-      padding: 28px 14px; text-align: center;
-      border-top: 1px solid rgba(255,255,255,0.05);
+    /* ===== FLOATING WHATSAPP ===== */
+    .float-wa {
+      position: fixed; bottom: 80px; right: 16px; z-index: 95;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--green); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.7rem; box-shadow: 0 6px 24px rgba(37,211,102,0.45);
+      transition: transform 0.2s;
     }
-    footer .brand { font-weight: 800; color: var(--red); margin-bottom: 4px; }
-    footer p { color: var(--muted); font-size: 0.85rem; }
-    footer .copy { margin-top: 12px; font-size: 0.75rem; color: #555; }
+    .float-wa:active { transform: scale(0.92); }
 
-    /* CONTACT */
-    .contact-card {
-      background: var(--card); border-radius: var(--radius); padding: 18px;
-    }
-    .contact-row {
-      display: flex; align-items: center; gap: 10px;
-      padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
-      font-size: 0.9rem;
-    }
-    .contact-row:last-child { border-bottom: none; }
-
-    @media (min-width: 500px) {
-      .container, .header-inner, .cart-inner, .modal { max-width: 520px; }
-      .hero-img { height: 220px; }
+    /* ===== DESKTOP ===== */
+    @media (min-width: 768px) {
+      .nav { display: flex; }
+      .hamburger { display: none; }
+      .hero-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .hero-text h1 { font-size: 3rem; }
+      .hero-btns { flex-direction: row; }
+      .hero-btns .btn { width: auto; padding: 0 28px; }
+      .feat-grid { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+      .feat-img { height: 130px; }
+      .float-wa { bottom: 24px; right: 24px; }
+      .cart-bar { bottom: 0; }
     }
   </style>
 </head>
@@ -208,306 +317,362 @@
 <!-- HEADER -->
 <header>
   <div class="header-inner">
-    <div class="logo">TNC <span>FAST FOOD</span></div>
-    <div class="status" id="statusBadge">
-      <span class="status-dot"></span>
-      <span id="statusText">Checking...</span>
+    <div class="logo-img">TNC <span>FAST FOOD</span></div>
+    <nav class="nav">
+      <a href="#home" class="active">Home</a>
+      <a href="#menu">Menu</a>
+      <a href="#weekend">Weekend Specials</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-right">
+      <div class="status" id="statusBadge">
+        <span class="status-dot"></span>
+        <span id="statusText">...</span>
+      </div>
+      <a href="https://wa.me/27840171408?text=Hi%20TNC%20Fast%20Food%20%F0%9F%91%8B%20I'd%20like%20to%20place%20an%20order%20for%20collection." class="wa-header" target="_blank">
+        💬 084 017 1408
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </header>
 
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#home">Home</a>
+  <a href="#menu">Menu</a>
+  <a href="#weekend">Weekend Specials</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+</div>
+
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="home">
   <div class="container">
-    <div class="hero-img" id="heroImg"></div>
-    <h1>Fresh. Tasty. Affordable.</h1>
-    <p>Loaded Kotas, crispy chips, chicken & more — ready for collection.</p>
-    <div class="hero-meta">
-      <div class="pill">🕐 <strong>07:30 – 18:00</strong></div>
-      <div class="pill">📍 <strong>Collection</strong></div>
-      <div class="pill"><strong id="openText">...</strong></div>
+    <div class="hero-grid">
+      <div class="hero-text">
+        <h1>Fresh. Tasty.<br><span class="red">Affordable.</span></h1>
+        <p>Your favourite Kotas, chicken, chips, snacks and more — all in one place!</p>
+        <div class="hero-btns">
+          <a href="https://wa.me/27840171408?text=Hi%20TNC%20Fast%20Food%20%F0%9F%91%8B%20I'd%20like%20to%20place%20an%20order%20for%20collection." class="btn btn-green" target="_blank">💬 ORDER FOR COLLECTION</a>
+          <a href="#menu" class="btn btn-outline">VIEW MENU →</a>
+        </div>
+        <div class="hero-meta">
+          <div>🕐 OPENING HOURS<br><strong>07:30 – 18:00</strong></div>
+          <div>🛍️ COLLECTION<br><strong>Ready to collect</strong></div>
+          <div>📞 CALL / WHATSAPP<br><strong>084 017 1408</strong></div>
+        </div>
+      </div>
+      <div class="hero-img-wrap">
+        <div class="hero-img-placeholder">
+          📷 Add your best Kota photo here<br>
+          <small style="opacity:0.6;margin-top:6px;display:block;">Replace this with assets/hero-kota.jpg</small>
+        </div>
+      </div>
     </div>
-    <a href="#menu" class="btn btn-red">View Full Menu</a>
   </div>
 </section>
 
-<!-- MENU -->
-<section id="menu">
+<!-- FEATURED -->
+<section class="featured">
+  <div class="container">
+    <h2 class="section-title">OUR <span>MENU</span></h2>
+    <p class="section-sub">Big flavour. Great prices. Something for everyone!</p>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-img"></div>
+        <div class="feat-body">
+          <div class="icon">🍔</div>
+          <h3>KOTAS</h3>
+          <p>Loaded, filling and packed with flavour.</p>
+          <div class="feat-price">From R20</div>
+          <a href="#kotas" class="feat-btn">VIEW KOTA MENU →</a>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-img"></div>
+        <div class="feat-body">
+          <div class="icon">🍟</div>
+          <h3>CHIPS</h3>
+          <p>Crispy, hot and made to order.</p>
+          <div class="feat-price">From R20</div>
+          <a href="#chips" class="feat-btn">VIEW CHIPS →</a>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-img"></div>
+        <div class="feat-body">
+          <div class="icon">🍗</div>
+          <h3>CHICKEN & WINGS</h3>
+          <p>Perfect for weekend cravings.</p>
+          <div class="feat-price">From R40</div>
+          <a href="#weekend" class="feat-btn">VIEW WEEKEND →</a>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-img"></div>
+        <div class="feat-body">
+          <div class="icon">🥤</div>
+          <h3>DRINKS & SNACKS</h3>
+          <p>Something refreshing or something sweet.</p>
+          <div class="feat-price">From R1</div>
+          <a href="#drinks" class="feat-btn">VIEW MENU →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FULL MENU -->
+<section class="menu-section" id="menu">
   <div class="container">
 
-    <!-- MAGWINYA -->
-    <div class="cat-title">🥟 Magwinya</div>
-    <div class="product" data-name="Magwinya" data-price="25">
+    <div class="cat-title" id="magwinya">🥟 Magwinya</div>
+    <div class="product" data-name="Magwinya" data-price="2">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>Magwinya</h4>
         <div class="desc">Freshly fried dough balls</div>
         <div class="product-bottom">
-          <span class="price">R25</span>
-          <button class="btn-sm add-btn">Add</button>
+          <span class="price">R2</span>
+          <button class="add-btn">Add</button>
         </div>
       </div>
     </div>
 
-    <!-- KOTAS -->
-    <div class="cat-title">🍔 Kota Menu</div>
+    <div class="cat-title" id="kotas">🍔 Kota Menu</div>
 
     <div class="product" data-name="KWID Kota" data-price="20">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>KWID</h4>
         <div class="desc">Atchaar, Chips, Polony</div>
-        <div class="product-bottom">
-          <span class="price">R20</span>
-          <button class="btn-sm add-btn">Add</button>
-        </div>
+        <div class="product-bottom"><span class="price">R20</span><button class="add-btn">Add</button></div>
       </div>
     </div>
-
     <div class="product" data-name="VW Kota" data-price="25">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>VW</h4>
         <div class="desc">Atchaar, Chips, Polony, Vienna</div>
-        <div class="product-bottom">
-          <span class="price">R25</span>
-          <button class="btn-sm add-btn">Add</button>
-        </div>
+        <div class="product-bottom"><span class="price">R25</span><button class="add-btn">Add</button></div>
       </div>
     </div>
-
     <div class="product" data-name="AUDI Kota" data-price="30">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>AUDI</h4>
         <div class="desc">Atchaar, Chips, Polony, Egg, Russian</div>
-        <div class="product-bottom">
-          <span class="price">R30</span>
-          <button class="btn-sm add-btn">Add</button>
-        </div>
+        <div class="product-bottom"><span class="price">R30</span><button class="add-btn">Add</button></div>
       </div>
     </div>
-
     <div class="product" data-name="BMW Kota" data-price="33">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>BMW</h4>
         <div class="desc">Atchaar, Chips, Polony, Cheese, Egg, Russian</div>
-        <div class="product-bottom">
-          <span class="price">R33</span>
-          <button class="btn-sm add-btn">Add</button>
-        </div>
+        <div class="product-bottom"><span class="price">R33</span><button class="add-btn">Add</button></div>
       </div>
     </div>
-
     <div class="product" data-name="Mercedes Benz Kota" data-price="40">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>MERCEDES BENZ <span class="badge popular">POPULAR</span></h4>
         <div class="desc">Atchaar, Chips, Polony, Cheese, Egg, Vienna, Russian</div>
-        <div class="product-bottom">
-          <span class="price">R40</span>
-          <button class="btn-sm add-btn">Add</button>
-        </div>
+        <div class="product-bottom"><span class="price">R40</span><button class="add-btn">Add</button></div>
       </div>
     </div>
-
     <div class="product" data-name="McLaren Kota" data-price="50">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>McLAREN <span class="badge best">FULL HOUSE</span></h4>
         <div class="desc">Atchaar, Chips, Polony, Cheese, Egg, Vienna, Russian, Beef Patty</div>
-        <div class="product-bottom">
-          <span class="price">R50</span>
-          <button class="btn-sm add-btn">Add</button>
-        </div>
+        <div class="product-bottom"><span class="price">R50</span><button class="add-btn">Add</button></div>
       </div>
     </div>
 
-    <!-- CHIPS -->
-    <div class="cat-title">🍟 Chips</div>
+    <div class="cat-title" id="chips">🍟 Chips</div>
     <div class="product" data-name="Small Chips" data-price="20">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>Small Chips</h4>
-        <div class="product-bottom">
-          <span class="price">R20</span>
-          <button class="btn-sm add-btn">Add</button>
-        </div>
+        <div class="product-bottom"><span class="price">R20</span><button class="add-btn">Add</button></div>
       </div>
     </div>
     <div class="product" data-name="Medium Chips" data-price="30">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>Medium Chips</h4>
-        <div class="product-bottom">
-          <span class="price">R30</span>
-          <button class="btn-sm add-btn">Add</button>
-        </div>
+        <div class="product-bottom"><span class="price">R30</span><button class="add-btn">Add</button></div>
       </div>
     </div>
     <div class="product" data-name="Large Chips" data-price="40">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>Large Chips</h4>
-        <div class="product-bottom">
-          <span class="price">R40</span>
-          <button class="btn-sm add-btn">Add</button>
-        </div>
+        <div class="product-bottom"><span class="price">R40</span><button class="add-btn">Add</button></div>
       </div>
     </div>
 
-    <!-- TOP UPS -->
     <div class="cat-title">➕ Make It Extra</div>
     <div class="product" data-name="Extra Egg" data-price="6">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>Egg</h4>
-        <div class="product-bottom"><span class="price">R6</span><button class="btn-sm add-btn">Add</button></div>
+        <div class="product-bottom"><span class="price">R6</span><button class="add-btn">Add</button></div>
       </div>
     </div>
     <div class="product" data-name="Extra Cheese" data-price="3">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>Cheese</h4>
-        <div class="product-bottom"><span class="price">R3</span><button class="btn-sm add-btn">Add</button></div>
+        <div class="product-bottom"><span class="price">R3</span><button class="add-btn">Add</button></div>
       </div>
     </div>
     <div class="product" data-name="Extra Vienna" data-price="7">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>Vienna</h4>
-        <div class="product-bottom"><span class="price">R7</span><button class="btn-sm add-btn">Add</button></div>
+        <div class="product-bottom"><span class="price">R7</span><button class="add-btn">Add</button></div>
       </div>
     </div>
     <div class="product" data-name="Extra Garlic" data-price="2">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>Garlic</h4>
-        <div class="product-bottom"><span class="price">R2</span><button class="btn-sm add-btn">Add</button></div>
+        <div class="product-bottom"><span class="price">R2</span><button class="add-btn">Add</button></div>
       </div>
     </div>
     <div class="product" data-name="Extra Polony" data-price="2">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>Polony</h4>
-        <div class="product-bottom"><span class="price">R2</span><button class="btn-sm add-btn">Add</button></div>
+        <div class="product-bottom"><span class="price">R2</span><button class="add-btn">Add</button></div>
       </div>
     </div>
     <div class="product" data-name="Extra Russian" data-price="12">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>Russian</h4>
-        <div class="product-bottom"><span class="price">R12</span><button class="btn-sm add-btn">Add</button></div>
+        <div class="product-bottom"><span class="price">R12</span><button class="add-btn">Add</button></div>
       </div>
     </div>
     <div class="product" data-name="Extra Beef Patty" data-price="10">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>Beef Patty</h4>
-        <div class="product-bottom"><span class="price">R10</span><button class="btn-sm add-btn">Add</button></div>
+        <div class="product-bottom"><span class="price">R10</span><button class="add-btn">Add</button></div>
       </div>
     </div>
 
-    <!-- WEEKEND -->
-    <div class="cat-title">🍗 Weekend Food</div>
-    <p style="color:var(--muted);font-size:0.8rem;margin-bottom:10px;">Also available with pap & salad</p>
+    <div class="cat-title" id="weekend">🍗 Weekend Food</div>
+    <p style="color:var(--muted);font-size:0.8rem;margin-bottom:12px;">Also available with pap & salad</p>
     <div class="product" data-name="Quarter Chicken & Chips" data-price="40">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>Quarter Chicken & Chips</h4>
-        <div class="product-bottom"><span class="price">R40</span><button class="btn-sm add-btn">Add</button></div>
+        <div class="product-bottom"><span class="price">R40</span><button class="add-btn">Add</button></div>
       </div>
     </div>
     <div class="product" data-name="Half Chicken & Chips" data-price="80">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>Half Chicken & Chips</h4>
-        <div class="product-bottom"><span class="price">R80</span><button class="btn-sm add-btn">Add</button></div>
+        <div class="product-bottom"><span class="price">R80</span><button class="add-btn">Add</button></div>
       </div>
     </div>
     <div class="product" data-name="Full Chicken & Chips" data-price="120">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>Full Chicken & Chips</h4>
-        <div class="product-bottom"><span class="price">R120</span><button class="btn-sm add-btn">Add</button></div>
+        <div class="product-bottom"><span class="price">R120</span><button class="add-btn">Add</button></div>
       </div>
     </div>
     <div class="product" data-name="3 Wings & Chips" data-price="40">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>3 Wings & Chips</h4>
-        <div class="product-bottom"><span class="price">R40</span><button class="btn-sm add-btn">Add</button></div>
+        <div class="product-bottom"><span class="price">R40</span><button class="add-btn">Add</button></div>
       </div>
     </div>
     <div class="product" data-name="5 Wings & Chips" data-price="60">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>5 Wings & Chips</h4>
-        <div class="product-bottom"><span class="price">R60</span><button class="btn-sm add-btn">Add</button></div>
+        <div class="product-bottom"><span class="price">R60</span><button class="add-btn">Add</button></div>
       </div>
     </div>
 
-    <!-- DRINKS -->
-    <div class="cat-title">🥤 Drinks & Snacks</div>
+    <div class="cat-title" id="drinks">🥤 Drinks & Snacks</div>
     <div class="product" data-name="Popcorn" data-price="5">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>Popcorn</h4>
-        <div class="product-bottom"><span class="price">R5</span><button class="btn-sm add-btn">Add</button></div>
+        <div class="product-bottom"><span class="price">R5</span><button class="add-btn">Add</button></div>
       </div>
     </div>
     <div class="product" data-name="Ice Cream" data-price="5">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>Ice Cream</h4>
-        <div class="product-bottom"><span class="price">R5</span><button class="btn-sm add-btn">Add</button></div>
+        <div class="product-bottom"><span class="price">R5</span><button class="add-btn">Add</button></div>
       </div>
     </div>
     <div class="product" data-name="Ice" data-price="1">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>Ice</h4>
-        <div class="product-bottom"><span class="price">R1</span><button class="btn-sm add-btn">Add</button></div>
+        <div class="product-bottom"><span class="price">R1</span><button class="add-btn">Add</button></div>
       </div>
     </div>
     <div class="product" data-name="Mocktail" data-price="10">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>Mocktail</h4>
-        <div class="product-bottom"><span class="price">R10</span><button class="btn-sm add-btn">Add</button></div>
+        <div class="product-bottom"><span class="price">R10</span><button class="add-btn">Add</button></div>
       </div>
     </div>
     <div class="product" data-name="Milkshake" data-price="10">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>Milkshake</h4>
-        <div class="product-bottom"><span class="price">R10</span><button class="btn-sm add-btn">Add</button></div>
+        <div class="product-bottom"><span class="price">R10</span><button class="add-btn">Add</button></div>
       </div>
     </div>
     <div class="product" data-name="Soft Drink" data-price="18">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>Soft Drink</h4>
-        <div class="product-bottom"><span class="price">R18</span><button class="btn-sm add-btn">Add</button></div>
+        <div class="product-bottom"><span class="price">R18</span><button class="add-btn">Add</button></div>
       </div>
     </div>
     <div class="product" data-name="Energy Drink" data-price="12">
       <div class="product-img"></div>
       <div class="product-info">
         <h4>Energy Drink</h4>
-        <div class="product-bottom"><span class="price">R12</span><button class="btn-sm add-btn">Add</button></div>
+        <div class="product-bottom"><span class="price">R12</span><button class="add-btn">Add</button></div>
       </div>
     </div>
 
   </div>
 </section>
 
+<!-- ABOUT -->
+<section id="about" style="padding:30px 0;background:#111;">
+  <div class="container" style="text-align:center;max-width:560px;">
+    <h2 class="section-title">About <span>TNC</span></h2>
+    <p style="color:var(--muted);margin-top:12px;">At TNC Fast Food we serve fresh, tasty and affordable food for every craving. From loaded Kotas and crispy chips to chicken, wings and cold drinks — there's something for everyone.</p>
+  </div>
+</section>
+
 <!-- CONTACT -->
-<section>
+<section class="contact-section" id="contact">
   <div class="container">
     <div class="contact-card">
-      <div class="contact-row">📞 <a href="tel:0840171408">084 017 1408</a></div>
+      <div class="contact-row">📞 <a href="tel:0840171408"><strong>084 017 1408</strong></a></div>
       <div class="contact-row">💬 WhatsApp available</div>
       <div class="contact-row">🕐 07:30 – 18:00</div>
       <div class="contact-row">📍 Address coming soon</div>
@@ -521,6 +686,11 @@
   <p>Fresh. Tasty. Affordable.</p>
   <div class="copy">© 2026 TNC Fast Food</div>
 </footer>
+
+<!-- FLOATING WHATSAPP CHAT ICON -->
+<a href="https://wa.me/27840171408?text=Hi%20TNC%20Fast%20Food%20%F0%9F%91%8B%20I'd%20like%20to%20place%20an%20order%20for%20collection." class="float-wa" target="_blank" aria-label="Chat on WhatsApp">
+  💬
+</a>
 
 <!-- CART BAR -->
 <div class="cart-bar" id="cartBar">
@@ -543,128 +713,88 @@
       <span id="modalTotal">R0</span>
     </div>
     <div class="modal-actions">
-      <button class="btn btn-green" id="whatsappOrderBtn" style="width:100%;height:48px;border-radius:50px;font-weight:700;border:none;cursor:pointer;">💬 Order on WhatsApp</button>
+      <button class="btn btn-green" id="whatsappOrderBtn" style="width:100%;height:48px;border-radius:50px;font-weight:700;">💬 Order on WhatsApp</button>
       <button class="close-modal" id="closeModal">Close</button>
     </div>
   </div>
 </div>
 
 <script>
-  // ===== OPEN / CLOSED STATUS (SAST) =====
+  // Mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  hamburger.addEventListener('click', () => mobileNav.classList.toggle('show'));
+  document.querySelectorAll('.mobile-nav a').forEach(a => {
+    a.addEventListener('click', () => mobileNav.classList.remove('show'));
+  });
+
+  // Open / Closed (SAST)
   function updateStatus() {
     const now = new Date();
-    const sastOffset = 2 * 60;
     const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-    const sast = new Date(utc + (sastOffset * 60000));
-    const hours = sast.getHours();
-    const mins = sast.getMinutes();
-    const time = hours * 60 + mins;
-    const openTime = 7 * 60 + 30;
-    const closeTime = 18 * 60;
-    const isOpen = time >= openTime && time < closeTime;
-
+    const sast = new Date(utc + (2 * 60 * 60000));
+    const time = sast.getHours() * 60 + sast.getMinutes();
+    const isOpen = time >= (7*60+30) && time < (18*60);
     const badge = document.getElementById('statusBadge');
     const text = document.getElementById('statusText');
-    const openText = document.getElementById('openText');
-
     if (isOpen) {
       badge.className = 'status open';
       text.textContent = 'Open now';
-      openText.textContent = 'Open now';
     } else {
       badge.className = 'status closed';
       text.textContent = 'Closed';
-      openText.textContent = 'Closed';
     }
   }
   updateStatus();
   setInterval(updateStatus, 60000);
 
-  // ===== CART =====
+  // Cart
   let cart = [];
-
   function addToCart(name, price) {
     const existing = cart.find(i => i.name === name);
-    if (existing) {
-      existing.qty += 1;
-    } else {
-      cart.push({ name, price, qty: 1 });
-    }
+    if (existing) existing.qty += 1;
+    else cart.push({ name, price, qty: 1 });
     renderCart();
   }
-
   function removeFromCart(name) {
     cart = cart.filter(i => i.name !== name);
     renderCart();
   }
-
-  function getTotal() {
-    return cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
-  }
-
-  function getCount() {
-    return cart.reduce((sum, i) => sum + i.qty, 0);
-  }
-
+  function getTotal() { return cart.reduce((s, i) => s + i.price * i.qty, 0); }
+  function getCount() { return cart.reduce((s, i) => s + i.qty, 0); }
   function renderCart() {
     const bar = document.getElementById('cartBar');
-    const countEl = document.getElementById('cartCount');
-    const totalEl = document.getElementById('cartTotal');
-    const itemsEl = document.getElementById('cartItems');
-    const modalTotal = document.getElementById('modalTotal');
-
     const count = getCount();
     const total = getTotal();
-
     if (count > 0) {
       bar.classList.add('show');
-      countEl.textContent = count + (count === 1 ? ' item' : ' items');
-      totalEl.textContent = 'R' + total;
-    } else {
-      bar.classList.remove('show');
-    }
-
-    itemsEl.innerHTML = cart.map(i => `
-      <div class="cart-item">
-        <span>${i.qty}× ${i.name}</span>
-        <span>R${i.price * i.qty} <button class="remove" onclick="removeFromCart('${i.name}')">✕</button></span>
-      </div>
-    `).join('');
-    modalTotal.textContent = 'R' + total;
+      document.getElementById('cartCount').textContent = count + (count === 1 ? ' item' : ' items');
+      document.getElementById('cartTotal').textContent = 'R' + total;
+    } else bar.classList.remove('show');
+    document.getElementById('cartItems').innerHTML = cart.map(i =>
+      `<div class="cart-item"><span>${i.qty}× ${i.name}</span><span>R${i.price*i.qty} <button class="remove" onclick="removeFromCart('${i.name}')">✕</button></span></div>`
+    ).join('');
+    document.getElementById('modalTotal').textContent = 'R' + total;
   }
-
   document.querySelectorAll('.add-btn').forEach(btn => {
     btn.addEventListener('click', function() {
-      const product = this.closest('.product');
-      const name = product.dataset.name;
-      const price = parseInt(product.dataset.price);
-      addToCart(name, price);
+      const p = this.closest('.product');
+      addToCart(p.dataset.name, parseInt(p.dataset.price));
       this.textContent = 'Added ✓';
-      setTimeout(() => { this.textContent = 'Add'; }, 800);
+      setTimeout(() => this.textContent = 'Add', 700);
     });
   });
-
-  document.getElementById('viewCartBtn').addEventListener('click', () => {
-    document.getElementById('cartModal').classList.add('show');
+  document.getElementById('viewCartBtn').addEventListener('click', () => document.getElementById('cartModal').classList.add('show'));
+  document.getElementById('closeModal').addEventListener('click', () => document.getElementById('cartModal').classList.remove('show'));
+  document.getElementById('cartModal').addEventListener('click', e => {
+    if (e.target.id === 'cartModal') document.getElementById('cartModal').classList.remove('show');
   });
-  document.getElementById('closeModal').addEventListener('click', () => {
-    document.getElementById('cartModal').classList.remove('show');
-  });
-  document.getElementById('cartModal').addEventListener('click', (e) => {
-    if (e.target.id === 'cartModal') {
-      document.getElementById('cartModal').classList.remove('show');
-    }
-  });
-
   document.getElementById('whatsappOrderBtn').addEventListener('click', () => {
-    if (cart.length === 0) return;
-    let message = 'Hi TNC Fast Food 👋\\nI would like to order for collection:\\n\\n';
-    cart.forEach(i => {
-      message += '• ' + i.qty + '× ' + i.name + ' – R' + (i.price * i.qty) + '\\n';
-    });
-    message += '\\nTotal: R' + getTotal() + '\\n\\nThank you!';
-    const url = 'https://wa.me/27840171408?text=' + encodeURIComponent(message);
-    window.open(url, '_blank');
+    if (!cart.length) return;
+    let msg = 'Hi TNC Fast Food 👋\\nI would like to order for collection:\\n\\n';
+    cart.forEach(i => { msg += `• ${i.qty}× ${i.name} – R${i.price*i.qty}\\n`; });
+    msg += `\\nTotal: R${getTotal()}\\n\\nThank you!`;
+    window.open('https://wa.me/27840171408?text=' + encodeURIComponent(msg), '_blank');
   });
 </script>
 </body>
