@@ -277,6 +277,45 @@
       font-size: 1.7rem; box-shadow: 0 6px 24px rgba(37,211,102,0.45);
     }
 
+
+    .product.text-only {
+      padding: 10px 12px;
+      gap: 0;
+    }
+    .product.text-only .product-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 10px;
+    }
+    .product.text-only h4 {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+    .product.text-only .product-bottom {
+      margin: 0;
+      flex-shrink: 0;
+      gap: 10px;
+    }
+    .product.text-only .price {
+      font-size: 0.95rem;
+    }
+    .product.text-only .add-btn {
+      height: 30px;
+      padding: 0 12px;
+      font-size: 0.75rem;
+    }
+    .extras-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .extras-grid .product {
+      margin-bottom: 0;
+    }
+
     @media (min-width: 768px) {
       .nav { display: flex; }
       .hamburger { display: none; }
@@ -284,7 +323,7 @@
       .hero-text h1 { font-size: 3rem; }
       .hero-btns { flex-direction: row; }
       .hero-btns .btn { width: auto; padding: 0 28px; }
-      .feat-grid { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+      .feat-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
       .feat-img { height: 130px; }
       .float-wa { bottom: 24px; right: 24px; }
     }
@@ -400,18 +439,7 @@
           <a href="#weekend" class="feat-btn">VIEW WEEKEND →</a>
         </div>
       </div>
-      <div class="feat-card">
-        <div class="feat-img">
-          <img src="assets/mocktail.jpg.jpeg" alt="Drinks & Snacks">
-        </div>
-        <div class="feat-body">
-          <div class="icon">🥤</div>
-          <h3>DRINKS & SNACKS</h3>
-          <p>Something refreshing or something sweet.</p>
-          <div class="feat-price">From R1</div>
-          <a href="#drinks" class="feat-btn">VIEW MENU →</a>
-        </div>
-      </div>
+
     </div>
   </div>
 </section>
@@ -507,149 +535,81 @@
     </div>
 
     <div class="cat-title">➕ Make It Extra</div>
-    <div class="product" data-name="Extra Egg" data-price="3">
-      <div class="product-img"></div>
-      <div class="product-info">
-        <h4>Egg</h4>
-        <div class="product-bottom"><span class="price">R3</span><button class="add-btn">Add</button></div>
+    <div class="extras-grid">
+      <div class="product text-only" data-name="Extra Egg" data-price="3">
+        <div class="product-info">
+          <h4>Egg</h4>
+          <div class="product-bottom"><span class="price">R3</span><button class="add-btn">Add</button></div>
+        </div>
       </div>
-    </div>
-    <div class="product" data-name="Extra Cheese" data-price="3">
-      <div class="product-img"></div>
-      <div class="product-info">
-        <h4>Cheese</h4>
-        <div class="product-bottom"><span class="price">R3</span><button class="add-btn">Add</button></div>
+      <div class="product text-only" data-name="Extra Cheese" data-price="3">
+        <div class="product-info">
+          <h4>Cheese</h4>
+          <div class="product-bottom"><span class="price">R3</span><button class="add-btn">Add</button></div>
+        </div>
       </div>
-    </div>
-    <div class="product" data-name="Extra Vienna" data-price="7">
-      <div class="product-img"></div>
-      <div class="product-info">
-        <h4>Vienna</h4>
-        <div class="product-bottom"><span class="price">R7</span><button class="add-btn">Add</button></div>
+      <div class="product text-only" data-name="Extra Vienna" data-price="7">
+        <div class="product-info">
+          <h4>Vienna</h4>
+          <div class="product-bottom"><span class="price">R7</span><button class="add-btn">Add</button></div>
+        </div>
       </div>
-    </div>
-    <div class="product" data-name="Extra Garlic" data-price="2">
-      <div class="product-img"></div>
-      <div class="product-info">
-        <h4>Garlic</h4>
-        <div class="product-bottom"><span class="price">R2</span><button class="add-btn">Add</button></div>
+      <div class="product text-only" data-name="Extra Garlic" data-price="2">
+        <div class="product-info">
+          <h4>Garlic</h4>
+          <div class="product-bottom"><span class="price">R2</span><button class="add-btn">Add</button></div>
+        </div>
       </div>
-    </div>
-    <div class="product" data-name="Extra Polony" data-price="2">
-      <div class="product-img"></div>
-      <div class="product-info">
-        <h4>Polony</h4>
-        <div class="product-bottom"><span class="price">R2</span><button class="add-btn">Add</button></div>
+      <div class="product text-only" data-name="Extra Polony" data-price="2">
+        <div class="product-info">
+          <h4>Polony</h4>
+          <div class="product-bottom"><span class="price">R2</span><button class="add-btn">Add</button></div>
+        </div>
       </div>
-    </div>
-    <div class="product" data-name="Extra Russian" data-price="12">
-      <div class="product-img"></div>
-      <div class="product-info">
-        <h4>Russian</h4>
-        <div class="product-bottom"><span class="price">R12</span><button class="add-btn">Add</button></div>
+      <div class="product text-only" data-name="Extra Russian" data-price="12">
+        <div class="product-info">
+          <h4>Russian</h4>
+          <div class="product-bottom"><span class="price">R12</span><button class="add-btn">Add</button></div>
+        </div>
       </div>
-    </div>
-    <div class="product" data-name="Extra Beef Patty" data-price="10">
-      <div class="product-img"></div>
-      <div class="product-info">
-        <h4>Beef Patty</h4>
-        <div class="product-bottom"><span class="price">R10</span><button class="add-btn">Add</button></div>
+      <div class="product text-only" data-name="Extra Beef Patty" data-price="10">
+        <div class="product-info">
+          <h4>Beef Patty</h4>
+          <div class="product-bottom"><span class="price">R10</span><button class="add-btn">Add</button></div>
+        </div>
       </div>
     </div>
 
     <div class="cat-title" id="weekend">🍗 Weekend Food</div>
     <p style="color:var(--muted);font-size:0.8rem;margin-bottom:12px;">Also available with pap & salad</p>
-    <div class="product" data-name="Quarter Chicken & Chips" data-price="40">
-      <div class="product-img"><img src="assets/full-chicken.jpg.jpeg" alt="Quarter Chicken"></div>
+    <div class="product text-only" data-name="Quarter Chicken & Chips" data-price="40">
       <div class="product-info">
         <h4>Quarter Chicken & Chips</h4>
         <div class="product-bottom"><span class="price">R40</span><button class="add-btn">Add</button></div>
       </div>
     </div>
-    <div class="product" data-name="Half Chicken & Chips" data-price="80">
-      <div class="product-img"><img src="assets/full-chicken.jpg.jpeg" alt="Half Chicken"></div>
+    <div class="product text-only" data-name="Half Chicken & Chips" data-price="80">
       <div class="product-info">
         <h4>Half Chicken & Chips</h4>
         <div class="product-bottom"><span class="price">R80</span><button class="add-btn">Add</button></div>
       </div>
     </div>
-    <div class="product" data-name="Full Chicken & Chips" data-price="120">
-      <div class="product-img"><img src="assets/full-chicken.jpg.jpeg" alt="Full Chicken"></div>
+    <div class="product text-only" data-name="Full Chicken & Chips" data-price="120">
       <div class="product-info">
         <h4>Full Chicken & Chips</h4>
         <div class="product-bottom"><span class="price">R120</span><button class="add-btn">Add</button></div>
       </div>
     </div>
-    <div class="product" data-name="3 Wings & Chips" data-price="40">
-      <div class="product-img"><img src="assets/chicken-wings.jpg.jpeg" alt="3 Wings"></div>
+    <div class="product text-only" data-name="3 Wings & Chips" data-price="40">
       <div class="product-info">
         <h4>3 Wings & Chips</h4>
         <div class="product-bottom"><span class="price">R40</span><button class="add-btn">Add</button></div>
       </div>
     </div>
-    <div class="product" data-name="5 Wings & Chips" data-price="60">
-      <div class="product-img"><img src="assets/chicken-wings.jpg.jpeg" alt="5 Wings"></div>
+    <div class="product text-only" data-name="5 Wings & Chips" data-price="60">
       <div class="product-info">
         <h4>5 Wings & Chips</h4>
         <div class="product-bottom"><span class="price">R60</span><button class="add-btn">Add</button></div>
-      </div>
-    </div>
-
-    <div class="cat-title" id="drinks">🥤 Drinks & Snacks</div>
-    <div class="product" data-name="Popcorn" data-price="5">
-      <div class="product-img"><img src="assets/pop-corn.jpg.jpeg" alt="Popcorn"></div>
-      <div class="product-info">
-        <h4>Popcorn</h4>
-        <div class="product-bottom"><span class="price">R5</span><button class="add-btn">Add</button></div>
-      </div>
-    </div>
-    <div class="product" data-name="Ice Cream" data-price="5">
-      <div class="product-img"><img src="assets/ice-cream.jpg.jpeg" alt="Ice Cream"></div>
-      <div class="product-info">
-        <h4>Ice Cream</h4>
-        <div class="product-bottom"><span class="price">R5 / R10</span><button class="add-btn">Add</button></div>
-      </div>
-    </div>
-    <div class="product" data-name="Ice" data-price="1">
-      <div class="product-img"></div>
-      <div class="product-info">
-        <h4>Ice</h4>
-        <div class="product-bottom"><span class="price">R1</span><button class="add-btn">Add</button></div>
-      </div>
-    </div>
-    <div class="product" data-name="Mocktail" data-price="10">
-      <div class="product-img"><img src="assets/mocktail.jpg.jpeg" alt="Mocktail"></div>
-      <div class="product-info">
-        <h4>Mocktail</h4>
-        <div class="product-bottom"><span class="price">R10</span><button class="add-btn">Add</button></div>
-      </div>
-    </div>
-    <div class="product" data-name="Milkshake" data-price="15">
-      <div class="product-img"></div>
-      <div class="product-info">
-        <h4>Milkshake</h4>
-        <div class="product-bottom"><span class="price">R15</span><button class="add-btn">Add</button></div>
-      </div>
-    </div>
-    <div class="product" data-name="Soft Drink" data-price="15">
-      <div class="product-img"></div>
-      <div class="product-info">
-        <h4>Soft Drink</h4>
-        <div class="product-bottom"><span class="price">R15 / R20</span><button class="add-btn">Add</button></div>
-      </div>
-    </div>
-    <div class="product" data-name="Energy Drink" data-price="12">
-      <div class="product-img"></div>
-      <div class="product-info">
-        <h4>Energy Drink</h4>
-        <div class="product-bottom"><span class="price">R12</span><button class="add-btn">Add</button></div>
-      </div>
-    </div>
-    <div class="product" data-name="Yoghurt" data-price="12">
-      <div class="product-img"></div>
-      <div class="product-info">
-        <h4>Yoghurt</h4>
-        <div class="product-bottom"><span class="price">R12</span><button class="add-btn">Add</button></div>
       </div>
     </div>
 
