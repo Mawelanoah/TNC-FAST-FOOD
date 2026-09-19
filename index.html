@@ -88,8 +88,9 @@
     }
     .hero-grid { display: grid; gap: 28px; align-items: center; }
     .hero-text h1 {
-      font-size: 2.4rem; font-weight: 800; line-height: 1.15;
-      margin-bottom: 12px; letter-spacing: -0.5px;
+      font-size: 2.55rem; font-weight: 800; line-height: 1.12;
+      margin-bottom: 14px; letter-spacing: -0.8px;
+      text-shadow: 0 2px 20px rgba(230,57,46,0.15);
     }
     .hero-text h1 .red { color: var(--red); }
     .hero-text p {
@@ -122,6 +123,26 @@
     }
 
     .featured { padding: 40px 0; background: #111; }
+
+    .chicken-bar {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 14px;
+      padding: 14px 16px;
+      background: var(--card);
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: 0.2s;
+    }
+    .chicken-bar:active { transform: scale(0.98); }
+    .cb-icon { font-size: 1.6rem; }
+    .cb-text { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+    .cb-text strong { font-size: 0.95rem; font-weight: 700; }
+    .cb-text small { font-size: 0.75rem; color: var(--muted); }
+    .cb-arrow { color: var(--red); font-weight: 700; font-size: 0.85rem; }
+    .feat-grid { grid-template-columns: 1fr 1fr !important; }
+
     .section-title {
       font-size: 1.5rem; font-weight: 800; text-align: center; margin-bottom: 8px;
     }
@@ -163,17 +184,20 @@
 
     .menu-section { padding: 36px 0; }
     .cat-title {
-      font-size: 1.1rem; font-weight: 700; color: var(--red);
-      margin: 28px 0 12px; display: flex; align-items: center; gap: 8px;
+      font-size: 1.2rem; font-weight: 800; color: var(--red);
+      margin: 32px 0 14px; display: flex; align-items: center; gap: 8px;
+      letter-spacing: -0.3px;
     }
     .product {
       background: var(--card); border-radius: 14px; margin-bottom: 10px;
-      display: flex; gap: 12px; padding: 12px; align-items: center;
-      border: 1px solid rgba(255,255,255,0.04);
+      display: flex; gap: 14px; padding: 14px; align-items: center;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
     }
     .product-img {
-      width: 70px; height: 70px; border-radius: 12px; flex-shrink: 0;
+      width: 82px; height: 82px; border-radius: 14px; flex-shrink: 0;
       background: #2a2a2a; overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
     .product-img img {
       width: 100%;
@@ -182,10 +206,10 @@
       display: block;
     }
     .product-info { flex: 1; min-width: 0; }
-    .product-info h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; }
-    .product-info .desc { font-size: 0.75rem; color: var(--muted); margin-bottom: 6px; line-height: 1.35; }
+    .product-info h4 { font-size: 1rem; font-weight: 700; margin-bottom: 3px; }
+    .product-info .desc { font-size: 0.78rem; color: var(--muted); margin-bottom: 8px; line-height: 1.4; }
     .product-bottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-    .price { color: var(--red); font-weight: 700; font-size: 1.05rem; }
+    .price { color: var(--red); font-weight: 800; font-size: 1.12rem; }
     .badge {
       display: inline-block; font-size: 0.65rem; font-weight: 700;
       padding: 2px 8px; border-radius: 8px; margin-left: 6px;
@@ -310,10 +334,22 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 8px;
-      margin-bottom: 10px;
+      margin-bottom: 16px;
     }
     .extras-grid .product {
       margin-bottom: 0;
+      padding: 12px;
+      min-height: 52px;
+    }
+    .extras-grid .product-info {
+      width: 100%;
+    }
+    .extras-grid h4 {
+      font-size: 0.88rem !important;
+      font-weight: 600 !important;
+    }
+    .weekend-list .product {
+      margin-bottom: 8px;
     }
 
     @media (min-width: 768px) {
@@ -323,7 +359,7 @@
       .hero-text h1 { font-size: 3rem; }
       .hero-btns { flex-direction: row; }
       .hero-btns .btn { width: auto; padding: 0 28px; }
-      .feat-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+      .feat-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
       .feat-img { height: 130px; }
       .float-wa { bottom: 24px; right: 24px; }
     }
@@ -368,8 +404,8 @@
   <div class="container">
     <div class="hero-grid">
       <div class="hero-text">
-        <h1>Fresh. Tasty.<br><span class="red">Affordable.</span></h1>
-        <p>Your favourite Kotas, chicken, chips, snacks and more — all in one place!</p>
+        <h1>Big Flavour.<br><span class="red">Small Prices.</span></h1>
+        <p>Loaded Kotas, crispy chips & weekend chicken — made fresh for you.</p>
         <div class="hero-btns">
           <a href="https://wa.me/27840171408?text=Hi%20TNC%20Fast%20Food%20%F0%9F%91%8B%20I'd%20like%20to%20place%20an%20order%20for%20collection." class="btn btn-green" target="_blank">
             💬 ORDER FOR COLLECTION
@@ -427,20 +463,17 @@
           <a href="#chips" class="feat-btn">VIEW CHIPS →</a>
         </div>
       </div>
-      <div class="feat-card">
-        <div class="feat-img">
-          <img src="assets/chicken-wings.jpg.jpeg" alt="Chicken & Wings">
-        </div>
-        <div class="feat-body">
-          <div class="icon">🍗</div>
-          <h3>CHICKEN & WINGS</h3>
-          <p>Perfect for weekend cravings.</p>
-          <div class="feat-price">From R40</div>
-          <a href="#weekend" class="feat-btn">VIEW WEEKEND →</a>
-        </div>
-      </div>
-
     </div>
+
+    <a href="#weekend" class="chicken-bar">
+      <span class="cb-icon">🍗</span>
+      <span class="cb-text">
+        <strong>Chicken & Wings</strong>
+        <small>Weekend specials from R40</small>
+      </span>
+      <span class="cb-arrow">View →</span>
+    </a>
+
   </div>
 </section>
 
@@ -582,6 +615,7 @@
 
     <div class="cat-title" id="weekend">🍗 Weekend Food</div>
     <p style="color:var(--muted);font-size:0.8rem;margin-bottom:12px;">Also available with pap & salad</p>
+    <div class="weekend-list">
     <div class="product text-only" data-name="Quarter Chicken & Chips" data-price="40">
       <div class="product-info">
         <h4>Quarter Chicken & Chips</h4>
