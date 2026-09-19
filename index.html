@@ -293,6 +293,53 @@
       cursor: pointer; width: 100%;
     }
 
+    .checkout-form {
+      margin: 12px 0 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .checkout-form label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .checkout-form input,
+    .checkout-form select {
+      width: 100%;
+      height: 44px;
+      border-radius: 12px;
+      border: 1.5px solid rgba(255,255,255,0.12);
+      background: #111;
+      color: #fff;
+      padding: 0 14px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+    }
+    .checkout-form input:focus,
+    .checkout-form select:focus {
+      border-color: var(--green);
+    }
+    .checkout-form select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23a0a0a0' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+    .form-error {
+      color: #ff6b6b;
+      font-size: 0.8rem;
+      display: none;
+      text-align: center;
+      margin-top: 4px;
+    }
+    .form-error.show { display: block; }
+
+
     .float-wa {
       position: fixed; bottom: 80px; right: 16px; z-index: 95;
       width: 56px; height: 56px; border-radius: 50%;
@@ -733,8 +780,32 @@
       <span>Total</span>
       <span id="modalTotal">R0</span>
     </div>
+
+    <div class="checkout-form">
+      <div>
+        <label for="custName">Your name *</label>
+        <input type="text" id="custName" placeholder="e.g. Thabo Mokoena" autocomplete="name" required>
+      </div>
+      <div>
+        <label for="custPhone">Phone / WhatsApp *</label>
+        <input type="tel" id="custPhone" placeholder="e.g. 084 123 4567" autocomplete="tel" required>
+      </div>
+      <div>
+        <label for="custTime">Collection time</label>
+        <select id="custTime">
+          <option value="">As soon as ready</option>
+          <option value="In 20 minutes">In 20 minutes</option>
+          <option value="In 30 minutes">In 30 minutes</option>
+          <option value="In 45 minutes">In 45 minutes</option>
+          <option value="In 1 hour">In 1 hour</option>
+          <option value="Later today (I will call)">Later today (I will call)</option>
+        </select>
+      </div>
+    </div>
+    <p class="form-error" id="formError">Please enter your name and phone number</p>
+
     <div class="modal-actions">
-      <a href="#" id="whatsappOrder" class="btn btn-green" target="_blank" style="width:100%;">💬 Send Order on WhatsApp</a>
+      <button type="button" id="whatsappOrder" class="btn btn-green" style="width:100%;">💬 Send Order on WhatsApp</button>
       <button class="close-modal" id="closeModal">Close</button>
     </div>
   </div>
@@ -782,6 +853,7 @@
   const cartItems = document.getElementById('cartItems');
   const modalTotal = document.getElementById('modalTotal');
   const whatsappOrder = document.getElementById('whatsappOrder');
+  const formError = document.getElementById('formError');
 
   document.querySelectorAll('.add-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -819,16 +891,54 @@
         renderCart();
       });
     });
-
-    let msg = 'Hi TNC Fast Food 👋%0AI would like to order for collection:%0A%0A';
-    cart.forEach(i => {
-      msg += `• ${i.qty}× ${i.name} – R${i.price * i.qty}%0A`;
-    });
-    msg += `%0ATotal: R${total}`;
-    whatsappOrder.href = `https://wa.me/27840171408?text=${msg}`;
   }
 
+  function buildWhatsAppMessage() {
+    const name = (document.getElementById('custName').value || '').trim();
+    const phone = (document.getElementById('custPhone').value || '').trim();
+    const time = document.getElementById('custTime').value || 'As soon as ready';
+    const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+    const count = cart.reduce((sum, i) => sum + i.qty, 0);
+
+    let lines = [];
+    lines.push('NEW ORDER – TNC Fast Food');
+    lines.push('────────────────');
+    lines.push('Customer: ' + name);
+    lines.push('Phone: ' + phone);
+    lines.push('Collection: ' + time);
+    lines.push('────────────────');
+    lines.push('ORDER (' + count + ' items):');
+    lines.push('');
+    cart.forEach((i, n) => {
+      lines.push((n + 1) + ') ' + i.qty + ' x ' + i.name);
+      lines.push('    R' + (i.price * i.qty));
+    });
+    lines.push('');
+    lines.push('────────────────');
+    lines.push('TOTAL: R' + total);
+    lines.push('Payment: On collection');
+    lines.push('────────────────');
+    lines.push('Please confirm when ready. Thank you!');
+
+    return lines.join('\n');
+  }
+
+  whatsappOrder.addEventListener('click', () => {
+    const name = (document.getElementById('custName').value || '').trim();
+    const phone = (document.getElementById('custPhone').value || '').trim();
+    if (!name || !phone) {
+      formError.classList.add('show');
+      return;
+    }
+    formError.classList.remove('show');
+    if (cart.length === 0) return;
+
+    const msg = encodeURIComponent(buildWhatsAppMessage());
+    window.open('https://wa.me/27840171408?text=' + msg, '_blank');
+  });
+
   document.getElementById('viewCartBtn').addEventListener('click', () => {
+    formError.classList.remove('show');
     cartModal.classList.add('show');
   });
   document.getElementById('closeModal').addEventListener('click', () => {
