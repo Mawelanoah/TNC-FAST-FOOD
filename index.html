@@ -234,6 +234,61 @@
     }
     .contact-row:last-child { border-bottom: none; }
 
+    .location-box {
+      margin-top: 14px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: #141414;
+    }
+    .location-photo {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #1f1f1f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 16px;
+    }
+    .location-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .location-photo.empty::before {
+      content: "📷 Upload location photo as assets/location.jpg";
+    }
+    .location-actions {
+      padding: 12px 14px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .location-actions a {
+      flex: 1;
+      min-width: 140px;
+      text-align: center;
+      height: 42px;
+      line-height: 42px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+    .btn-map {
+      background: var(--green);
+      color: #fff;
+    }
+    .btn-map-outline {
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      color: #fff;
+    }
+
+
     footer {
       padding: 32px 16px; text-align: center;
       border-top: 1px solid rgba(255,255,255,0.05);
@@ -532,7 +587,7 @@
       <div class="product-img"><img src="assets/magwinya.jpg.jpeg" alt="Magwinya"></div>
       <div class="product-info">
         <h4>Magwinya</h4>
-        <div class="desc">Freshly fried dough balls</div>
+        <div class="desc">Freshly fried dough balls · 1 for R2</div>
         <div class="product-bottom">
           <span class="price">R2</span>
           <button class="add-btn">Add</button>
@@ -543,7 +598,7 @@
     <div class="cat-title" id="kotas">🍔 Kota Menu</div>
 
     <div class="product" data-name="KWID Kota" data-price="20">
-      <div class="product-img"><img src="assets/hero.kota.jpg" alt="KWID Kota"></div>
+      <div class="product-img"><img src="assets/kwid-pjg.jpg" alt="KWID Kota"></div>
       <div class="product-info">
         <h4>KWID</h4>
         <div class="desc">Atchaar • Chips • Polony</div>
@@ -559,7 +614,7 @@
       </div>
     </div>
     <div class="product" data-name="AUDI Kota" data-price="30">
-      <div class="product-img"><img src="assets/hero.kota.jpg" alt="AUDI Kota"></div>
+      <div class="product-img"><img src="assets/audi-pjg.jpg" alt="AUDI Kota"></div>
       <div class="product-info">
         <h4>AUDI</h4>
         <div class="desc">Atchaar • Chips • Polony • Egg • Russian</div>
@@ -722,8 +777,18 @@
       <div class="contact-row">
         <span>📍</span>
         <div>
-          <strong>Collection only</strong><br>
-          <span style="color:var(--muted);font-size:0.85rem;">Address coming soon</span>
+          <strong>Tshwene St, Soshanguve – U</strong><br>
+          <span style="color:var(--muted);font-size:0.85rem;">Soshanguve, 0164 · Collection only</span>
+        </div>
+      </div>
+
+      <div class="location-box">
+        <div class="location-photo" id="locationPhoto">
+          <img src="assets/location.jpg" alt="TNC Fast Food location" onerror="this.parentElement.classList.add('empty'); this.style.display='none';">
+        </div>
+        <div class="location-actions">
+          <a class="btn-map" href="https://maps.app.goo.gl/QzFSjZ5bAQjd6k1J7" target="_blank" rel="noopener">📍 Open in Google Maps</a>
+          <a class="btn-map-outline" href="https://www.google.com/maps/dir/?api=1&destination=Tshwene+St,+Soshanguve+-+U,+Soshanguve,+0164" target="_blank" rel="noopener">Get directions</a>
         </div>
       </div>
     </div>
@@ -751,6 +816,13 @@
         <span>🕐</span>
         <div>
           <strong>07:30 – 18:00</strong>
+        </div>
+      </div>
+      <div class="contact-row">
+        <span>📍</span>
+        <div>
+          <strong>Tshwene St, Soshanguve – U, 0164</strong><br>
+          <a href="https://maps.app.goo.gl/QzFSjZ5bAQjd6k1J7" target="_blank" rel="noopener" style="color:var(--green);font-weight:600;font-size:0.85rem;">Open in Google Maps →</a>
         </div>
       </div>
     </div>
