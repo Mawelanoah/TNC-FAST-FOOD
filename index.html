@@ -2,458 +2,442 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <meta name="theme-color" content="#0d0d0d">
+  <meta name="description" content="TNC Fast Food – Fresh, tasty and affordable Kotas, chicken, chips, wings and Magwinya in Soshanguve. Order for collection via WhatsApp.">
+  <meta name="keywords" content="TNC Fast Food, Kotas Soshanguve, chips, chicken, Magwinya, order collection">
   <title>TNC Fast Food | Kotas, Chicken, Chips & More</title>
-  <meta name="description" content="TNC Fast Food – Fresh, tasty and affordable Kotas, chicken, chips, wings and drinks. Order for collection.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --bg: #0d0d0d;
-      --card: #1a1a1a;
+      --card: #161616;
+      --card-hover: #1e1e1e;
       --red: #e6392e;
       --red-dark: #c62d24;
       --green: #25d366;
-      --text: #fff;
-      --muted: #a0a0a0;
-      --radius: 16px;
+      --green-dark: #1da851;
+      --text: #ffffff;
+      --muted: #9a9a9a;
+      --border: rgba(255,255,255,0.08);
+      --radius: 14px;
+      --shadow: 0 4px 20px rgba(0,0,0,0.35);
     }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.5;
       font-size: 15px;
-      padding-bottom: 90px;
+      padding-bottom: 100px;
+      -webkit-font-smoothing: antialiased;
     }
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
+    button { font-family: inherit; cursor: pointer; }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
 
+    /* ===== HEADER ===== */
     header {
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      background: rgba(13,13,13,0.97);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(13,13,13,0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
     }
     .header-inner {
       display: flex; align-items: center; justify-content: space-between;
       height: 60px; max-width: 1100px; margin: 0 auto; padding: 0 16px;
     }
-    .logo-img {
-      height: 42px;
-      width: auto;
-      border-radius: 8px;
-      display: block;
-    }
-    .nav { display: none; gap: 24px; }
-    .nav a { font-weight: 500; font-size: 0.9rem; opacity: 0.85; transition: 0.2s; }
+    .logo-img { height: 40px; width: auto; border-radius: 8px; }
+    .nav { display: none; gap: 22px; }
+    .nav a { font-weight: 500; font-size: 0.88rem; opacity: 0.8; transition: 0.2s; }
     .nav a:hover, .nav a.active { opacity: 1; color: var(--red); }
-    .header-right { display: flex; align-items: center; gap: 10px; }
+    .header-right { display: flex; align-items: center; gap: 8px; }
     .wa-header {
-      background: var(--green); color: #fff; font-weight: 600; font-size: 0.82rem;
-      padding: 8px 14px; border-radius: 50px; display: flex; align-items: center; gap: 6px;
-      white-space: nowrap;
+      background: var(--green); color: #fff; font-weight: 600; font-size: 0.8rem;
+      padding: 7px 12px; border-radius: 50px; display: flex; align-items: center; gap: 5px;
+      white-space: nowrap; transition: 0.2s;
     }
+    .wa-header:hover { background: var(--green-dark); }
     .status {
-      font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 20px;
+      font-size: 0.68rem; font-weight: 600; padding: 4px 9px; border-radius: 20px;
       display: flex; align-items: center; gap: 5px;
     }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; }
     .status.open { background: rgba(37,211,102,0.15); color: var(--green); }
-    .status.closed { background: rgba(230,57,46,0.18); color: #ff6b6b; }
-    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+    .status.open .status-dot { background: var(--green); box-shadow: 0 0 6px var(--green); }
+    .status.closed { background: rgba(230,57,46,0.15); color: var(--red); }
+    .status.closed .status-dot { background: var(--red); }
     .hamburger {
       display: flex; flex-direction: column; gap: 5px; background: none; border: none;
-      cursor: pointer; padding: 6px;
+      padding: 8px; margin-left: 4px;
     }
-    .hamburger span { width: 22px; height: 2.5px; background: #fff; border-radius: 2px; }
-
+    .hamburger span {
+      display: block; width: 20px; height: 2px; background: #fff; border-radius: 2px;
+      transition: 0.25s;
+    }
     .mobile-nav {
-      display: none; position: fixed; top: 60px; left: 0; right: 0;
-      background: #111; padding: 12px 16px 20px; z-index: 999;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: none; position: fixed; top: 60px; left: 0; right: 0; z-index: 999;
+      background: rgba(13,13,13,0.98); border-bottom: 1px solid var(--border);
+      padding: 12px 16px 20px; flex-direction: column; gap: 4px;
     }
-    .mobile-nav.show { display: flex; flex-direction: column; gap: 4px; }
+    .mobile-nav.show { display: flex; }
     .mobile-nav a {
-      padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
-      font-weight: 500;
+      padding: 12px 14px; border-radius: 10px; font-weight: 500; font-size: 0.95rem;
+      transition: 0.15s;
     }
+    .mobile-nav a:hover, .mobile-nav a.active { background: rgba(230,57,46,0.12); color: var(--red); }
 
-    .hero {
-      padding: 80px 0 40px;
-      background: linear-gradient(135deg, #1a0a0a 0%, #0d0d0d 50%, #1a1208 100%);
-    }
+    /* ===== HERO ===== */
+    .hero { padding: 90px 0 40px; }
     .hero-grid { display: grid; gap: 28px; align-items: center; }
     .hero-text h1 {
-      font-size: 2.55rem; font-weight: 800; line-height: 1.12;
-      margin-bottom: 14px; letter-spacing: -0.8px;
-      text-shadow: 0 2px 20px rgba(230,57,46,0.15);
+      font-size: 2.35rem; font-weight: 800; line-height: 1.15;
+      letter-spacing: -0.03em; margin-bottom: 12px;
     }
     .hero-text h1 .red { color: var(--red); }
     .hero-text p {
-      color: var(--muted); font-size: 1rem; margin-bottom: 22px; max-width: 380px;
+      color: var(--muted); font-size: 1rem; margin-bottom: 20px; max-width: 420px;
     }
-    .hero-btns { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+    .hero-btns { display: flex; flex-direction: column; gap: 10px; margin-bottom: 22px; }
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      height: 48px; border-radius: 50px; font-weight: 600; font-size: 0.95rem;
-      border: none; cursor: pointer;
+      height: 48px; padding: 0 22px; border-radius: 50px; font-weight: 600;
+      font-size: 0.92rem; transition: 0.2s; border: none; cursor: pointer;
     }
     .btn-green { background: var(--green); color: #fff; }
+    .btn-green:hover { background: var(--green-dark); transform: translateY(-1px); }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-red:hover { background: var(--red-dark); transform: translateY(-1px); }
     .btn-outline {
-      background: transparent; border: 1.5px solid rgba(255,255,255,0.3); color: #fff;
+      background: transparent; border: 1.5px solid rgba(255,255,255,0.25); color: #fff;
     }
+    .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.05); }
     .hero-meta {
-      display: flex; flex-wrap: wrap; gap: 16px; font-size: 0.8rem; color: var(--muted);
+      display: flex; flex-wrap: wrap; gap: 16px 24px; font-size: 0.75rem; color: var(--muted);
     }
-    .hero-meta strong { color: #fff; display: block; font-size: 0.9rem; }
+    .hero-meta strong { color: #fff; display: block; font-size: 0.88rem; }
     .hero-img-wrap {
-      border-radius: 20px; overflow: hidden;
-      background: #1a1a1a; aspect-ratio: 4/3;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+      border-radius: 20px; overflow: hidden; box-shadow: var(--shadow);
+      aspect-ratio: 4/3; background: var(--card);
     }
-    .hero-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+    .hero-img { width: 100%; height: 100%; object-fit: cover; }
+    .starting-price {
+      display: inline-block; background: rgba(230,57,46,0.15); color: var(--red);
+      font-weight: 700; font-size: 0.85rem; padding: 6px 14px; border-radius: 50px;
+      margin-bottom: 14px;
     }
 
-    .featured { padding: 40px 0; background: #111; }
-
-    .chicken-bar {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-top: 14px;
-      padding: 14px 16px;
-      background: var(--card);
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.06);
-      transition: 0.2s;
-    }
-    .chicken-bar:active { transform: scale(0.98); }
-    .cb-icon { font-size: 1.6rem; }
-    .cb-text { flex: 1; display: flex; flex-direction: column; gap: 2px; }
-    .cb-text strong { font-size: 0.95rem; font-weight: 700; }
-    .cb-text small { font-size: 0.75rem; color: var(--muted); }
-    .cb-arrow { color: var(--red); font-weight: 700; font-size: 0.85rem; }
-    .feat-grid { grid-template-columns: 1fr 1fr !important; }
-
+    /* ===== FEATURED / CATEGORIES ===== */
+    .featured { padding: 20px 0 36px; }
     .section-title {
-      font-size: 1.5rem; font-weight: 800; text-align: center; margin-bottom: 8px;
+      font-size: 1.45rem; font-weight: 800; letter-spacing: -0.02em;
+      margin-bottom: 6px; text-align: center;
     }
     .section-title span { color: var(--red); }
     .section-sub {
-      text-align: center; color: var(--muted); margin-bottom: 28px; font-size: 0.95rem;
+      text-align: center; color: var(--muted); font-size: 0.9rem; margin-bottom: 22px;
     }
-    .feat-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-    }
+    .feat-grid { display: grid; gap: 14px; margin-bottom: 16px; }
     .feat-card {
       background: var(--card); border-radius: var(--radius); overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.05);
+      border: 1px solid var(--border); transition: 0.2s;
     }
-    .feat-img {
-      height: 110px; background: #222; overflow: hidden;
-    }
-    .feat-img img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-    }
-    .feat-body { padding: 14px 12px 16px; text-align: center; }
-    .feat-body .icon {
-      width: 36px; height: 36px; border-radius: 50%; background: var(--red);
-      display: flex; align-items: center; justify-content: center;
-      margin: -28px auto 8px; font-size: 1rem; position: relative; z-index: 1;
-    }
-    .feat-body h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
-    .feat-body p { font-size: 0.75rem; color: var(--muted); margin-bottom: 8px; }
-    .feat-price {
-      display: inline-block; background: var(--red); color: #fff;
-      font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 6px;
-      margin-bottom: 10px;
-    }
+    .feat-card:hover { border-color: rgba(230,57,46,0.3); transform: translateY(-2px); }
+    .feat-img { height: 120px; overflow: hidden; }
+    .feat-img img { width: 100%; height: 100%; object-fit: cover; }
+    .feat-body { padding: 14px 16px 16px; }
+    .feat-body .icon { font-size: 1.3rem; margin-bottom: 4px; }
+    .feat-body h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+    .feat-body p { font-size: 0.82rem; color: var(--muted); margin-bottom: 10px; }
+    .feat-price { font-weight: 700; color: var(--green); font-size: 0.95rem; margin-bottom: 10px; }
     .feat-btn {
-      display: block; width: 100%; height: 36px; border-radius: 20px;
-      border: 1.5px solid rgba(255,255,255,0.2); background: transparent;
-      color: #fff; font-size: 0.8rem; font-weight: 600;
+      display: inline-block; font-size: 0.8rem; font-weight: 600; color: var(--red);
+    }
+    .chicken-bar {
+      display: flex; align-items: center; gap: 14px; background: var(--card);
+      border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px;
+      transition: 0.2s;
+    }
+    .chicken-bar:hover { border-color: rgba(230,57,46,0.35); }
+    .cb-icon { font-size: 1.8rem; }
+    .cb-text strong { display: block; font-size: 0.95rem; }
+    .cb-text span { font-size: 0.8rem; color: var(--muted); }
+    .cb-arrow { margin-left: auto; color: var(--red); font-weight: 700; }
+
+    /* ===== CATEGORY NAV ===== */
+    .cat-nav {
+      display: flex; gap: 8px; overflow-x: auto; padding: 12px 0 4px;
+      -webkit-overflow-scrolling: touch; scrollbar-width: none;
+      position: sticky; top: 60px; z-index: 50; background: var(--bg);
+      margin: 0 -16px; padding-left: 16px; padding-right: 16px;
+    }
+    .cat-nav::-webkit-scrollbar { display: none; }
+    .cat-nav a {
+      flex-shrink: 0; padding: 8px 16px; border-radius: 50px; font-size: 0.82rem;
+      font-weight: 600; background: var(--card); border: 1px solid var(--border);
+      transition: 0.2s; white-space: nowrap;
+    }
+    .cat-nav a:hover, .cat-nav a.active {
+      background: var(--red); border-color: var(--red); color: #fff;
     }
 
-    .menu-section { padding: 36px 0; }
+    /* ===== MENU ===== */
+    .menu-section { padding: 28px 0 20px; }
     .cat-title {
-      font-size: 1.2rem; font-weight: 800; color: var(--red);
-      margin: 32px 0 14px; display: flex; align-items: center; gap: 8px;
-      letter-spacing: -0.3px;
+      font-size: 1.15rem; font-weight: 700; margin: 28px 0 12px;
+      display: flex; align-items: center; gap: 8px;
     }
+    .cat-title:first-child { margin-top: 8px; }
     .product {
-      background: var(--card); border-radius: 14px; margin-bottom: 10px;
-      display: flex; gap: 14px; padding: 14px; align-items: center;
-      border: 1px solid rgba(255,255,255,0.06);
-      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+      display: flex; gap: 14px; background: var(--card); border-radius: var(--radius);
+      padding: 12px; margin-bottom: 10px; border: 1px solid var(--border);
+      transition: 0.2s; align-items: center;
     }
+    .product:hover { border-color: rgba(255,255,255,0.14); background: var(--card-hover); }
     .product-img {
-      width: 82px; height: 82px; border-radius: 14px; flex-shrink: 0;
-      background: #2a2a2a; overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      width: 88px; height: 88px; border-radius: 12px; overflow: hidden; flex-shrink: 0;
+      background: #111;
     }
-    .product-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    .product-img img { width: 100%; height: 100%; object-fit: cover; }
     .product-info { flex: 1; min-width: 0; }
-    .product-info h4 { font-size: 1rem; font-weight: 700; margin-bottom: 3px; }
-    .product-info .desc { font-size: 0.78rem; color: var(--muted); margin-bottom: 8px; line-height: 1.4; }
+    .product-info h4 { font-size: 0.98rem; font-weight: 700; margin-bottom: 2px; }
+    .product-info .desc { font-size: 0.76rem; color: var(--muted); margin-bottom: 8px; line-height: 1.35; }
     .product-bottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-    .price { color: var(--red); font-weight: 800; font-size: 1.12rem; }
-    .badge {
-      display: inline-block; font-size: 0.65rem; font-weight: 700;
-      padding: 2px 8px; border-radius: 8px; margin-left: 6px;
-    }
-    .badge.popular { background: var(--red); color: #fff; }
-    .badge.best { background: #ff6b00; color: #fff; }
+    .price { font-weight: 700; font-size: 1.05rem; color: var(--green); }
     .add-btn {
-      height: 34px; padding: 0 14px; border-radius: 20px;
-      background: var(--green); color: #fff; border: none;
-      font-weight: 600; font-size: 0.8rem; cursor: pointer;
+      background: var(--red); color: #fff; border: none; height: 34px; padding: 0 16px;
+      border-radius: 50px; font-weight: 600; font-size: 0.8rem; transition: 0.2s;
+    }
+    .add-btn:hover { background: var(--red-dark); }
+    .add-btn.added { background: var(--green); }
+    .badge {
+      font-size: 0.65rem; font-weight: 700; background: rgba(230,57,46,0.2);
+      color: var(--red); padding: 2px 7px; border-radius: 6px; margin-left: 4px;
+      vertical-align: middle;
     }
 
-    .contact-section { padding: 30px 0; }
+    /* text-only products (add-ons / weekend) */
+    .product.text-only { padding: 12px 14px; gap: 0; }
+    .product.text-only .product-info {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; gap: 10px;
+    }
+    .product.text-only h4 { margin: 0; font-size: 0.9rem; }
+    .product.text-only .product-bottom { margin: 0; flex-shrink: 0; gap: 10px; }
+    .product.text-only .price { font-size: 0.95rem; }
+    .product.text-only .add-btn { height: 30px; padding: 0 12px; font-size: 0.75rem; }
+    .extras-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;
+    }
+    .extras-grid .product { margin-bottom: 0; padding: 12px; min-height: 52px; }
+    .weekend-note {
+      color: var(--muted); font-size: 0.8rem; margin-bottom: 12px;
+      background: rgba(255,255,255,0.04); padding: 10px 14px; border-radius: 10px;
+    }
+
+    /* ===== WHY CHOOSE ===== */
+    .why-section { padding: 36px 0; }
+    .why-grid { display: grid; gap: 12px; }
+    .why-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 18px 16px; text-align: center;
+    }
+    .why-card .icon { font-size: 1.6rem; margin-bottom: 8px; }
+    .why-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+    .why-card p { font-size: 0.8rem; color: var(--muted); }
+
+    /* ===== GALLERY ===== */
+    .gallery-section { padding: 20px 0 36px; }
+    .gallery-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    }
+    .gallery-grid img {
+      width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .gallery-grid img:first-child { grid-column: span 2; aspect-ratio: 16/9; }
+
+    /* ===== CONTACT / ABOUT ===== */
+    .contact-section { padding: 28px 0; }
     .contact-card {
-      background: var(--card); border-radius: var(--radius); padding: 20px;
-      border: 1px solid rgba(255,255,255,0.05);
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 20px 16px;
     }
     .contact-row {
-      display: flex; align-items: center; gap: 12px;
-      padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
-      font-size: 0.95rem;
+      display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px;
     }
-    .contact-row:last-child { border-bottom: none; }
-
-    .location-box {
-      margin-top: 14px;
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.06);
-      background: #141414;
-    }
-    .location-photo {
-      width: 100%;
-      aspect-ratio: 16/9;
-      background: #1f1f1f;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
-      font-size: 0.85rem;
-      text-align: center;
-      padding: 16px;
-    }
-    .location-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .location-photo.empty::before {
-      content: "📷 Upload location photo as assets/location.jpg";
-    }
-    .location-actions {
-      padding: 12px 14px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .location-actions a {
-      flex: 1;
-      min-width: 140px;
-      text-align: center;
-      height: 42px;
-      line-height: 42px;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 0.85rem;
-    }
+    .contact-row span { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+    .contact-row strong { font-size: 0.95rem; }
+    .location-box { margin-top: 16px; }
+    .location-actions { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
     .btn-map {
-      background: var(--green);
-      color: #fff;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      height: 44px; border-radius: 50px; background: var(--red); color: #fff;
+      font-weight: 600; font-size: 0.88rem;
     }
     .btn-map-outline {
-      background: transparent;
-      border: 1.5px solid rgba(255,255,255,0.2);
-      color: #fff;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      height: 44px; border-radius: 50px; border: 1.5px solid rgba(255,255,255,0.2);
+      color: #fff; font-weight: 600; font-size: 0.88rem;
     }
+    .collection-notice {
+      background: rgba(230,57,46,0.1); border: 1px solid rgba(230,57,46,0.25);
+      border-radius: 12px; padding: 12px 14px; margin-top: 14px;
+      font-size: 0.85rem; text-align: center;
+    }
+    .collection-notice strong { color: var(--red); }
 
-
+    /* ===== FOOTER ===== */
     footer {
-      padding: 32px 16px; text-align: center;
-      border-top: 1px solid rgba(255,255,255,0.05);
-      background: #0a0a0a;
+      text-align: center; padding: 36px 16px 20px; border-top: 1px solid var(--border);
     }
-    footer .brand { font-weight: 800; color: var(--red); font-size: 1.1rem; margin-bottom: 4px; }
-    footer p { color: var(--muted); font-size: 0.85rem; }
-    footer .copy { margin-top: 14px; font-size: 0.75rem; color: #555; }
+    footer .brand { font-weight: 800; font-size: 1.1rem; margin-bottom: 4px; }
+    footer p { color: var(--muted); font-size: 0.85rem; margin-bottom: 12px; }
+    footer .footer-links { display: flex; justify-content: center; gap: 18px; margin-bottom: 14px; }
+    footer .footer-links a { font-size: 0.82rem; color: var(--muted); }
+    footer .footer-links a:hover { color: var(--red); }
+    footer .copy { font-size: 0.72rem; color: #666; }
 
+    /* ===== CART BAR ===== */
     .cart-bar {
-      position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
-      background: #161616; border-top: 1px solid rgba(255,255,255,0.08);
-      padding: 10px 16px; display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 900;
+      background: rgba(13,13,13,0.98); border-top: 1px solid var(--border);
+      padding: 10px 16px; padding-bottom: max(10px, env(safe-area-inset-bottom));
+      transform: translateY(100%); transition: transform 0.3s ease;
+      box-shadow: 0 -4px 24px rgba(0,0,0,0.4);
     }
-    .cart-bar.show { display: block; }
+    .cart-bar.show { transform: translateY(0); }
     .cart-inner {
-      max-width: 1100px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      max-width: 1100px; margin: 0 auto; display: flex; align-items: center;
+      justify-content: space-between; gap: 12px;
     }
-    .cart-info { font-size: 0.85rem; }
-    .cart-info strong { color: var(--green); font-size: 1.1rem; }
+    .cart-info { font-size: 0.9rem; }
+    .cart-info strong { color: var(--green); }
     .cart-btn {
-      background: var(--green); color: #fff; border: none;
-      height: 42px; padding: 0 20px; border-radius: 50px;
-      font-weight: 700; font-size: 0.85rem; cursor: pointer;
+      background: var(--green); color: #fff; border: none; height: 42px;
+      padding: 0 20px; border-radius: 50px; font-weight: 700; font-size: 0.88rem;
+      white-space: nowrap;
     }
+    .cart-btn:hover { background: var(--green-dark); }
 
+    /* ===== MODAL ===== */
     .modal-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.75);
-      z-index: 200; display: none; align-items: flex-end; justify-content: center;
+      display: none; position: fixed; inset: 0; z-index: 1100;
+      background: rgba(0,0,0,0.7); align-items: flex-end; justify-content: center;
     }
     .modal-overlay.show { display: flex; }
     .modal {
       background: #1a1a1a; width: 100%; max-width: 480px;
-      border-radius: 20px 20px 0 0; padding: 22px 16px 32px;
-      max-height: 80vh; overflow-y: auto;
+      border-radius: 20px 20px 0 0; padding: 20px 16px 28px;
+      max-height: 88vh; overflow-y: auto; -webkit-overflow-scrolling: touch;
     }
-    .modal h3 { font-size: 1.2rem; margin-bottom: 14px; text-align: center; }
+    .modal-handle {
+      width: 40px; height: 4px; background: rgba(255,255,255,0.2);
+      border-radius: 4px; margin: 0 auto 14px;
+    }
+    .modal h3 { font-size: 1.15rem; margin-bottom: 14px; text-align: center; }
     .cart-item {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
-      font-size: 0.9rem;
+      padding: 12px 0; border-bottom: 1px solid var(--border); gap: 10px;
     }
-    .cart-item .remove {
-      background: none; border: none; color: var(--red);
-      font-size: 0.85rem; cursor: pointer; margin-left: 8px;
+    .cart-item-info { flex: 1; min-width: 0; }
+    .cart-item-name { font-size: 0.9rem; font-weight: 600; }
+    .cart-item-price { font-size: 0.8rem; color: var(--muted); }
+    .qty-controls {
+      display: flex; align-items: center; gap: 0; background: #111;
+      border-radius: 50px; border: 1px solid var(--border);
     }
+    .qty-btn {
+      width: 32px; height: 32px; border: none; background: transparent;
+      color: #fff; font-size: 1.1rem; font-weight: 600; display: flex;
+      align-items: center; justify-content: center;
+    }
+    .qty-btn:hover { color: var(--red); }
+    .qty-num {
+      min-width: 28px; text-align: center; font-weight: 700; font-size: 0.9rem;
+    }
+    .cart-item-total { font-weight: 700; color: var(--green); font-size: 0.9rem; min-width: 48px; text-align: right; }
     .cart-total {
-      display: flex; justify-content: space-between;
-      font-size: 1.15rem; font-weight: 700; margin: 16px 0;
+      display: flex; justify-content: space-between; font-size: 1.15rem;
+      font-weight: 700; margin: 14px 0 8px; padding-top: 8px;
+      border-top: 1px solid var(--border);
     }
     .cart-total span:last-child { color: var(--green); }
-    .modal-actions { display: flex; flex-direction: column; gap: 10px; }
+
+    .checkout-form { margin: 12px 0 8px; display: flex; flex-direction: column; gap: 10px; }
+    .checkout-form label {
+      font-size: 0.72rem; color: var(--muted); font-weight: 600;
+      display: block; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.03em;
+    }
+    .checkout-form input,
+    .checkout-form select,
+    .checkout-form textarea {
+      width: 100%; border-radius: 12px; border: 1.5px solid rgba(255,255,255,0.12);
+      background: #111; color: #fff; padding: 0 14px; font-size: 0.95rem;
+      font-family: inherit; outline: none; transition: border-color 0.2s;
+    }
+    .checkout-form input, .checkout-form select { height: 44px; }
+    .checkout-form textarea {
+      padding: 12px 14px; min-height: 72px; resize: vertical;
+    }
+    .checkout-form input:focus,
+    .checkout-form select:focus,
+    .checkout-form textarea:focus { border-color: var(--green); }
+    .checkout-form select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23a0a0a0' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px;
+    }
+    .form-error {
+      color: #ff6b6b; font-size: 0.8rem; display: none; text-align: center; margin-top: 4px;
+    }
+    .form-error.show { display: block; }
+    .form-note {
+      font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: 8px; line-height: 1.4;
+    }
+    .modal-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+    .btn-send {
+      background: var(--green); color: #fff; border: none; height: 50px;
+      border-radius: 50px; font-weight: 700; font-size: 0.95rem; width: 100%;
+    }
+    .btn-send:hover { background: var(--green-dark); }
+    .btn-send:disabled { opacity: 0.5; cursor: not-allowed; }
     .close-modal {
       background: transparent; border: 1.5px solid rgba(255,255,255,0.2);
       color: #fff; height: 44px; border-radius: 50px; font-weight: 600;
       cursor: pointer; width: 100%;
     }
 
-    .checkout-form {
-      margin: 12px 0 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .checkout-form label {
-      font-size: 0.75rem;
-      color: var(--muted);
-      font-weight: 600;
-      display: block;
-      margin-bottom: 4px;
-    }
-    .checkout-form input,
-    .checkout-form select {
-      width: 100%;
-      height: 44px;
-      border-radius: 12px;
-      border: 1.5px solid rgba(255,255,255,0.12);
-      background: #111;
-      color: #fff;
-      padding: 0 14px;
-      font-size: 0.95rem;
-      font-family: inherit;
-      outline: none;
-    }
-    .checkout-form input:focus,
-    .checkout-form select:focus {
-      border-color: var(--green);
-    }
-    .checkout-form select {
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23a0a0a0' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 14px center;
-      padding-right: 36px;
-    }
-    .form-error {
-      color: #ff6b6b;
-      font-size: 0.8rem;
-      display: none;
-      text-align: center;
-      margin-top: 4px;
-    }
-    .form-error.show { display: block; }
-
-
+    /* ===== FLOAT WA ===== */
     .float-wa {
-      position: fixed; bottom: 80px; right: 16px; z-index: 95;
-      width: 56px; height: 56px; border-radius: 50%;
+      position: fixed; bottom: 90px; right: 14px; z-index: 95;
+      width: 54px; height: 54px; border-radius: 50%;
       background: var(--green); color: #fff;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.7rem; box-shadow: 0 6px 24px rgba(37,211,102,0.45);
+      font-size: 1.6rem; box-shadow: 0 6px 24px rgba(37,211,102,0.4);
+      transition: 0.2s;
+    }
+    .float-wa:hover { transform: scale(1.06); }
+
+    /* ===== EMPTY CART ===== */
+    .empty-cart {
+      text-align: center; padding: 24px 0; color: var(--muted); font-size: 0.9rem;
     }
 
-
-    .product.text-only {
-      padding: 10px 12px;
-      gap: 0;
+    /* ===== RESPONSIVE ===== */
+    @media (min-width: 640px) {
+      .feat-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .why-grid { grid-template-columns: 1fr 1fr 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr 1fr; }
+      .gallery-grid img:first-child { grid-column: span 1; aspect-ratio: 1; }
+      .extras-grid { grid-template-columns: 1fr 1fr 1fr; }
     }
-    .product.text-only .product-info {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      gap: 10px;
-    }
-    .product.text-only h4 {
-      margin: 0;
-      font-size: 0.9rem;
-    }
-    .product.text-only .product-bottom {
-      margin: 0;
-      flex-shrink: 0;
-      gap: 10px;
-    }
-    .product.text-only .price {
-      font-size: 0.95rem;
-    }
-    .product.text-only .add-btn {
-      height: 30px;
-      padding: 0 12px;
-      font-size: 0.75rem;
-    }
-    .extras-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-    .extras-grid .product {
-      margin-bottom: 0;
-      padding: 12px;
-      min-height: 52px;
-    }
-    .extras-grid .product-info {
-      width: 100%;
-    }
-    .extras-grid h4 {
-      font-size: 0.88rem !important;
-      font-weight: 600 !important;
-    }
-    .weekend-list .product {
-      margin-bottom: 8px;
-    }
-
     @media (min-width: 768px) {
       .nav { display: flex; }
       .hamburger { display: none; }
@@ -461,21 +445,23 @@
       .hero-text h1 { font-size: 3rem; }
       .hero-btns { flex-direction: row; }
       .hero-btns .btn { width: auto; padding: 0 28px; }
-      .feat-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
-      .feat-img { height: 130px; }
-      .float-wa { bottom: 24px; right: 24px; }
+      .feat-img { height: 140px; }
+      .float-wa { bottom: 28px; right: 24px; }
+      .modal { border-radius: 20px; margin-bottom: 24px; max-height: 85vh; }
+      .modal-overlay { align-items: center; }
     }
   </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
   <div class="header-inner">
-    <img src="assets/logo.png" alt="TNC Fast Food" class="logo-img">
+    <a href="#home"><img src="assets/logo.png" alt="TNC Fast Food" class="logo-img" onerror="this.style.display='none'"></a>
     <nav class="nav">
-      <a href="#home" class="active">Home</a>
+      <a href="#home">Home</a>
       <a href="#menu">Menu</a>
-      <a href="#weekend">Weekend Specials</a>
+      <a href="#weekend">Weekend</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -484,8 +470,8 @@
         <span class="status-dot"></span>
         <span id="statusText">...</span>
       </div>
-      <a href="https://wa.me/27840171408?text=Hi%20TNC%20Fast%20Food%20%F0%9F%91%8B%20I'd%20like%20to%20place%20an%20order%20for%20collection." class="wa-header" target="_blank">
-        💬 084 017 1408
+      <a href="https://wa.me/27840171408?text=Hi%20TNC%20Fast%20Food%20%F0%9F%91%8B%20I'd%20like%20to%20place%20an%20order%20for%20collection." class="wa-header" target="_blank" rel="noopener">
+        💬 Order
       </a>
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -494,6 +480,7 @@
   </div>
 </header>
 
+<!-- MOBILE NAV -->
 <div class="mobile-nav" id="mobileNav">
   <a href="#home">Home</a>
   <a href="#menu">Menu</a>
@@ -502,16 +489,16 @@
   <a href="#contact">Contact</a>
 </div>
 
+<!-- HERO -->
 <section class="hero" id="home">
   <div class="container">
     <div class="hero-grid">
       <div class="hero-text">
+        <div class="starting-price">Kotas from R20</div>
         <h1>Big Flavour.<br><span class="red">Small Prices.</span></h1>
-        <p>Loaded Kotas, crispy chips & weekend chicken — made fresh for you.</p>
+        <p>Loaded Kotas, crispy chips & weekend chicken — made fresh for you. Collection only in Soshanguve.</p>
         <div class="hero-btns">
-          <a href="https://wa.me/27840171408?text=Hi%20TNC%20Fast%20Food%20%F0%9F%91%8B%20I'd%20like%20to%20place%20an%20order%20for%20collection." class="btn btn-green" target="_blank">
-            💬 ORDER FOR COLLECTION
-          </a>
+          <a href="#menu" class="btn btn-red">ORDER NOW</a>
           <a href="#menu" class="btn btn-outline">VIEW MENU →</a>
         </div>
         <div class="hero-meta">
@@ -520,8 +507,8 @@
             OPENING HOURS
           </div>
           <div>
-            <strong>Ready to collect</strong>
-            COLLECTION
+            <strong>Collection only</strong>
+            NO DELIVERY
           </div>
           <div>
             <strong>084 017 1408</strong>
@@ -530,235 +517,296 @@
         </div>
       </div>
       <div class="hero-img-wrap">
-        <img src="assets/kota-mclaren.jpg" alt="Delicious TNC Kota" class="hero-img">
+        <img src="assets/kota-mclaren.jpg" alt="TNC Fast Food Kota" class="hero-img" onerror="this.src='assets/hero.kota.jpg'">
       </div>
     </div>
   </div>
 </section>
 
+<!-- FEATURED CATEGORIES -->
 <section class="featured">
   <div class="container">
     <h2 class="section-title">OUR <span>MENU</span></h2>
-    <p class="section-sub">Big flavour. Great prices. Something for everyone!</p>
+    <p class="section-sub">Big flavour. Great prices. Something for everyone.</p>
     <div class="feat-grid">
-      <div class="feat-card">
-        <div class="feat-img">
-          <img src="assets/kota-mclaren.jpg" alt="Kotas">
-        </div>
+      <a href="#kotas" class="feat-card">
+        <div class="feat-img"><img src="assets/kota-mclaren.jpg" alt="Kotas" onerror="this.src='assets/hero.kota.jpg'"></div>
         <div class="feat-body">
           <div class="icon">🍔</div>
           <h3>KOTAS</h3>
           <p>Loaded, filling and packed with flavour.</p>
           <div class="feat-price">From R20</div>
-          <a href="#kotas" class="feat-btn">VIEW KOTA MENU →</a>
+          <span class="feat-btn">VIEW KOTA MENU →</span>
         </div>
-      </div>
-      <div class="feat-card">
-        <div class="feat-img">
-          <img src="assets/large-chips.jpg.jpeg" alt="Chips">
-        </div>
+      </a>
+      <a href="#chips" class="feat-card">
+        <div class="feat-img"><img src="assets/large-chips.jpg.jpeg" alt="Chips"></div>
         <div class="feat-body">
           <div class="icon">🍟</div>
           <h3>CHIPS</h3>
           <p>Crispy, hot and made to order.</p>
           <div class="feat-price">From R20</div>
-          <a href="#chips" class="feat-btn">VIEW CHIPS →</a>
+          <span class="feat-btn">VIEW CHIPS →</span>
         </div>
-      </div>
+      </a>
     </div>
-
     <a href="#weekend" class="chicken-bar">
       <span class="cb-icon">🍗</span>
       <span class="cb-text">
         <strong>Chicken & Wings</strong>
-        <small>Weekend specials from R40</small>
+        <span>Weekend specials from R40 · also with pap & salad</span>
       </span>
-      <span class="cb-arrow">View →</span>
+      <span class="cb-arrow">→</span>
     </a>
-
   </div>
 </section>
 
+<!-- MENU -->
 <section class="menu-section" id="menu">
   <div class="container">
+    <div class="cat-nav" id="catNav">
+      <a href="#magwinya">Magwinya</a>
+      <a href="#kotas">Kotas</a>
+      <a href="#chips">Chips</a>
+      <a href="#addons">Add-ons</a>
+      <a href="#weekend">Weekend</a>
+    </div>
 
+    <!-- MAGWINYA -->
     <div class="cat-title" id="magwinya">🥟 Magwinya</div>
     <div class="product" data-name="Magwinya" data-price="2">
-      <div class="product-img"><img src="assets/magwinya.jpg.jpeg" alt="Magwinya"></div>
+      <div class="product-img"><img src="assets/magwinya.jpg.jpeg" alt="Magwinya" loading="lazy"></div>
       <div class="product-info">
         <h4>Magwinya</h4>
-        <div class="desc">Freshly fried dough balls · 1 for R2</div>
+        <div class="desc">Freshly fried dough balls · R2 each</div>
         <div class="product-bottom">
           <span class="price">R2</span>
-          <button class="add-btn">Add</button>
+          <button class="add-btn" type="button">Add</button>
         </div>
       </div>
     </div>
 
+    <!-- KOTAS -->
     <div class="cat-title" id="kotas">🍔 Kota Menu</div>
 
     <div class="product" data-name="KWID Kota" data-price="20">
-      <div class="product-img"><img src="assets/kwid.jpg" alt="KWID Kota"></div>
+      <div class="product-img"><img src="assets/kwid.jpg" alt="KWID Kota" loading="lazy"></div>
       <div class="product-info">
         <h4>KWID</h4>
-        <div class="desc">Atchaar • Chips • Polony</div>
-        <div class="product-bottom"><span class="price">R20</span><button class="add-btn">Add</button></div>
+        <div class="desc">Atchaar · Chips · Polony</div>
+        <div class="product-bottom"><span class="price">R20</span><button class="add-btn" type="button">Add</button></div>
       </div>
     </div>
+
     <div class="product" data-name="VW Kota" data-price="25">
-      <div class="product-img"><img src="assets/kota-vw.jpg.jpeg" alt="VW Kota"></div>
+      <div class="product-img"><img src="assets/kota-vw.jpg.jpeg" alt="VW Kota" loading="lazy"></div>
       <div class="product-info">
         <h4>VW</h4>
-        <div class="desc">Atchaar • Chips • Polony • Vienna</div>
-        <div class="product-bottom"><span class="price">R25</span><button class="add-btn">Add</button></div>
+        <div class="desc">Atchaar · Chips · Polony · Vienna</div>
+        <div class="product-bottom"><span class="price">R25</span><button class="add-btn" type="button">Add</button></div>
       </div>
     </div>
+
     <div class="product" data-name="AUDI Kota" data-price="30">
-      <div class="product-img"><img src="assets/audi.jpg" alt="AUDI Kota"></div>
+      <div class="product-img"><img src="assets/audi.jpg" alt="AUDI Kota" loading="lazy"></div>
       <div class="product-info">
         <h4>AUDI</h4>
-        <div class="desc">Atchaar • Chips • Polony • Egg • Russian</div>
-        <div class="product-bottom"><span class="price">R30</span><button class="add-btn">Add</button></div>
+        <div class="desc">Atchaar · Chips · Polony · Egg · Russian</div>
+        <div class="product-bottom"><span class="price">R30</span><button class="add-btn" type="button">Add</button></div>
       </div>
     </div>
+
     <div class="product" data-name="BMW Kota" data-price="33">
-      <div class="product-img"><img src="assets/hero.kota.jpg" alt="BMW Kota"></div>
+      <div class="product-img"><img src="assets/hero.kota.jpg" alt="BMW Kota" loading="lazy"></div>
       <div class="product-info">
         <h4>BMW</h4>
-        <div class="desc">Atchaar • Chips • Polony • Cheese • Egg • Russian</div>
-        <div class="product-bottom"><span class="price">R33</span><button class="add-btn">Add</button></div>
-      </div>
-    </div>
-    <div class="product" data-name="Mercedes Benz Kota" data-price="40">
-      <div class="product-img"><img src="assets/kota-mercedes.jpg" alt="Mercedes Benz Kota"></div>
-      <div class="product-info">
-        <h4>MERCEDES BENZ <span class="badge popular">POPULAR</span></h4>
-        <div class="desc">Atchaar • Chips • Polony • Cheese • Egg • Vienna • Russian</div>
-        <div class="product-bottom"><span class="price">R40</span><button class="add-btn">Add</button></div>
-      </div>
-    </div>
-    <div class="product" data-name="McLaren Kota" data-price="50">
-      <div class="product-img"><img src="assets/kota-mclaren.jpg" alt="McLaren Kota"></div>
-      <div class="product-info">
-        <h4>McLAREN <span class="badge best">FULL HOUSE</span></h4>
-        <div class="desc">Atchaar • Chips • Polony • Cheese • Egg • Vienna • Russian • Beef Patty</div>
-        <div class="product-bottom"><span class="price">R50</span><button class="add-btn">Add</button></div>
+        <div class="desc">Atchaar · Chips · Polony · Cheese · Egg · Russian</div>
+        <div class="product-bottom"><span class="price">R33</span><button class="add-btn" type="button">Add</button></div>
       </div>
     </div>
 
+    <div class="product" data-name="Mercedes Benz Kota" data-price="40">
+      <div class="product-img"><img src="assets/kota-mercedes.jpg" alt="Mercedes Benz Kota" loading="lazy"></div>
+      <div class="product-info">
+        <h4>MERCEDES-BENZ <span class="badge">Confirm price</span></h4>
+        <div class="desc">Atchaar · Chips · Polony · Cheese · Egg · Vienna · Russian</div>
+        <div class="product-bottom"><span class="price">R40</span><button class="add-btn" type="button">Add</button></div>
+      </div>
+    </div>
+
+    <div class="product" data-name="McLaren Kota" data-price="50">
+      <div class="product-img"><img src="assets/kota-mclaren.jpg" alt="McLaren Kota" loading="lazy"></div>
+      <div class="product-info">
+        <h4>McLAREN</h4>
+        <div class="desc">Atchaar · Chips · Polony · Cheese · Egg · Vienna · Russian · Beef patty</div>
+        <div class="product-bottom"><span class="price">R50</span><button class="add-btn" type="button">Add</button></div>
+      </div>
+    </div>
+
+    <!-- CHIPS -->
     <div class="cat-title" id="chips">🍟 Chips</div>
+
     <div class="product" data-name="Small Chips" data-price="20">
-      <div class="product-img"><img src="assets/chips-small.jpg.jpeg" alt="Small Chips"></div>
+      <div class="product-img"><img src="assets/chips-small.jpg.jpeg" alt="Small Chips" loading="lazy"></div>
       <div class="product-info">
         <h4>Small Chips</h4>
-        <div class="product-bottom"><span class="price">R20</span><button class="add-btn">Add</button></div>
-      </div>
-    </div>
-    <div class="product" data-name="Medium Chips" data-price="30">
-      <div class="product-img"><img src="assets/large-chips.jpg.jpeg" alt="Medium Chips"></div>
-      <div class="product-info">
-        <h4>Medium Chips</h4>
-        <div class="product-bottom"><span class="price">R30</span><button class="add-btn">Add</button></div>
-      </div>
-    </div>
-    <div class="product" data-name="Large Chips" data-price="40">
-      <div class="product-img"><img src="assets/large-chips.jpg.jpeg" alt="Large Chips"></div>
-      <div class="product-info">
-        <h4>Large Chips</h4>
-        <div class="product-bottom"><span class="price">R40</span><button class="add-btn">Add</button></div>
+        <div class="desc">Crispy, made to order</div>
+        <div class="product-bottom"><span class="price">R20</span><button class="add-btn" type="button">Add</button></div>
       </div>
     </div>
 
-    <div class="cat-title">➕ Make It Extra</div>
+    <div class="product" data-name="Medium Chips" data-price="30">
+      <div class="product-img"><img src="assets/large-chips.jpg.jpeg" alt="Medium Chips" loading="lazy"></div>
+      <div class="product-info">
+        <h4>Medium Chips</h4>
+        <div class="desc">Crispy, made to order</div>
+        <div class="product-bottom"><span class="price">R30</span><button class="add-btn" type="button">Add</button></div>
+      </div>
+    </div>
+
+    <div class="product" data-name="Large Chips" data-price="40">
+      <div class="product-img"><img src="assets/large-chips.jpg.jpeg" alt="Large Chips" loading="lazy"></div>
+      <div class="product-info">
+        <h4>Large Chips</h4>
+        <div class="desc">Crispy, made to order</div>
+        <div class="product-bottom"><span class="price">R40</span><button class="add-btn" type="button">Add</button></div>
+      </div>
+    </div>
+
+    <!-- ADD-ONS -->
+    <div class="cat-title" id="addons">➕ Add-ons</div>
     <div class="extras-grid">
       <div class="product text-only" data-name="Extra Egg" data-price="3">
         <div class="product-info">
           <h4>Egg</h4>
-          <div class="product-bottom"><span class="price">R3</span><button class="add-btn">Add</button></div>
+          <div class="product-bottom"><span class="price">R3</span><button class="add-btn" type="button">Add</button></div>
         </div>
       </div>
       <div class="product text-only" data-name="Extra Cheese" data-price="3">
         <div class="product-info">
           <h4>Cheese</h4>
-          <div class="product-bottom"><span class="price">R3</span><button class="add-btn">Add</button></div>
+          <div class="product-bottom"><span class="price">R3</span><button class="add-btn" type="button">Add</button></div>
         </div>
       </div>
       <div class="product text-only" data-name="Extra Vienna" data-price="7">
         <div class="product-info">
           <h4>Vienna</h4>
-          <div class="product-bottom"><span class="price">R7</span><button class="add-btn">Add</button></div>
+          <div class="product-bottom"><span class="price">R7</span><button class="add-btn" type="button">Add</button></div>
         </div>
       </div>
       <div class="product text-only" data-name="Extra Garlic" data-price="2">
         <div class="product-info">
           <h4>Garlic</h4>
-          <div class="product-bottom"><span class="price">R2</span><button class="add-btn">Add</button></div>
+          <div class="product-bottom"><span class="price">R2</span><button class="add-btn" type="button">Add</button></div>
         </div>
       </div>
       <div class="product text-only" data-name="Extra Polony" data-price="2">
         <div class="product-info">
           <h4>Polony</h4>
-          <div class="product-bottom"><span class="price">R2</span><button class="add-btn">Add</button></div>
+          <div class="product-bottom"><span class="price">R2</span><button class="add-btn" type="button">Add</button></div>
         </div>
       </div>
       <div class="product text-only" data-name="Extra Russian" data-price="12">
         <div class="product-info">
           <h4>Russian</h4>
-          <div class="product-bottom"><span class="price">R12</span><button class="add-btn">Add</button></div>
+          <div class="product-bottom"><span class="price">R12</span><button class="add-btn" type="button">Add</button></div>
         </div>
       </div>
       <div class="product text-only" data-name="Extra Beef Patty" data-price="10">
         <div class="product-info">
           <h4>Beef Patty</h4>
-          <div class="product-bottom"><span class="price">R10</span><button class="add-btn">Add</button></div>
+          <div class="product-bottom"><span class="price">R10</span><button class="add-btn" type="button">Add</button></div>
         </div>
       </div>
     </div>
 
+    <!-- WEEKEND -->
     <div class="cat-title" id="weekend">🍗 Weekend Food</div>
-    <p style="color:var(--muted);font-size:0.8rem;margin-bottom:12px;">Also available with pap & salad</p>
+    <p class="weekend-note">Also available with pap & salad (as on the printed menu). Confirm availability when ordering.</p>
     <div class="weekend-list">
-    <div class="product text-only" data-name="Quarter Chicken & Chips" data-price="40">
-      <div class="product-info">
-        <h4>Quarter Chicken & Chips</h4>
-        <div class="product-bottom"><span class="price">R40</span><button class="add-btn">Add</button></div>
+      <div class="product text-only" data-name="Quarter Chicken & Chips" data-price="40">
+        <div class="product-info">
+          <h4>Quarter Chicken & Chips</h4>
+          <div class="product-bottom"><span class="price">R40</span><button class="add-btn" type="button">Add</button></div>
+        </div>
+      </div>
+      <div class="product text-only" data-name="Half Chicken & Chips" data-price="80">
+        <div class="product-info">
+          <h4>Half Chicken & Chips</h4>
+          <div class="product-bottom"><span class="price">R80</span><button class="add-btn" type="button">Add</button></div>
+        </div>
+      </div>
+      <div class="product text-only" data-name="Full Chicken & Chips" data-price="120">
+        <div class="product-info">
+          <h4>Full Chicken & Chips</h4>
+          <div class="product-bottom"><span class="price">R120</span><button class="add-btn" type="button">Add</button></div>
+        </div>
+      </div>
+      <div class="product text-only" data-name="3 Wings & Chips" data-price="40">
+        <div class="product-info">
+          <h4>3 Wings & Chips</h4>
+          <div class="product-bottom"><span class="price">R40</span><button class="add-btn" type="button">Add</button></div>
+        </div>
+      </div>
+      <div class="product text-only" data-name="5 Wings & Chips" data-price="60">
+        <div class="product-info">
+          <h4>5 Wings & Chips</h4>
+          <div class="product-bottom"><span class="price">R60</span><button class="add-btn" type="button">Add</button></div>
+        </div>
       </div>
     </div>
-    <div class="product text-only" data-name="Half Chicken & Chips" data-price="80">
-      <div class="product-info">
-        <h4>Half Chicken & Chips</h4>
-        <div class="product-bottom"><span class="price">R80</span><button class="add-btn">Add</button></div>
-      </div>
-    </div>
-    <div class="product text-only" data-name="Full Chicken & Chips" data-price="120">
-      <div class="product-info">
-        <h4>Full Chicken & Chips</h4>
-        <div class="product-bottom"><span class="price">R120</span><button class="add-btn">Add</button></div>
-      </div>
-    </div>
-    <div class="product text-only" data-name="3 Wings & Chips" data-price="40">
-      <div class="product-info">
-        <h4>3 Wings & Chips</h4>
-        <div class="product-bottom"><span class="price">R40</span><button class="add-btn">Add</button></div>
-      </div>
-    </div>
-    <div class="product text-only" data-name="5 Wings & Chips" data-price="60">
-      <div class="product-info">
-        <h4>5 Wings & Chips</h4>
-        <div class="product-bottom"><span class="price">R60</span><button class="add-btn">Add</button></div>
-      </div>
-    </div>
-
   </div>
 </section>
 
+<!-- WHY CHOOSE -->
+<section class="why-section" id="why">
+  <div class="container">
+    <h2 class="section-title">WHY CHOOSE <span>TNC</span></h2>
+    <p class="section-sub">Simple reasons customers come back.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="icon">💰</div>
+        <h3>Affordable prices</h3>
+        <p>Kotas from R20. Great value without cutting corners on flavour.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">🔥</div>
+        <h3>Made fresh</h3>
+        <p>Kotas, chips and chicken prepared when you order.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">📱</div>
+        <h3>Easy WhatsApp order</h3>
+        <p>Build your order here and send it straight to us on WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section" id="gallery">
+  <div class="container">
+    <h2 class="section-title">FOOD <span>GALLERY</span></h2>
+    <p class="section-sub">A taste of what we serve.</p>
+    <div class="gallery-grid">
+      <img src="assets/kota-mclaren.jpg" alt="McLaren Kota" loading="lazy" onerror="this.style.display='none'">
+      <img src="assets/large-chips.jpg.jpeg" alt="Chips" loading="lazy" onerror="this.style.display='none'">
+      <img src="assets/chicken-wings.jpg.jpeg" alt="Chicken wings" loading="lazy" onerror="this.style.display='none'">
+      <img src="assets/magwinya.jpg.jpeg" alt="Magwinya" loading="lazy" onerror="this.style.display='none'">
+      <img src="assets/full-chicken.jpg.jpeg" alt="Full chicken" loading="lazy" onerror="this.style.display='none'">
+      <img src="assets/kota-mercedes.jpg" alt="Mercedes Kota" loading="lazy" onerror="this.style.display='none'">
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
 <section class="contact-section" id="about">
   <div class="container">
     <h2 class="section-title">ABOUT <span>TNC</span></h2>
     <p class="section-sub">Fresh, tasty and affordable food for every craving.</p>
     <div class="contact-card">
       <p style="color:var(--muted);margin-bottom:16px;line-height:1.6;">
-        At TNC Fast Food we serve fresh, tasty and affordable food. From loaded Kotas and crispy chips to chicken, wings and cold drinks — there's something for everyone.
+        At TNC Fast Food we serve fresh, tasty and affordable food. From loaded Kotas and crispy chips to chicken, wings and Magwinya — there’s something for everyone in Soshanguve.
       </p>
       <div class="contact-row">
         <span>📞</span>
@@ -777,15 +825,14 @@
       <div class="contact-row">
         <span>📍</span>
         <div>
-          <strong>Tshwene St, Soshanguve – U</strong><br>
-          <span style="color:var(--muted);font-size:0.85rem;">Soshanguve, 0164 · Collection only</span>
+          <strong>Tshwene Street, Soshanguve-U</strong><br>
+          <span style="color:var(--muted);font-size:0.85rem;">Soshanguve, 0164</span>
         </div>
       </div>
-
+      <div class="collection-notice">
+        <strong>Collection only</strong> — we do not currently offer delivery. Please collect your order at the shop.
+      </div>
       <div class="location-box">
-        <div class="location-photo" id="locationPhoto">
-          <img src="assets/location.jpg" alt="TNC Fast Food location" onerror="this.parentElement.classList.add('empty'); this.style.display='none';">
-        </div>
         <div class="location-actions">
           <a class="btn-map" href="https://maps.app.goo.gl/QzFSjZ5bAQjd6k1J7" target="_blank" rel="noopener">📍 Open in Google Maps</a>
           <a class="btn-map-outline" href="https://www.google.com/maps/dir/?api=1&destination=Tshwene+St,+Soshanguve+-+U,+Soshanguve,+0164" target="_blank" rel="noopener">Get directions</a>
@@ -795,6 +842,7 @@
   </div>
 </section>
 
+<!-- CONTACT -->
 <section class="contact-section" id="contact">
   <div class="container">
     <h2 class="section-title">CONTACT <span>US</span></h2>
@@ -809,19 +857,20 @@
       <div class="contact-row">
         <span>💬</span>
         <div>
-          <a href="https://wa.me/27840171408?text=Hi%20TNC%20Fast%20Food%20%F0%9F%91%8B%20I'd%20like%20to%20place%20an%20order%20for%20collection." style="color:var(--green);font-weight:600;" target="_blank">WhatsApp us</a>
+          <a href="https://wa.me/27840171408?text=Hi%20TNC%20Fast%20Food%20%F0%9F%91%8B%20I'd%20like%20to%20place%20an%20order%20for%20collection." style="color:var(--green);font-weight:600;" target="_blank" rel="noopener">WhatsApp us</a>
         </div>
       </div>
       <div class="contact-row">
         <span>🕐</span>
         <div>
-          <strong>07:30 – 18:00</strong>
+          <strong>07:30 – 18:00</strong><br>
+          <span style="color:var(--muted);font-size:0.85rem;">Monday – Sunday</span>
         </div>
       </div>
       <div class="contact-row">
         <span>📍</span>
         <div>
-          <strong>Tshwene St, Soshanguve – U, 0164</strong><br>
+          <strong>Tshwene Street, Soshanguve-U, 0164</strong><br>
           <a href="https://maps.app.goo.gl/QzFSjZ5bAQjd6k1J7" target="_blank" rel="noopener" style="color:var(--green);font-weight:600;font-size:0.85rem;">Open in Google Maps →</a>
         </div>
       </div>
@@ -829,23 +878,36 @@
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <div class="brand">TNC Fast Food</div>
-  <p>Fresh. Tasty. Affordable.</p>
+  <p>Fresh. Tasty. Affordable. · Collection only</p>
+  <div class="footer-links">
+    <a href="#home">Home</a>
+    <a href="#menu">Menu</a>
+    <a href="#contact">Contact</a>
+    <a href="https://wa.me/27840171408" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
   <div class="copy">© 2026 TNC Fast Food. All rights reserved.</div>
 </footer>
 
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/27840171408?text=Hi%20TNC%20Fast%20Food%20%F0%9F%91%8B%20I'd%20like%20to%20place%20an%20order%20for%20collection." class="float-wa" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+
+<!-- CART BAR -->
 <div class="cart-bar" id="cartBar">
   <div class="cart-inner">
     <div class="cart-info">
-      <span id="cartCount">0</span> items · <strong id="cartTotal">R0</strong>
+      <span id="cartCount">0 items</span> · <strong id="cartTotal">R0</strong>
     </div>
-    <button class="cart-btn" id="viewCartBtn">View Order</button>
+    <button class="cart-btn" id="viewCartBtn" type="button">View Order</button>
   </div>
 </div>
 
+<!-- CART MODAL -->
 <div class="modal-overlay" id="cartModal">
   <div class="modal">
+    <div class="modal-handle"></div>
     <h3>Your Order</h3>
     <div id="cartItems"></div>
     <div class="cart-total">
@@ -855,147 +917,224 @@
 
     <div class="checkout-form">
       <div>
-        <label for="custName">Your name *</label>
+        <label for="custName">Your full name *</label>
         <input type="text" id="custName" placeholder="e.g. Thabo Mokoena" autocomplete="name" required>
       </div>
       <div>
-        <label for="custPhone">Phone / WhatsApp *</label>
+        <label for="custPhone">Phone / WhatsApp number *</label>
         <input type="tel" id="custPhone" placeholder="e.g. 084 123 4567" autocomplete="tel" required>
       </div>
       <div>
         <label for="custTime">Collection time</label>
         <select id="custTime">
-          <option value="">As soon as ready</option>
+          <option value="As soon as ready">As soon as ready</option>
+          <option value="In 15 minutes">In 15 minutes</option>
           <option value="In 20 minutes">In 20 minutes</option>
           <option value="In 30 minutes">In 30 minutes</option>
           <option value="In 45 minutes">In 45 minutes</option>
           <option value="In 1 hour">In 1 hour</option>
-          <option value="Later today (I will call)">Later today (I will call)</option>
         </select>
       </div>
+      <div>
+        <label for="custNotes">Special instructions (optional)</label>
+        <textarea id="custNotes" placeholder="e.g. Extra sauce, no atchaar, soft chips…"></textarea>
+      </div>
     </div>
-    <p class="form-error" id="formError">Please enter your name and phone number</p>
+
+    <p class="form-error" id="formError">Please enter your name and phone number.</p>
+    <p class="form-note">This opens WhatsApp with your order ready to send. The order is only confirmed once TNC replies.</p>
 
     <div class="modal-actions">
-      <button type="button" id="whatsappOrder" class="btn btn-green" style="width:100%;">💬 Send Order on WhatsApp</button>
-      <button class="close-modal" id="closeModal">Close</button>
+      <button class="btn-send" id="whatsappOrder" type="button">💬 SEND ORDER ON WHATSAPP</button>
+      <button class="close-modal" id="closeModal" type="button">Continue browsing</button>
     </div>
   </div>
 </div>
 
-<a href="https://wa.me/27840171408?text=Hi%20TNC%20Fast%20Food%20%F0%9F%91%8B%20I'd%20like%20to%20place%20an%20order%20for%20collection." class="float-wa" target="_blank">💬</a>
-
 <script>
-  // Status
+(function () {
+  /* ===== CONFIG (easy to edit) ===== */
+  const CONFIG = {
+    whatsappNumber: '27840171408', // international format without +
+    openHour: 7,
+    openMinute: 30,
+    closeHour: 18,
+    closeMinute: 0,
+    timezoneNote: 'Africa/Johannesburg'
+  };
+
+  /* ===== OPENING STATUS (SA local time approx via device) ===== */
   function updateStatus() {
     const now = new Date();
-    const day = now.getDay();
     const time = now.getHours() * 60 + now.getMinutes();
-    const open = 7 * 60 + 30;
-    const close = 18 * 60;
+    const open = CONFIG.openHour * 60 + CONFIG.openMinute;
+    const close = CONFIG.closeHour * 60 + CONFIG.closeMinute;
     const badge = document.getElementById('statusBadge');
     const text = document.getElementById('statusText');
     if (time >= open && time < close) {
       badge.className = 'status open';
-      text.textContent = 'OPEN';
+      text.textContent = 'Open';
     } else {
       badge.className = 'status closed';
-      text.textContent = 'CLOSED';
+      text.textContent = 'Closed';
     }
   }
   updateStatus();
   setInterval(updateStatus, 60000);
 
-  // Mobile menu
+  /* ===== MOBILE NAV ===== */
   const hamburger = document.getElementById('hamburger');
   const mobileNav = document.getElementById('mobileNav');
-  hamburger.addEventListener('click', () => {
-    mobileNav.classList.toggle('show');
-  });
-  mobileNav.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => mobileNav.classList.remove('show'));
+  hamburger.addEventListener('click', () => mobileNav.classList.toggle('show'));
+  document.querySelectorAll('.mobile-nav a').forEach(link => {
+    link.addEventListener('click', () => mobileNav.classList.remove('show'));
   });
 
-  // Cart
+  /* ===== CART ===== */
   let cart = [];
-  const cartBar = document.getElementById('cartBar');
-  const cartCount = document.getElementById('cartCount');
-  const cartTotal = document.getElementById('cartTotal');
-  const cartModal = document.getElementById('cartModal');
-  const cartItems = document.getElementById('cartItems');
-  const modalTotal = document.getElementById('modalTotal');
-  const whatsappOrder = document.getElementById('whatsappOrder');
-  const formError = document.getElementById('formError');
 
-  document.querySelectorAll('.add-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const product = btn.closest('.product');
-      const name = product.dataset.name;
-      const price = parseFloat(product.dataset.price);
-      const existing = cart.find(i => i.name === name);
-      if (existing) {
-        existing.qty += 1;
-      } else {
-        cart.push({ name, price, qty: 1 });
-      }
-      renderCart();
-    });
-  });
+  function addToCart(name, price) {
+    const existing = cart.find(i => i.name === name);
+    if (existing) existing.qty += 1;
+    else cart.push({ name, price: Number(price), qty: 1 });
+    renderCart();
+  }
+
+  function changeQty(index, delta) {
+    if (!cart[index]) return;
+    cart[index].qty += delta;
+    if (cart[index].qty <= 0) cart.splice(index, 1);
+    renderCart();
+  }
+
+  function getTotal() {
+    return cart.reduce((s, i) => s + i.price * i.qty, 0);
+  }
+
+  function getCount() {
+    return cart.reduce((s, i) => s + i.qty, 0);
+  }
 
   function renderCart() {
-    const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
-    const count = cart.reduce((sum, i) => sum + i.qty, 0);
-    cartCount.textContent = count;
-    cartTotal.textContent = 'R' + total;
-    modalTotal.textContent = 'R' + total;
-    cartBar.classList.toggle('show', count > 0);
+    const bar = document.getElementById('cartBar');
+    const count = getCount();
+    const total = getTotal();
+    const cartItems = document.getElementById('cartItems');
+    const formError = document.getElementById('formError');
+
+    if (count > 0) {
+      bar.classList.add('show');
+      document.getElementById('cartCount').textContent = count + (count === 1 ? ' item' : ' items');
+      document.getElementById('cartTotal').textContent = 'R' + total;
+    } else {
+      bar.classList.remove('show');
+    }
+
+    document.getElementById('modalTotal').textContent = 'R' + total;
+
+    if (cart.length === 0) {
+      cartItems.innerHTML = '<div class="empty-cart">Your order is empty. Add items from the menu.</div>';
+      return;
+    }
 
     cartItems.innerHTML = cart.map((i, idx) => `
       <div class="cart-item">
-        <span>${i.qty}× ${i.name} – R${i.price * i.qty}</span>
-        <button class="remove" data-idx="${idx}">Remove</button>
+        <div class="cart-item-info">
+          <div class="cart-item-name">${escapeHtml(i.name)}</div>
+          <div class="cart-item-price">R${i.price} each</div>
+        </div>
+        <div class="qty-controls">
+          <button class="qty-btn" type="button" data-idx="${idx}" data-delta="-1" aria-label="Decrease">−</button>
+          <span class="qty-num">${i.qty}</span>
+          <button class="qty-btn" type="button" data-idx="${idx}" data-delta="1" aria-label="Increase">+</button>
+        </div>
+        <div class="cart-item-total">R${i.price * i.qty}</div>
       </div>
     `).join('');
 
-    document.querySelectorAll('.remove').forEach(btn => {
+    cartItems.querySelectorAll('.qty-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        cart.splice(parseInt(btn.dataset.idx), 1);
-        renderCart();
+        changeQty(parseInt(btn.dataset.idx, 10), parseInt(btn.dataset.delta, 10));
       });
     });
   }
 
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  /* Add buttons */
+  document.querySelectorAll('.add-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+      const p = this.closest('.product');
+      if (!p) return;
+      const name = p.dataset.name;
+      const price = parseInt(p.dataset.price, 10);
+      addToCart(name, price);
+      this.textContent = 'Added ✓';
+      this.classList.add('added');
+      setTimeout(() => {
+        this.textContent = 'Add';
+        this.classList.remove('added');
+      }, 800);
+    });
+  });
+
+  /* Modal */
+  const cartModal = document.getElementById('cartModal');
+  const formError = document.getElementById('formError');
+
+  document.getElementById('viewCartBtn').addEventListener('click', () => {
+    formError.classList.remove('show');
+    cartModal.classList.add('show');
+    renderCart();
+  });
+
+  document.getElementById('closeModal').addEventListener('click', () => {
+    cartModal.classList.remove('show');
+  });
+
+  cartModal.addEventListener('click', (e) => {
+    if (e.target === cartModal) cartModal.classList.remove('show');
+  });
+
+  /* WhatsApp order */
   function buildWhatsAppMessage() {
     const name = (document.getElementById('custName').value || '').trim();
     const phone = (document.getElementById('custPhone').value || '').trim();
     const time = document.getElementById('custTime').value || 'As soon as ready';
-    const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
-    const count = cart.reduce((sum, i) => sum + i.qty, 0);
+    const notes = (document.getElementById('custNotes').value || '').trim();
+    const total = getTotal();
+    const count = getCount();
 
-    let lines = [];
-    lines.push('NEW ORDER – TNC Fast Food');
+    const lines = [];
+    lines.push('*NEW ORDER – TNC Fast Food*');
     lines.push('────────────────');
     lines.push('Customer: ' + name);
     lines.push('Phone: ' + phone);
     lines.push('Collection: ' + time);
+    if (notes) lines.push('Notes: ' + notes);
     lines.push('────────────────');
     lines.push('ORDER (' + count + ' items):');
     lines.push('');
     cart.forEach((i, n) => {
-      lines.push((n + 1) + ') ' + i.qty + ' x ' + i.name);
+      lines.push((n + 1) + ') ' + i.qty + ' × ' + i.name);
       lines.push('    R' + (i.price * i.qty));
     });
     lines.push('');
     lines.push('────────────────');
-    lines.push('TOTAL: R' + total);
+    lines.push('*TOTAL: R' + total + '*');
     lines.push('Payment: On collection');
     lines.push('────────────────');
     lines.push('Please confirm when ready. Thank you!');
-
     return lines.join('\n');
   }
 
-  whatsappOrder.addEventListener('click', () => {
+  document.getElementById('whatsappOrder').addEventListener('click', () => {
     const name = (document.getElementById('custName').value || '').trim();
     const phone = (document.getElementById('custPhone').value || '').trim();
     if (!name || !phone) {
@@ -1006,19 +1145,22 @@
     if (cart.length === 0) return;
 
     const msg = encodeURIComponent(buildWhatsAppMessage());
-    window.open('https://wa.me/27840171408?text=' + msg, '_blank');
+    window.open('https://wa.me/' + CONFIG.whatsappNumber + '?text=' + msg, '_blank');
   });
 
-  document.getElementById('viewCartBtn').addEventListener('click', () => {
-    formError.classList.remove('show');
-    cartModal.classList.add('show');
-  });
-  document.getElementById('closeModal').addEventListener('click', () => {
-    cartModal.classList.remove('show');
-  });
-  cartModal.addEventListener('click', (e) => {
-    if (e.target === cartModal) cartModal.classList.remove('show');
-  });
+  /* Active nav highlight on scroll (simple) */
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    document.querySelectorAll('.nav a, .mobile-nav a').forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }, { passive: true });
+
+})();
 </script>
 </body>
 </html>
