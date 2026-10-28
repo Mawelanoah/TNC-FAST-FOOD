@@ -264,8 +264,43 @@
     .product.drink-item.hidden { display: none; }
     .product-img.placeholder {
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.8rem; background: #1a1a1a;
+      background: linear-gradient(145deg, #1a1a1a, #222);
+      border: 1px dashed rgba(255,255,255,0.12);
     }
+    .product-img.placeholder span {
+      font-size: 0.68rem; font-weight: 600; color: var(--muted);
+      text-align: center; line-height: 1.3; padding: 6px;
+      letter-spacing: 0.02em;
+    }
+    .opt-choice-wrap {
+      display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px;
+    }
+    .opt-choice {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 12px; border-radius: 12px; border: 1.5px solid var(--border);
+      background: var(--card); color: #fff; font-weight: 600; font-size: 0.9rem;
+      width: 100%; text-align: left; transition: 0.15s;
+    }
+    .opt-choice .opt-thumb {
+      width: 48px; height: 48px; border-radius: 10px; flex-shrink: 0;
+      background: #1a1a1a; display: flex; align-items: center; justify-content: center;
+      overflow: hidden; border: 1px solid var(--border);
+    }
+    .opt-choice .opt-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .opt-choice .opt-thumb span {
+      font-size: 0.55rem; color: var(--muted); text-align: center; padding: 2px; line-height: 1.2;
+    }
+    .opt-choice .opt-info { flex: 1; min-width: 0; }
+    .opt-choice .opt-info small { display: block; font-weight: 500; color: var(--muted); font-size: 0.75rem; }
+    .opt-choice .opt-price { color: var(--green); font-weight: 800; flex-shrink: 0; }
+    .opt-choice:hover, .opt-choice.selected {
+      border-color: var(--green); background: rgba(37,211,102,0.08);
+    }
+    .opt-error {
+      color: #ff6b6b; font-size: 0.8rem; text-align: center; display: none; margin-bottom: 8px;
+    }
+    .opt-error.show { display: block; }
+
 
     /* Option picker modal */
     .opt-overlay {
@@ -281,12 +316,7 @@
     .opt-sheet h3 { font-size: 1.1rem; margin-bottom: 4px; text-align: center; }
     .opt-sheet .opt-sub { text-align: center; color: var(--muted); font-size: 0.82rem; margin-bottom: 14px; }
     .opt-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
-    .opt-choice {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 16px; border-radius: 12px; border: 1.5px solid var(--border);
-      background: var(--card); color: #fff; font-weight: 600; font-size: 0.92rem;
-      width: 100%; text-align: left; transition: 0.15s;
-    }
+    /* opt-choice styled below */
     .opt-choice:hover, .opt-choice.selected {
       border-color: var(--green); background: rgba(37,211,102,0.08);
     }
@@ -606,7 +636,7 @@
       <a href="#kotas" class="feat-card">
         <div class="feat-img"><img src="assets/kota-mclaren.jpg" alt="Kotas" onerror="this.src='assets/hero.kota.jpg'"></div>
         <div class="feat-body">
-          <div class="icon">🍔</div>
+          
           <h3>KOTAS</h3>
           <p>Loaded, filling and packed with flavour.</p>
           <div class="feat-price">From R20</div>
@@ -616,7 +646,7 @@
       <a href="#chips" class="feat-card">
         <div class="feat-img"><img src="assets/large-chips.jpg.jpeg" alt="Chips"></div>
         <div class="feat-body">
-          <div class="icon">🍟</div>
+          
           <h3>CHIPS</h3>
           <p>Crispy, hot and made to order.</p>
           <div class="feat-price">From R20</div>
@@ -625,7 +655,7 @@
       </a>
     </div>
     <a href="#weekend" class="chicken-bar">
-      <span class="cb-icon">🍗</span>
+      <span class="cb-icon" style="font-weight:800;font-size:0.75rem;color:var(--red);">HOT</span>
       <span class="cb-text">
         <strong>Chicken & Wings</strong>
         <span>Weekend specials from R40 · also with pap & salad</span>
@@ -633,10 +663,10 @@
       <span class="cb-arrow">→</span>
     </a>
     <a href="#drinks" class="chicken-bar" style="margin-top:10px;">
-      <span class="cb-icon">🥤</span>
+      <span class="cb-icon" style="font-weight:800;font-size:0.75rem;color:var(--green);">NEW</span>
       <span class="cb-text">
         <strong>Drinks & Treats</strong>
-        <span>Cold drinks, energy drinks, ice cream & popcorn</span>
+        <span>Soft drinks, energy drinks, ice cream and popcorn</span>
       </span>
       <span class="cb-arrow">→</span>
     </a>
@@ -656,7 +686,7 @@
     </div>
 
     <!-- MAGWINYA -->
-    <div class="cat-title" id="magwinya">🥟 Magwinya</div>
+    <div class="cat-title" id="magwinya">Magwinya</div>
     <div class="product" data-name="Magwinya" data-price="2">
       <div class="product-img"><img src="assets/magwinya.jpg.jpeg" alt="Magwinya" loading="lazy"></div>
       <div class="product-info">
@@ -670,7 +700,7 @@
     </div>
 
     <!-- KOTAS -->
-    <div class="cat-title" id="kotas">🍔 Kota Menu</div>
+    <div class="cat-title" id="kotas">Kota Menu</div>
 
     <div class="product" data-name="KWID Kota" data-price="20">
       <div class="product-img"><img src="assets/kwid.jpg" alt="KWID Kota" loading="lazy"></div>
@@ -727,7 +757,7 @@
     </div>
 
     <!-- CHIPS -->
-    <div class="cat-title" id="chips">🍟 Chips</div>
+    <div class="cat-title" id="chips">Chips</div>
 
     <div class="product" data-name="Small Chips" data-price="20">
       <div class="product-img"><img src="assets/chips-small.jpg.jpeg" alt="Small Chips" loading="lazy"></div>
@@ -757,7 +787,7 @@
     </div>
 
     <!-- ADD-ONS -->
-    <div class="cat-title" id="addons">➕ Add-ons</div>
+    <div class="cat-title" id="addons">Add-ons</div>
     <div class="extras-grid">
       <div class="product text-only" data-name="Extra Egg" data-price="3">
         <div class="product-info">
@@ -804,8 +834,8 @@
     </div>
 
     <!-- WEEKEND -->
-    <div class="cat-title" id="weekend">🍗 Weekend Food</div>
-    <p class="weekend-note">Also available with pap & salad (as on the printed menu). Confirm availability when ordering.</p>
+    <div class="cat-title" id="weekend">Weekend Food</div>
+    <p class="weekend-note">Also available with pap and salad. Ask when ordering if unsure.</p>
     <div class="weekend-list">
       <div class="product text-only" data-name="Quarter Chicken & Chips" data-price="40">
         <div class="product-info">
@@ -841,9 +871,10 @@
 
 
 
+
     <!-- DRINKS & TREATS -->
-    <div class="cat-title" id="drinks">🥤 Drinks & Treats</div>
-    <p class="weekend-note">Choose your drink, flavour or size where needed. Collection only — same WhatsApp order as the rest of the menu.</p>
+    <div class="cat-title" id="drinks">Drinks & Treats</div>
+    <p class="weekend-note">Soft drinks, energy drinks, ice cream and popcorn. Collection only.</p>
 
     <div class="drinks-filters" id="drinksFilters" role="tablist" aria-label="Filter drinks and treats">
       <button type="button" class="filter-btn active" data-filter="all">All</button>
@@ -856,75 +887,86 @@
     <div class="drink-group-title drink-item" data-cat="drinks">Soft drinks</div>
 
     <div class="product drink-item needs-options" data-cat="drinks" data-base-name="Soft Drink"
-         data-options-type="brand"
-         data-category="Soft Drink"
+         data-options-type="brand" data-category="Soft Drink"
          data-options='[{"label":"Coca-Cola 2L","price":30},{"label":"Sprite","price":30},{"label":"Fanta","price":30}]'>
-      <div class="product-img placeholder" aria-hidden="true">🥤</div>
+      <div class="product-img placeholder"><span>Picture Coming Soon</span></div>
       <div class="product-info">
         <h4>Soft Drinks</h4>
-        <div class="desc">Coca-Cola 2L · Sprite · Fanta — R30 each. Choose your drink.</div>
+        <div class="desc">Coca-Cola 2L, Sprite or Fanta — R30 each</div>
         <div class="product-bottom"><span class="price">R30</span><button class="btn-choose" type="button">Choose drink</button></div>
       </div>
     </div>
 
-    <div class="product drink-item needs-options" data-cat="drinks" data-base-name="Kingsley"
-         data-options-type="size"
-         data-category="Soft Drink"
-         data-options='[{"label":"Kingsley 2L","price":15},{"label":"Kingsley 500ml","price":10}]'>
-      <div class="product-img placeholder" aria-hidden="true">🥤</div>
+    <div class="product drink-item needs-options" data-cat="drinks" data-base-name="Kingsley 2L"
+         data-options-type="flavor" data-category="Soft Drink"
+         data-options='[{"label":"Kingsley 2L","price":15,"meta":"Selected"}]'>
+      <div class="product-img placeholder"><span>Picture Coming Soon</span></div>
       <div class="product-info">
-        <h4>Kingsley</h4>
-        <div class="desc">Choose size · 2L R15 or 500ml R10</div>
-        <div class="product-bottom"><span class="price">From R10</span><button class="btn-choose" type="button">Choose size</button></div>
+        <h4>Kingsley 2L</h4>
+        <div class="desc">R15 · choose flavour</div>
+        <div class="product-bottom"><span class="price">R15</span><button class="btn-choose" type="button">Choose flavour</button></div>
       </div>
     </div>
 
-    <div class="drink-group-title drink-item" data-cat="energy">Energy drinks · R12 each</div>
+    <div class="product drink-item needs-options" data-cat="drinks" data-base-name="Kingsley 500ml"
+         data-options-type="flavor" data-category="Soft Drink"
+         data-options='[{"label":"Kingsley 500ml","price":10,"meta":"Selected"}]'>
+      <div class="product-img placeholder"><span>Picture Coming Soon</span></div>
+      <div class="product-info">
+        <h4>Kingsley 500ml</h4>
+        <div class="desc">R10 · choose flavour</div>
+        <div class="product-bottom"><span class="price">R10</span><button class="btn-choose" type="button">Choose flavour</button></div>
+      </div>
+    </div>
+
+    <div class="drink-group-title drink-item" data-cat="energy">Energy drinks</div>
 
     <div class="product drink-item needs-options" data-cat="energy" data-base-name="Switch Energy"
-         data-options-type="flavor"
-         data-category="Energy Drink"
-         data-options='[{"label":"Switch Energy","price":12,"meta":"Flavour: confirm with shop / notes"}]'>
-      <div class="product-img"><img src="assets/energy-drink.jpg.jpeg" alt="Switch Energy" loading="lazy"></div>
+         data-options-type="flavor" data-category="Energy Drink"
+         data-options='[{"label":"Switch Energy","price":12,"meta":"Selected"}]'>
+      <div class="product-img"><img src="assets/energy-drink.jpg.jpeg" alt="Switch Energy" loading="lazy" onerror="this.parentElement.classList.add('placeholder');this.parentElement.innerHTML='<span>Picture Coming Soon</span>';"></div>
       <div class="product-info">
         <h4>Switch Energy</h4>
-        <div class="desc">R12 each · choose option · add preferred flavour in notes if needed</div>
-        <div class="product-bottom"><span class="price">R12</span><button class="btn-choose" type="button">Choose option</button></div>
+        <div class="desc">R12 each · choose flavour</div>
+        <div class="product-bottom"><span class="price">R12</span><button class="btn-choose" type="button">Choose flavour</button></div>
       </div>
     </div>
 
     <div class="product drink-item needs-options" data-cat="energy" data-base-name="Dragon Energy"
-         data-options-type="flavor"
-         data-category="Energy Drink"
-         data-options='[{"label":"Dragon Energy","price":12,"meta":"Flavour: confirm with shop / notes"}]'>
-      <div class="product-img"><img src="assets/energy-drink.jpg.jpeg" alt="Dragon Energy" loading="lazy"></div>
+         data-options-type="flavor" data-category="Energy Drink"
+         data-options='[{"label":"Dragon Energy","price":12,"meta":"Selected"}]'>
+      <div class="product-img"><img src="assets/energy-drink.jpg.jpeg" alt="Dragon Energy" loading="lazy" onerror="this.parentElement.classList.add('placeholder');this.parentElement.innerHTML='<span>Picture Coming Soon</span>';"></div>
       <div class="product-info">
         <h4>Dragon Energy</h4>
-        <div class="desc">R12 each · choose option · add preferred flavour in notes if needed</div>
-        <div class="product-bottom"><span class="price">R12</span><button class="btn-choose" type="button">Choose option</button></div>
+        <div class="desc">R12 each · choose flavour</div>
+        <div class="product-bottom"><span class="price">R12</span><button class="btn-choose" type="button">Choose flavour</button></div>
       </div>
     </div>
 
     <div class="drink-group-title drink-item" data-cat="icecream">Ice creams</div>
 
     <div class="product drink-item" data-cat="icecream" data-name="Showpie Ice Cream" data-price="10" data-category="Ice Cream">
-      <div class="product-img"><img src="assets/ice-cream.jpg.jpeg" alt="Showpie" loading="lazy"></div>
+      <div class="product-img"><img src="assets/ice-cream.jpg.jpeg" alt="Showpie" loading="lazy" onerror="this.parentElement.classList.add('placeholder');this.parentElement.innerHTML='<span>Picture Coming Soon</span>';"></div>
       <div class="product-info">
         <h4>Showpie</h4>
         <div class="desc">Ice cream</div>
         <div class="product-bottom"><span class="price">R10</span><button class="add-btn" type="button">Add</button></div>
       </div>
     </div>
-    <div class="product drink-item" data-cat="icecream" data-name="Split Ice Cream" data-price="5" data-category="Ice Cream">
-      <div class="product-img"><img src="assets/ice-cream.jpg.jpeg" alt="Split" loading="lazy"></div>
+
+    <div class="product drink-item needs-options" data-cat="icecream" data-base-name="Split Ice Cream"
+         data-options-type="flavor" data-category="Ice Cream"
+         data-options='[{"label":"Split Ice Cream","price":5,"meta":"Flavour 1"},{"label":"Split Ice Cream","price":5,"meta":"Flavour 2"},{"label":"Split Ice Cream","price":5,"meta":"Flavour 3"}]'>
+      <div class="product-img"><img src="assets/ice-cream.jpg.jpeg" alt="Split" loading="lazy" onerror="this.parentElement.classList.add('placeholder');this.parentElement.innerHTML='<span>Picture Coming Soon</span>';"></div>
       <div class="product-info">
         <h4>Split</h4>
-        <div class="desc">Ice cream</div>
-        <div class="product-bottom"><span class="price">R5</span><button class="add-btn" type="button">Add</button></div>
+        <div class="desc">R5 · choose flavour</div>
+        <div class="product-bottom"><span class="price">R5</span><button class="btn-choose" type="button">Choose flavour</button></div>
       </div>
     </div>
+
     <div class="product drink-item" data-cat="icecream" data-name="Cone Ice Cream" data-price="5" data-category="Ice Cream">
-      <div class="product-img"><img src="assets/ice-cream.jpg.jpeg" alt="Cone" loading="lazy"></div>
+      <div class="product-img"><img src="assets/ice-cream.jpg.jpeg" alt="Cone" loading="lazy" onerror="this.parentElement.classList.add('placeholder');this.parentElement.innerHTML='<span>Picture Coming Soon</span>';"></div>
       <div class="product-info">
         <h4>Cone</h4>
         <div class="desc">Ice cream</div>
@@ -935,13 +977,12 @@
     <div class="drink-group-title drink-item" data-cat="popcorn">Popcorn</div>
 
     <div class="product drink-item needs-options" data-cat="popcorn" data-base-name="Popcorn"
-         data-options-type="price"
-         data-category="Popcorn"
-         data-options='[{"label":"Popcorn","price":5,"meta":"Option: R5"},{"label":"Popcorn","price":10,"meta":"Option: R10"}]'>
-      <div class="product-img"><img src="assets/pop-corn.jpg.jpeg" alt="Popcorn" loading="lazy"></div>
+         data-options-type="price" data-category="Popcorn"
+         data-options='[{"label":"Popcorn","price":5,"meta":"R5 option"},{"label":"Popcorn","price":10,"meta":"R10 option"}]'>
+      <div class="product-img"><img src="assets/pop-corn.jpg.jpeg" alt="Popcorn" loading="lazy" onerror="this.parentElement.classList.add('placeholder');this.parentElement.innerHTML='<span>Picture Coming Soon</span>';"></div>
       <div class="product-info">
         <h4>Popcorn</h4>
-        <div class="desc">One product · choose R5 or R10</div>
+        <div class="desc">Choose R5 or R10</div>
         <div class="product-bottom"><span class="price">R5 / R10</span><button class="btn-choose" type="button">Choose option</button></div>
       </div>
     </div>
@@ -957,17 +998,14 @@
     <p class="section-sub">Simple reasons customers come back.</p>
     <div class="why-grid">
       <div class="why-card">
-        <div class="icon">💰</div>
         <h3>Affordable prices</h3>
         <p>Kotas from R20. Great value without cutting corners on flavour.</p>
       </div>
       <div class="why-card">
-        <div class="icon">🔥</div>
         <h3>Made fresh</h3>
         <p>Kotas, chips and chicken prepared when you order.</p>
       </div>
       <div class="why-card">
-        <div class="icon">📱</div>
         <h3>Easy WhatsApp order</h3>
         <p>Build your order here and send it straight to us on WhatsApp.</p>
       </div>
@@ -1093,6 +1131,7 @@
     <h3 id="optTitle">Choose option</h3>
     <p class="opt-sub" id="optSub">Select one to continue</p>
     <div class="opt-list" id="optList"></div>
+    <p class="opt-error" id="optError">Please select an option first</p>
     <div class="opt-actions">
       <button type="button" class="opt-confirm" id="optConfirm" disabled>Add to order</button>
       <button type="button" class="opt-cancel" id="optCancel">Cancel</button>
@@ -1297,21 +1336,28 @@
     pendingOptions = { productEl: productEl, options: options };
     selectedOpt = null;
     optConfirm.disabled = true;
+    const err = document.getElementById('optError');
+    if (err) err.classList.remove('show');
     optTitle.textContent = productEl.dataset.baseName || 'Choose option';
     const t = productEl.dataset.optionsType;
-    optSub.textContent = t === 'size' ? 'Select bottle size' : t === 'brand' ? 'Select your soft drink' : t === 'flavor' ? 'Select flavour / option' : t === 'price' ? 'Select R5 or R10' : 'Select your option';
-    optList.innerHTML = options.map((o, idx) => `
-      <button type="button" class="opt-choice" data-idx="${idx}">
-        <span>${escapeHtml(o.label)}</span>
-        <span class="opt-price">R${o.price}</span>
-      </button>
-    `).join('');
+    optSub.textContent = t === 'brand' ? 'Select your soft drink' : t === 'flavor' ? 'Select a flavour to continue' : t === 'price' ? 'Select R5 or R10' : 'Select an option to continue';
+    optList.innerHTML = options.map((o, idx) => {
+      const thumb = o.img
+        ? '<div class="opt-thumb"><img src="' + o.img + '" alt="" onerror="this.parentElement.innerHTML=\'<span>Picture Coming Soon</span>\'"></div>'
+        : '<div class="opt-thumb"><span>Picture Coming Soon</span></div>';
+      const sub = o.meta ? '<small>' + escapeHtml(o.meta) + '</small>' : '';
+      return '<button type="button" class="opt-choice" data-idx="' + idx + '">' +
+        thumb +
+        '<span class="opt-info"><span>' + escapeHtml(o.label) + '</span>' + sub + '</span>' +
+        '<span class="opt-price">R' + o.price + '</span></button>';
+    }).join('');
     optList.querySelectorAll('.opt-choice').forEach(btn => {
       btn.addEventListener('click', () => {
         optList.querySelectorAll('.opt-choice').forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
         selectedOpt = options[parseInt(btn.dataset.idx, 10)];
         optConfirm.disabled = false;
+        if (err) err.classList.remove('show');
       });
     });
     optModal.classList.add('show');
@@ -1319,7 +1365,11 @@
 
   if (optConfirm) {
     optConfirm.addEventListener('click', () => {
-      if (!selectedOpt || !pendingOptions) return;
+      if (!selectedOpt || !pendingOptions) {
+        const err = document.getElementById('optError');
+        if (err) err.classList.add('show');
+        return;
+      }
       const cat = (pendingOptions.productEl && pendingOptions.productEl.dataset.category) || '';
       const meta = selectedOpt.meta || '';
       addToCart(selectedOpt.label, selectedOpt.price, meta, cat);
