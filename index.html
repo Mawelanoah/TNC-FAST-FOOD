@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <meta name="theme-color" content="#0d0d0d">
-  <meta name="description" content="TNC Fast Food – Fresh, tasty and affordable Kotas, chicken, chips, wings and Magwinya in Soshanguve. Order for collection via WhatsApp.">
+  <meta name="description" content="TNC Fast Food – Fresh, tasty and affordable Kotas, chicken, chips, wings, Magwinya, drinks and treats in Soshanguve. Order for collection via WhatsApp.">
   <meta name="keywords" content="TNC Fast Food, Kotas Soshanguve, chips, chicken, Magwinya, order collection">
   <title>TNC Fast Food | Kotas, Chicken, Chips & More</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -239,6 +239,32 @@
     .weekend-note {
       color: var(--muted); font-size: 0.8rem; margin-bottom: 12px;
       background: rgba(255,255,255,0.04); padding: 10px 14px; border-radius: 10px;
+    }
+
+
+    /* ===== DRINKS & TREATS FILTERS ===== */
+    .drinks-filters {
+      display: flex; gap: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch;
+      margin: 0 0 14px; padding-bottom: 4px;
+      scrollbar-width: none;
+    }
+    .drinks-filters::-webkit-scrollbar { display: none; }
+    .filter-btn {
+      flex-shrink: 0; border: 1px solid var(--border); background: var(--card);
+      color: var(--muted); font-weight: 600; font-size: 0.78rem;
+      padding: 8px 14px; border-radius: 50px; transition: 0.2s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--red); color: #fff; border-color: var(--red);
+    }
+    .drink-group-title {
+      font-size: 0.85rem; font-weight: 700; color: var(--muted);
+      margin: 16px 0 8px; letter-spacing: 0.02em; text-transform: uppercase;
+    }
+    .product.drink-item.hidden { display: none; }
+    .product-img.placeholder {
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; background: #1a1a1a;
     }
 
     /* ===== WHY CHOOSE ===== */
@@ -558,6 +584,14 @@
       </span>
       <span class="cb-arrow">→</span>
     </a>
+    <a href="#drinks" class="chicken-bar" style="margin-top:10px;">
+      <span class="cb-icon">🥤</span>
+      <span class="cb-text">
+        <strong>Drinks & Treats</strong>
+        <span>Cold drinks, energy drinks, ice cream & popcorn</span>
+      </span>
+      <span class="cb-arrow">→</span>
+    </a>
   </div>
 </section>
 
@@ -570,6 +604,7 @@
       <a href="#chips">Chips</a>
       <a href="#addons">Add-ons</a>
       <a href="#weekend">Weekend</a>
+      <a href="#drinks">Drinks & Treats</a>
     </div>
 
     <!-- MAGWINYA -->
@@ -755,6 +790,100 @@
         </div>
       </div>
     </div>
+
+    <!-- DRINKS & TREATS -->
+    <div class="cat-title" id="drinks">🥤 Drinks & Treats</div>
+    <p class="weekend-note">Cold drinks, ice creams and popcorn. Collection only — same WhatsApp order as the rest of the menu.</p>
+
+    <div class="drinks-filters" id="drinksFilters" role="tablist" aria-label="Filter drinks and treats">
+      <button type="button" class="filter-btn active" data-filter="all">All</button>
+      <button type="button" class="filter-btn" data-filter="drinks">Cold Drinks</button>
+      <button type="button" class="filter-btn" data-filter="energy">Energy Drinks</button>
+      <button type="button" class="filter-btn" data-filter="icecream">Ice Creams</button>
+      <button type="button" class="filter-btn" data-filter="popcorn">Popcorn</button>
+    </div>
+
+    <div class="drink-group-title drink-item" data-cat="drinks">Cold drinks</div>
+    <div class="product drink-item" data-cat="drinks" data-name="Coca-Cola 2L" data-price="30">
+      <div class="product-img placeholder" aria-hidden="true">🥤</div>
+      <div class="product-info">
+        <h4>Coca-Cola 2L</h4>
+        <div class="desc">Cold drink · 2 litre</div>
+        <div class="product-bottom"><span class="price">R30</span><button class="add-btn" type="button">Add</button></div>
+      </div>
+    </div>
+    <div class="product drink-item" data-cat="drinks" data-name="Kingsley 2L" data-price="15">
+      <div class="product-img placeholder" aria-hidden="true">🥤</div>
+      <div class="product-info">
+        <h4>Kingsley 2L</h4>
+        <div class="desc">Cold drink · 2 litre</div>
+        <div class="product-bottom"><span class="price">R15</span><button class="add-btn" type="button">Add</button></div>
+      </div>
+    </div>
+    <div class="product drink-item" data-cat="drinks" data-name="Kingsley 500ml" data-price="10">
+      <div class="product-img placeholder" aria-hidden="true">🥤</div>
+      <div class="product-info">
+        <h4>Kingsley 500ml</h4>
+        <div class="desc">Cold drink · 500ml</div>
+        <div class="product-bottom"><span class="price">R10</span><button class="add-btn" type="button">Add</button></div>
+      </div>
+    </div>
+
+    <div class="drink-group-title drink-item" data-cat="energy">Energy drinks</div>
+    <div class="product drink-item" data-cat="energy" data-name="Energy Drink" data-price="12">
+      <div class="product-img"><img src="assets/energy-drink.jpg.jpeg" alt="Energy Drink" loading="lazy"></div>
+      <div class="product-info">
+        <h4>Energy Drink</h4>
+        <div class="desc">R12 each</div>
+        <div class="product-bottom"><span class="price">R12</span><button class="add-btn" type="button">Add</button></div>
+      </div>
+    </div>
+
+    <div class="drink-group-title drink-item" data-cat="icecream">Ice creams</div>
+    <div class="product drink-item" data-cat="icecream" data-name="Showpie Ice Cream" data-price="10">
+      <div class="product-img"><img src="assets/ice-cream.jpg.jpeg" alt="Showpie Ice Cream" loading="lazy"></div>
+      <div class="product-info">
+        <h4>Showpie</h4>
+        <div class="desc">Ice cream</div>
+        <div class="product-bottom"><span class="price">R10</span><button class="add-btn" type="button">Add</button></div>
+      </div>
+    </div>
+    <div class="product drink-item" data-cat="icecream" data-name="Split Ice Cream" data-price="5">
+      <div class="product-img"><img src="assets/ice-cream.jpg.jpeg" alt="Split Ice Cream" loading="lazy"></div>
+      <div class="product-info">
+        <h4>Split</h4>
+        <div class="desc">Ice cream</div>
+        <div class="product-bottom"><span class="price">R5</span><button class="add-btn" type="button">Add</button></div>
+      </div>
+    </div>
+    <div class="product drink-item" data-cat="icecream" data-name="Cone Ice Cream" data-price="5">
+      <div class="product-img"><img src="assets/ice-cream.jpg.jpeg" alt="Cone Ice Cream" loading="lazy"></div>
+      <div class="product-info">
+        <h4>Cone</h4>
+        <div class="desc">Ice cream</div>
+        <div class="product-bottom"><span class="price">R5</span><button class="add-btn" type="button">Add</button></div>
+      </div>
+    </div>
+
+    <div class="drink-group-title drink-item" data-cat="popcorn">Popcorn</div>
+    <div class="product drink-item" data-cat="popcorn" data-name="Popcorn R5" data-price="5">
+      <div class="product-img"><img src="assets/pop-corn.jpg.jpeg" alt="Popcorn" loading="lazy"></div>
+      <div class="product-info">
+        <h4>Popcorn</h4>
+        <div class="desc">R5 option · confirm size when collecting</div>
+        <div class="product-bottom"><span class="price">R5</span><button class="add-btn" type="button">Add</button></div>
+      </div>
+    </div>
+    <div class="product drink-item" data-cat="popcorn" data-name="Popcorn R10" data-price="10">
+      <div class="product-img"><img src="assets/pop-corn.jpg.jpeg" alt="Popcorn" loading="lazy"></div>
+      <div class="product-info">
+        <h4>Popcorn</h4>
+        <div class="desc">R10 option · confirm size when collecting</div>
+        <div class="product-bottom"><span class="price">R10</span><button class="add-btn" type="button">Add</button></div>
+      </div>
+    </div>
+
+
   </div>
 </section>
 
@@ -1153,6 +1282,24 @@
     const msg = encodeURIComponent(buildWhatsAppMessage());
     window.open('https://wa.me/' + CONFIG.whatsappNumber + '?text=' + msg, '_blank');
   });
+
+
+  /* Drinks & Treats filters */
+  const drinksFilters = document.getElementById('drinksFilters');
+  if (drinksFilters) {
+    drinksFilters.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        drinksFilters.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        document.querySelectorAll('.drink-item').forEach(el => {
+          const cat = el.dataset.cat;
+          const show = (f === 'all') || (cat === f);
+          el.classList.toggle('hidden', !show);
+        });
+      });
+    });
+  }
 
   /* Active nav highlight on scroll (simple) */
   const sections = document.querySelectorAll('section[id]');
