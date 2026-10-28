@@ -267,6 +267,54 @@
       font-size: 1.8rem; background: #1a1a1a;
     }
 
+    /* Option picker modal */
+    .opt-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+      z-index: 210; display: none; align-items: flex-end; justify-content: center;
+    }
+    .opt-overlay.show { display: flex; }
+    .opt-sheet {
+      background: #1a1a1a; width: 100%; max-width: 480px;
+      border-radius: 20px 20px 0 0; padding: 20px 16px 28px;
+      max-height: 75vh; overflow-y: auto;
+    }
+    .opt-sheet h3 { font-size: 1.1rem; margin-bottom: 4px; text-align: center; }
+    .opt-sheet .opt-sub { text-align: center; color: var(--muted); font-size: 0.82rem; margin-bottom: 14px; }
+    .opt-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    .opt-choice {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 16px; border-radius: 12px; border: 1.5px solid var(--border);
+      background: var(--card); color: #fff; font-weight: 600; font-size: 0.92rem;
+      width: 100%; text-align: left; transition: 0.15s;
+    }
+    .opt-choice:hover, .opt-choice.selected {
+      border-color: var(--green); background: rgba(37,211,102,0.08);
+    }
+    .opt-choice .opt-price { color: var(--green); font-weight: 800; }
+    .opt-actions { display: flex; flex-direction: column; gap: 8px; }
+    .opt-confirm {
+      height: 48px; border: none; border-radius: 50px; background: var(--green);
+      color: #fff; font-weight: 700; font-size: 0.95rem;
+    }
+    .opt-confirm:disabled { opacity: 0.45; }
+    .opt-cancel {
+      height: 44px; border-radius: 50px; border: 1.5px solid rgba(255,255,255,0.2);
+      background: transparent; color: #fff; font-weight: 600;
+    }
+    .btn-choose {
+      background: transparent; border: 1.5px solid var(--red); color: var(--red);
+      height: 34px; padding: 0 14px; border-radius: 50px; font-weight: 600; font-size: 0.78rem;
+    }
+    .btn-choose:hover { background: var(--red); color: #fff; }
+    .price-tbc {
+      font-size: 0.8rem; color: var(--muted); font-weight: 600;
+    }
+    .badge-tbc {
+      font-size: 0.65rem; font-weight: 700; background: rgba(255,255,255,0.08);
+      color: var(--muted); padding: 2px 7px; border-radius: 6px; margin-left: 4px;
+    }
+
+
     /* ===== WHY CHOOSE ===== */
     .why-section { padding: 36px 0; }
     .why-grid { display: grid; gap: 12px; }
@@ -791,9 +839,10 @@
       </div>
     </div>
 
+
     <!-- DRINKS & TREATS -->
     <div class="cat-title" id="drinks">🥤 Drinks & Treats</div>
-    <p class="weekend-note">Cold drinks, ice creams and popcorn. Collection only — same WhatsApp order as the rest of the menu.</p>
+    <p class="weekend-note">Cold drinks, energy drinks, ice cream and popcorn. Collection only — order with the rest of your meal on WhatsApp.</p>
 
     <div class="drinks-filters" id="drinksFilters" role="tablist" aria-label="Filter drinks and treats">
       <button type="button" class="filter-btn active" data-filter="all">All</button>
@@ -804,6 +853,7 @@
     </div>
 
     <div class="drink-group-title drink-item" data-cat="drinks">Cold drinks</div>
+
     <div class="product drink-item" data-cat="drinks" data-name="Coca-Cola 2L" data-price="30">
       <div class="product-img placeholder" aria-hidden="true">🥤</div>
       <div class="product-info">
@@ -812,36 +862,59 @@
         <div class="product-bottom"><span class="price">R30</span><button class="add-btn" type="button">Add</button></div>
       </div>
     </div>
-    <div class="product drink-item" data-cat="drinks" data-name="Kingsley 2L" data-price="15">
+
+    <div class="product drink-item needs-options" data-cat="drinks" data-base-name="Kingsley" data-options-type="size"
+         data-options='[{"label":"Kingsley 2L","price":15},{"label":"Kingsley 500ml","price":10}]'>
       <div class="product-img placeholder" aria-hidden="true">🥤</div>
       <div class="product-info">
-        <h4>Kingsley 2L</h4>
-        <div class="desc">Cold drink · 2 litre</div>
-        <div class="product-bottom"><span class="price">R15</span><button class="add-btn" type="button">Add</button></div>
-      </div>
-    </div>
-    <div class="product drink-item" data-cat="drinks" data-name="Kingsley 500ml" data-price="10">
-      <div class="product-img placeholder" aria-hidden="true">🥤</div>
-      <div class="product-info">
-        <h4>Kingsley 500ml</h4>
-        <div class="desc">Cold drink · 500ml</div>
-        <div class="product-bottom"><span class="price">R10</span><button class="add-btn" type="button">Add</button></div>
+        <h4>Kingsley</h4>
+        <div class="desc">Choose bottle size · 2L R15 or 500ml R10</div>
+        <div class="product-bottom"><span class="price">From R10</span><button class="btn-choose" type="button">Choose size</button></div>
       </div>
     </div>
 
-    <div class="drink-group-title drink-item" data-cat="energy">Energy drinks</div>
-    <div class="product drink-item" data-cat="energy" data-name="Energy Drink" data-price="12">
-      <div class="product-img"><img src="assets/energy-drink.jpg.jpeg" alt="Energy Drink" loading="lazy"></div>
+    <div class="product drink-item" data-cat="drinks" data-name="Sprite" data-price="">
+      <div class="product-img placeholder" aria-hidden="true">🥤</div>
       <div class="product-info">
-        <h4>Energy Drink</h4>
-        <div class="desc">R12 each</div>
+        <h4>Sprite <span class="badge-tbc">PRICE TBC</span></h4>
+        <div class="desc">Available — confirm price with TNC when ordering</div>
+        <div class="product-bottom"><span class="price-tbc">Price on request</span></div>
+      </div>
+    </div>
+
+    <div class="product drink-item" data-cat="drinks" data-name="Fanta" data-price="">
+      <div class="product-img placeholder" aria-hidden="true">🥤</div>
+      <div class="product-info">
+        <h4>Fanta <span class="badge-tbc">PRICE TBC</span></h4>
+        <div class="desc">Available — confirm price with TNC when ordering</div>
+        <div class="product-bottom"><span class="price-tbc">Price on request</span></div>
+      </div>
+    </div>
+
+    <div class="drink-group-title drink-item" data-cat="energy">Energy drinks · R12 each</div>
+
+    <div class="product drink-item" data-cat="energy" data-name="Dragon Energy" data-price="12">
+      <div class="product-img"><img src="assets/energy-drink.jpg.jpeg" alt="Dragon Energy" loading="lazy"></div>
+      <div class="product-info">
+        <h4>Dragon</h4>
+        <div class="desc">Energy drink · R12 each</div>
+        <div class="product-bottom"><span class="price">R12</span><button class="add-btn" type="button">Add</button></div>
+      </div>
+    </div>
+
+    <div class="product drink-item" data-cat="energy" data-name="Switch Energy" data-price="12">
+      <div class="product-img"><img src="assets/energy-drink.jpg.jpeg" alt="Switch Energy" loading="lazy"></div>
+      <div class="product-info">
+        <h4>Switch</h4>
+        <div class="desc">Energy drink · R12 each</div>
         <div class="product-bottom"><span class="price">R12</span><button class="add-btn" type="button">Add</button></div>
       </div>
     </div>
 
     <div class="drink-group-title drink-item" data-cat="icecream">Ice creams</div>
+
     <div class="product drink-item" data-cat="icecream" data-name="Showpie Ice Cream" data-price="10">
-      <div class="product-img"><img src="assets/ice-cream.jpg.jpeg" alt="Showpie Ice Cream" loading="lazy"></div>
+      <div class="product-img"><img src="assets/ice-cream.jpg.jpeg" alt="Showpie" loading="lazy"></div>
       <div class="product-info">
         <h4>Showpie</h4>
         <div class="desc">Ice cream</div>
@@ -849,7 +922,7 @@
       </div>
     </div>
     <div class="product drink-item" data-cat="icecream" data-name="Split Ice Cream" data-price="5">
-      <div class="product-img"><img src="assets/ice-cream.jpg.jpeg" alt="Split Ice Cream" loading="lazy"></div>
+      <div class="product-img"><img src="assets/ice-cream.jpg.jpeg" alt="Split" loading="lazy"></div>
       <div class="product-info">
         <h4>Split</h4>
         <div class="desc">Ice cream</div>
@@ -857,16 +930,25 @@
       </div>
     </div>
     <div class="product drink-item" data-cat="icecream" data-name="Cone Ice Cream" data-price="5">
-      <div class="product-img"><img src="assets/ice-cream.jpg.jpeg" alt="Cone Ice Cream" loading="lazy"></div>
+      <div class="product-img"><img src="assets/ice-cream.jpg.jpeg" alt="Cone" loading="lazy"></div>
       <div class="product-info">
         <h4>Cone</h4>
         <div class="desc">Ice cream</div>
         <div class="product-bottom"><span class="price">R5</span><button class="add-btn" type="button">Add</button></div>
       </div>
     </div>
+    <div class="product drink-item" data-cat="icecream" data-name="Milk Pie" data-price="10">
+      <div class="product-img"><img src="assets/ice-cream.jpg.jpeg" alt="Milk Pie" loading="lazy"></div>
+      <div class="product-info">
+        <h4>Milk Pie <span class="badge-tbc">CONFIRM</span></h4>
+        <div class="desc">Ice cream · price subject to confirmation</div>
+        <div class="product-bottom"><span class="price">R10</span><button class="add-btn" type="button">Add</button></div>
+      </div>
+    </div>
 
     <div class="drink-group-title drink-item" data-cat="popcorn">Popcorn</div>
-    <div class="product drink-item" data-cat="popcorn" data-name="Popcorn R5" data-price="5">
+
+    <div class="product drink-item" data-cat="popcorn" data-name="Popcorn (R5)" data-price="5">
       <div class="product-img"><img src="assets/pop-corn.jpg.jpeg" alt="Popcorn" loading="lazy"></div>
       <div class="product-info">
         <h4>Popcorn</h4>
@@ -874,7 +956,7 @@
         <div class="product-bottom"><span class="price">R5</span><button class="add-btn" type="button">Add</button></div>
       </div>
     </div>
-    <div class="product drink-item" data-cat="popcorn" data-name="Popcorn R10" data-price="10">
+    <div class="product drink-item" data-cat="popcorn" data-name="Popcorn (R10)" data-price="10">
       <div class="product-img"><img src="assets/pop-corn.jpg.jpeg" alt="Popcorn" loading="lazy"></div>
       <div class="product-info">
         <h4>Popcorn</h4>
@@ -1024,6 +1106,19 @@
 <a href="https://wa.me/27840171408?text=Hi%20TNC%20Fast%20Food%20%F0%9F%91%8B%20I'd%20like%20to%20place%20an%20order%20for%20collection." class="float-wa" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
 
 <!-- CART BAR -->
+
+<div class="opt-overlay" id="optModal">
+  <div class="opt-sheet">
+    <h3 id="optTitle">Choose option</h3>
+    <p class="opt-sub" id="optSub">Select one to continue</p>
+    <div class="opt-list" id="optList"></div>
+    <div class="opt-actions">
+      <button type="button" class="opt-confirm" id="optConfirm" disabled>Add to order</button>
+      <button type="button" class="opt-cancel" id="optCancel">Cancel</button>
+    </div>
+  </div>
+</div>
+
 <div class="cart-bar" id="cartBar">
   <div class="cart-inner">
     <div class="cart-info">
@@ -1128,10 +1223,12 @@
   /* ===== CART ===== */
   let cart = [];
 
-  function addToCart(name, price) {
-    const existing = cart.find(i => i.name === name);
+  function addToCart(name, price, meta) {
+    meta = meta || '';
+    const key = name + '|' + meta;
+    const existing = cart.find(i => i.key === key);
     if (existing) existing.qty += 1;
-    else cart.push({ name, price: Number(price), qty: 1 });
+    else cart.push({ key: key, name: name, meta: meta, price: Number(price), qty: 1 });
     renderCart();
   }
 
@@ -1175,7 +1272,7 @@
     cartItems.innerHTML = cart.map((i, idx) => `
       <div class="cart-item">
         <div class="cart-item-info">
-          <div class="cart-item-name">${escapeHtml(i.name)}</div>
+          <div class="cart-item-name">${escapeHtml(i.name)}${i.meta ? ' · ' + escapeHtml(i.meta) : ''}</div>
           <div class="cart-item-price">R${i.price} each</div>
         </div>
         <div class="qty-controls">
@@ -1202,14 +1299,88 @@
       .replace(/"/g, '"');
   }
 
+  /* Option picker (sizes / variants) */
+  let pendingOptions = null;
+  let selectedOpt = null;
+  const optModal = document.getElementById('optModal');
+  const optList = document.getElementById('optList');
+  const optConfirm = document.getElementById('optConfirm');
+  const optTitle = document.getElementById('optTitle');
+  const optSub = document.getElementById('optSub');
+
+  function openOptions(productEl) {
+    let options = [];
+    try { options = JSON.parse(productEl.dataset.options || '[]'); } catch (e) { options = []; }
+    if (!options.length) return;
+    pendingOptions = { productEl: productEl, options: options };
+    selectedOpt = null;
+    optConfirm.disabled = true;
+    optTitle.textContent = productEl.dataset.baseName || 'Choose option';
+    optSub.textContent = productEl.dataset.optionsType === 'size' ? 'Select bottle size' : 'Select your option';
+    optList.innerHTML = options.map((o, idx) => `
+      <button type="button" class="opt-choice" data-idx="${idx}">
+        <span>${escapeHtml(o.label)}</span>
+        <span class="opt-price">R${o.price}</span>
+      </button>
+    `).join('');
+    optList.querySelectorAll('.opt-choice').forEach(btn => {
+      btn.addEventListener('click', () => {
+        optList.querySelectorAll('.opt-choice').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedOpt = options[parseInt(btn.dataset.idx, 10)];
+        optConfirm.disabled = false;
+      });
+    });
+    optModal.classList.add('show');
+  }
+
+  if (optConfirm) {
+    optConfirm.addEventListener('click', () => {
+      if (!selectedOpt || !pendingOptions) return;
+      addToCart(selectedOpt.label, selectedOpt.price, '');
+      optModal.classList.remove('show');
+      pendingOptions = null;
+      selectedOpt = null;
+    });
+  }
+  if (document.getElementById('optCancel')) {
+    document.getElementById('optCancel').addEventListener('click', () => {
+      optModal.classList.remove('show');
+      pendingOptions = null;
+      selectedOpt = null;
+    });
+  }
+  if (optModal) {
+    optModal.addEventListener('click', (e) => {
+      if (e.target === optModal) {
+        optModal.classList.remove('show');
+        pendingOptions = null;
+        selectedOpt = null;
+      }
+    });
+  }
+
+  /* Choose size / options buttons */
+  document.querySelectorAll('.btn-choose').forEach(btn => {
+    btn.addEventListener('click', function () {
+      const p = this.closest('.product');
+      if (p) openOptions(p);
+    });
+  });
+
   /* Add buttons */
   document.querySelectorAll('.add-btn').forEach(btn => {
     btn.addEventListener('click', function () {
       const p = this.closest('.product');
       if (!p) return;
+      if (p.classList.contains('needs-options')) {
+        openOptions(p);
+        return;
+      }
       const name = p.dataset.name;
       const price = parseInt(p.dataset.price, 10);
-      addToCart(name, price);
+      if (!name || isNaN(price)) return;
+      addToCart(name, price, '');
       this.textContent = 'Added ✓';
       this.classList.add('added');
       setTimeout(() => {
@@ -1257,7 +1428,8 @@
     lines.push('ORDER (' + count + ' items):');
     lines.push('');
     cart.forEach((i, n) => {
-      lines.push((n + 1) + ') ' + i.qty + ' × ' + i.name);
+      const label = i.meta ? (i.name + ' (' + i.meta + ')') : i.name;
+      lines.push((n + 1) + ') ' + i.qty + ' × ' + label);
       lines.push('    R' + (i.price * i.qty));
     });
     lines.push('');
