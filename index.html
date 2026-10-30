@@ -1,2 +1,33 @@
 <!DOCTYPE html>
-<!-- See full file upload next -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0d0d0d">
+  <title>TNC Fast Food</title>
+  <style>
+    body { margin:0; background:#0d0d0d; color:#fff; font-family: system-ui, sans-serif;
+           display:flex; align-items:center; justify-content:center; min-height:100vh; }
+  </style>
+</head>
+<body>
+  <p id="msg">Loading TNC Fast Food…</p>
+  <script>
+  (async function () {
+    try {
+      var b64 = "PLACEHOLDER_B64";
+      var bin = Uint8Array.from(atob(b64), function (c) { return c.charCodeAt(0); });
+      var ds = new DecompressionStream("gzip");
+      var stream = new Blob([bin]).stream().pipeThrough(ds);
+      var html = await new Response(stream).text();
+      document.open();
+      document.write(html);
+      document.close();
+    } catch (e) {
+      document.getElementById("msg").textContent = "Failed to load. Please refresh or contact the site owner.";
+      console.error(e);
+    }
+  })();
+  </script>
+</body>
+</html>
